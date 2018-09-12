@@ -1,3 +1,5 @@
+import { CheckOutComponent } from './../../components/check-out/check-out.component';
+import { AuthGuard } from './../../guards/auth-guard.service';
 import { LoginComponent } from './../../components/login/login.component';
 import { RegisterComponent } from './../../components/register/register.component';
 import { NotfoundComponent } from './../../components/notfound/notfound.component';
@@ -20,10 +22,12 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'shopping-cart', component: ShoppingCartComponent },
-  { path: 'order-success', component: OrderSuccessComponent },
-  { path: 'admin-products', component: AdminProductsComponent },
-  { path: 'admin-orders', component: OrdersComponent },
-  { path: 'myorders', component: MyordersComponent },
+
+  { path: 'order-success', component: OrderSuccessComponent , canActivate: [ AuthGuard ] },
+  { path: 'admin-products', component: AdminProductsComponent, canActivate: [ AuthGuard ] },
+  { path: 'check-out', component: CheckOutComponent, canActivate: [ AuthGuard ]},
+  { path: 'admin-orders', component: OrdersComponent , canActivate: [ AuthGuard ] },
+  { path: 'myorders', component: MyordersComponent , canActivate: [ AuthGuard ]},
   { path: '**', component: NotfoundComponent }
 
 ]

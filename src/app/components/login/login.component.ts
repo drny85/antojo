@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginsService } from '../../services/logins.service';
+
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { LoginsService } from '../../services/logins/logins.service';
 
 @Component({
   selector: 'app-login',
@@ -11,25 +13,18 @@ export class LoginComponent implements OnInit {
 
 email: string;
 password: string;
-  constructor(private authServ: LoginsService, private route: Router) { }
+  constructor(private authServ: LoginsService, private route: Router, private msg: ToastrService) { }
 
   ngOnInit() {
     this.authServ.getState().subscribe(auth => {
       if (auth) {
-        console.log(auth);
         this.route.navigate(['/']);
       }
     })
   }
 
   login() {
-    this.authServ.login(this.email, this.password).then(user => {
-      console.log(user);
-      this.route.navigate(['/']);
-    } )
-    .catch(err => {
-
-    })
-  }
+    this.authServ.login(this.email, this.password)
+    }
 
 }

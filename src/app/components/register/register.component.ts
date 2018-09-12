@@ -1,8 +1,8 @@
+import { UsersService } from '../../services/users/users.service';
 import { User } from './../../models/user';
 import { ToastrService } from 'ngx-toastr';
-import { LoginsService } from './../../services/logins.service';
+import { LoginsService } from '../../services/logins/logins.service';
 import { Component, OnInit } from '@angular/core';
-import { flatten } from '@angular/compiler';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,13 +17,14 @@ export class RegisterComponent implements OnInit {
     last_name: '',
     phone: '',
     email: '',
-    password: ''
+    password: '',
+    isAdmin: false
 
   }
   psw: string;
   pswMatching = false;
 
-  constructor(private logServ: LoginsService, private msg: ToastrService, private router: Router) { }
+  constructor(private logServ: LoginsService, private msg: ToastrService, private router: Router, private userServ: UsersService) { }
 
   ngOnInit() {
 
@@ -40,6 +41,7 @@ export class RegisterComponent implements OnInit {
       // add referral
       this.logServ.register(this.user.email, this.user.password).then(res => {
         this.msg.success('Registration Succefull', 'Registered');
+        this.userServ.addUser(this.user, res.user.email);
         this.router.navigate['login'];
       })
       .catch(err => this.msg.error(err.message, 'Error'));

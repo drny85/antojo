@@ -3,4 +3,14 @@
 }
 .nav-item {
     padding-right: 30px;
+   
+}
+
+ul>li>a {
+    color: aliceblue;
+    font-weight: bold;
+}
+
+ul>li>a:hover {
+    background-color: dimgray;
 }
