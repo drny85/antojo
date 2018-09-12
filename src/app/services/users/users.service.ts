@@ -40,7 +40,7 @@ getUsers() {
 
 //add user
 addUser(user: User, id: string) {
-  this.usersCollection.doc(id).update(user);
+  this.usersCollection.doc(id).set(user);
 }
 
 deleteUser(id: string) {

@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
       this.logServ.register(this.user.email, this.user.password).then(res => {
         this.msg.success('Registration Succefull', 'Registered');
         this.userServ.addUser(this.user, res.user.email);
-        this.router.navigate['login'];
+        this.router.navigate(['/login']);
       })
       .catch(err => this.msg.error(err.message, 'Error'));
       

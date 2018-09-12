@@ -24,7 +24,7 @@ export class LoginsService {
 
   //return a promise of the logim state
   getState() {
-    return this.authServ.authState.pipe(map(auth => auth));
+    return this.authServ.authState;
   }
 
   //return a login promise

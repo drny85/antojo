@@ -1,3 +1,4 @@
+import { AdminGuard } from './guards/admin-guard.service';
 import { AuthGuard } from './guards/auth-guard.service';
 import { LoginsService } from './services/logins/logins.service';
 import { UsersService } from './services/users/users.service';
@@ -62,7 +63,7 @@ import { RegisterComponent } from './components/register/register.component';
 
 
   ],
-  providers: [ LoginsService, UsersService, AuthGuard ],
+  providers: [ LoginsService, UsersService, AuthGuard, AdminGuard ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
