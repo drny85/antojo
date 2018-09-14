@@ -1,9 +1,10 @@
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, take } from 'rxjs/operators';
 import { UsersService } from './../services/users/users.service';
 import { LoginsService } from './../services/logins/logins.service';
 import { Injectable } from '@angular/core';
-import { CanActivate } from '@angular/router';
+import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
+
 
 
 @Injectable({
@@ -11,11 +12,14 @@ import { Observable } from 'rxjs';
 })
 export class AdminGuard implements CanActivate {
 
-  constructor(private userServ: UsersService, private auth: LoginsService) { }
+  admin: boolean;
 
-  canActivate(): boolean {
+  constructor(private userServ: UsersService, private auth: LoginsService, private loged: LoginsService, private route: Router) { }
+
+  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+
     return false;
-  }
-    
+
+}
 
 }

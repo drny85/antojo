@@ -8,6 +8,8 @@ import { LoginsService } from './services/logins/logins.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  currentUser;
  
   constructor(private auth: LoginsService, private router: Router) {
     auth.user$.subscribe(user => {
@@ -16,5 +18,6 @@ export class AppComponent {
         router.navigateByUrl(returnURL);
       }
     })
+
   }
 }

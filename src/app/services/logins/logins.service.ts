@@ -24,7 +24,7 @@ export class LoginsService {
 
   //return a promise of the logim state
   getState() {
-    return this.authServ.authState;
+    return this.authServ.authState.pipe(map(auth => auth));
   }
 
   //return a login promise
@@ -32,7 +32,7 @@ export class LoginsService {
     let returnURL= this.route.snapshot.queryParamMap.get('returnURL') || '/';
     localStorage.setItem('returnURL', returnURL);
     this.authServ.auth.signInWithEmailAndPassword(email, password);
-  }
+    }
 
   logout() {
     this.authServ.auth.signOut();

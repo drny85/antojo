@@ -18,9 +18,12 @@ export class NavbarComponent implements OnInit {
   loggedIn: boolean;
   user;
   guest = 'Guest User';
+  currentUser;
 
   constructor(public auth: LoginsService, private msg: ToastrService, private route: Router, private userServ: UsersService) {
-   
+    // this.auth.user$.subscribe(user => {
+    //   this.userServ.getUser(user.email).subscribe(current => this.user = current)
+    // })
   }
   ngOnInit() {
     this.auth.getState().subscribe(user => {

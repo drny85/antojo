@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { User } from '../../models/user';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 
 @Injectable({
@@ -14,11 +15,16 @@ export class UsersService {
   users: Observable<User[]>;
   userDoc: AngularFirestoreDocument<User>;
   user: Observable<User>;
+  current: Observable<User>;
 
-  constructor(private fb: AngularFirestore) { 
+  constructor(private fb: AngularFirestore, private auth: AngularFireAuth) { 
      
-    this.getUsers();
-      
+    this.auth.authState.subscribe(user => {
+      if(user) {
+      this.current = this.fb.doc<User>(`users/${user.email}`).valueChanges();
+      }
+      return null;
+    })
 }
 
 //get all users
@@ -69,7 +75,7 @@ getUser(id: string): Observable<User> {
 }
 
 getUserByEmail(email: string) {
-  
+  return this.fb.doc(`users/${email}`);
 }
 
 }
