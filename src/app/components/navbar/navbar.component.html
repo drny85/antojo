@@ -16,16 +16,18 @@
       </li>
       <li *ngIf="loggedIn" ngbDropdown class="nav-item dropdown">
         <a ngbDropdownToggle class="nav-link dropdown-toggle text-capitalize" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span *ngIf="user; else noUser">{{ user.name }} {{ user.last_name }}</span>
+          <span *ngIf="user && loggedIn">{{ user.name }} {{ user.last_name }}</span>
           <ng-template #noUser>
             <span>{{ guest }}</span>
           </ng-template>
         </a>
         
-        <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div *ngIf="user" ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" routerLink="myorders">My Orders</a>
-          <a class="dropdown-item" routerLink="admin-products">Manage Products</a>
-          <a class="dropdown-item" routerLink="admin-orders">Manage Orders</a>
+          <ng-container *ngIf="user.isAdmin">
+            <a class="dropdown-item" routerLink="admin-products">Manage Products</a>
+            <a class="dropdown-item" routerLink="admin-orders">Manage Orders</a>
+          </ng-container>
         </div>
         
       </li>

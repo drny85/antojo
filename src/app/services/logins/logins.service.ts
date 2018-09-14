@@ -4,7 +4,7 @@ import * as firebase from 'firebase';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Injectable()
@@ -12,7 +12,7 @@ export class LoginsService {
 
 
   user$: Observable<firebase.User>
-  constructor(private authServ: AngularFireAuth, private msg: ToastrService, private route: ActivatedRoute) {
+  constructor(private authServ: AngularFireAuth, private msg: ToastrService, private router: ActivatedRoute, private route: Router) {
 
     this.user$ = authServ.authState;
    }
@@ -29,12 +29,13 @@ export class LoginsService {
 
   //return a login promise
   login(email: string, password: string) {
-    let returnURL= this.route.snapshot.queryParamMap.get('returnURL') || '/';
+    let returnURL= this.router.snapshot.queryParamMap.get('returnURL') || '/';
     localStorage.setItem('returnURL', returnURL);
     this.authServ.auth.signInWithEmailAndPassword(email, password);
     }
 
   logout() {
     this.authServ.auth.signOut();
+    this.route.navigate(['/login']);
   }
 }

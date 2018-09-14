@@ -1,9 +1,11 @@
+import { Observable } from 'rxjs';
 import { UsersService } from './../../services/users/users.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 import { Component, OnInit } from '@angular/core';
 import { LoginsService } from '../../services/logins/logins.service';
+import { User } from '../../models/user';
 
 
 @Component({
@@ -17,8 +19,8 @@ export class NavbarComponent implements OnInit {
   userEmail: string;
   loggedIn: boolean;
   user;
-  guest = 'Guest User';
-  currentUser;
+  guest: string;
+  
 
   constructor(public auth: LoginsService, private msg: ToastrService, private route: Router, private userServ: UsersService) {
     this.auth.getState().subscribe(user => {
@@ -39,9 +41,9 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-    this.guest = 'Guest User';
     this.auth.logout();
     this.msg.info('You are now logged Out', 'Logged Out');
+    this.guest = 'Guest User';
     
     this.route.navigate['/login'];
     

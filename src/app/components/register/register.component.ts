@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
+  
+
   user: User = {
     name: '',
     last_name: '',
@@ -23,6 +25,7 @@ export class RegisterComponent implements OnInit {
   }
   psw: string;
   pswMatching = false;
+  error: string;
 
   constructor(private logServ: LoginsService, private msg: ToastrService, private router: Router, private userServ: UsersService) { }
 
@@ -38,10 +41,9 @@ export class RegisterComponent implements OnInit {
 
     } 
     if(this.psw === this.user.password) {
-      // add referral
+      //register the user
       this.logServ.register(this.user.email, this.user.password).then(res => {
-       
-        console.log('User: ', this.user);
+        //notify the user about success
         this.msg.success('Registration Succefull', 'Registered');
         //adding the user
         this.userServ.addUser(this.user, res.user.uid);
@@ -50,6 +52,7 @@ export class RegisterComponent implements OnInit {
       .catch(err => this.msg.error(err.message, 'Error'));
       
     } else {
+      this.error = 'Passwords do not match';
       this.msg.error('Passwords do not match', 'Please Try Again');
       return;
     }

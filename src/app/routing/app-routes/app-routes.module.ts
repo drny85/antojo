@@ -1,3 +1,4 @@
+import { ProductFormComponent } from './../../admin/product-form/product-form.component';
 import { CheckOutComponent } from './../../components/check-out/check-out.component';
 import { AuthGuard } from './../../guards/auth-guard.service';
 import { LoginComponent } from './../../components/login/login.component';
@@ -12,6 +13,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from '../../components/home/home.component';
 import { ProductsComponent } from '../../components/products/products.component';
+import { AdminGuard } from '../../guards/admin-guard.service';
 
 
 
@@ -24,9 +26,10 @@ const appRoutes: Routes = [
   { path: 'shopping-cart', component: ShoppingCartComponent },
 
   { path: 'order-success', component: OrderSuccessComponent , canActivate: [ AuthGuard ] },
-  { path: 'admin-products', component: AdminProductsComponent, canActivate: [ AuthGuard ] },
+  { path: 'admin-products', component: AdminProductsComponent, canActivate: [ AuthGuard , AdminGuard] },
+  { path: 'admin/products/new', component: ProductFormComponent, canActivate: [ AuthGuard , AdminGuard] },
   { path: 'check-out', component: CheckOutComponent, canActivate: [ AuthGuard ]},
-  { path: 'admin-orders', component: OrdersComponent , canActivate: [ AuthGuard ] },
+  { path: 'admin-orders', component: OrdersComponent , canActivate: [ AuthGuard, AdminGuard] },
   { path: 'myorders', component: MyordersComponent , canActivate: [ AuthGuard ]},
   { path: '**', component: NotfoundComponent }
 

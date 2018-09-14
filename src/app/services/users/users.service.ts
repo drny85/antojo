@@ -6,6 +6,8 @@ import { User } from '../../models/user';
 import { AngularFireAuth } from 'angularfire2/auth';
 
 
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -22,9 +24,9 @@ export class UsersService {
     this.auth.authState.subscribe(user => {
       if(user) {
       this.current = this.fb.doc<User>(`users/${user.uid}`).valueChanges();
-      } else {
+      } 
       return null;
-      }
+      
     })
     
 }
@@ -49,7 +51,7 @@ getUsers() {
 
 //add user
 addUser(user: User, id: string) {
-  this.usersCollection.doc(id).set(user).then( () => console.log("Success")).catch(err => console.log(err));
+  this.fb.collection('users').doc(id).set(user).then( () => console.log("Success")).catch(err => console.log(err));
 }
 
 deleteUser(id: string) {

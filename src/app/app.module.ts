@@ -31,6 +31,7 @@ import { MyordersComponent } from './components/myorders/myorders.component';
 import { FormsModule } from '@angular/forms';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { RegisterComponent } from './components/register/register.component';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { RegisterComponent } from './components/register/register.component';
     OrdersComponent,
     MyordersComponent,
     NotfoundComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProductFormComponent
     
   ],
   imports: [
