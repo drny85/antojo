@@ -1,6 +1,10 @@
+import { AngularFireAuth } from 'angularfire2/auth';
+import { UsersService } from './services/users/users.service';
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { LoginsService } from './services/logins/logins.service';
+import { User } from './models/user';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +13,7 @@ import { LoginsService } from './services/logins/logins.service';
 })
 export class AppComponent {
 
-  currentUser;
+  current;
  
   constructor(private auth: LoginsService, private router: Router) {
     auth.user$.subscribe(user => {
@@ -19,5 +23,6 @@ export class AppComponent {
       }
     })
 
+  
   }
 }
