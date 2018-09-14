@@ -1,3 +1,5 @@
+import { ProductService } from './services/product.service';
+import { CategoryService } from './services/category.service';
 import { AdminGuard } from './guards/admin-guard.service';
 import { AuthGuard } from './guards/auth-guard.service';
 import { LoginsService } from './services/logins/logins.service';
@@ -11,6 +13,7 @@ import { NgModule } from '@angular/core';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -32,6 +35,9 @@ import { FormsModule } from '@angular/forms';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { CustomFormsModule } from 'ng2-validation'
+import { AngularFireStorageModule } from 'angularfire2/storage';
+
 
 
 @NgModule({
@@ -56,16 +62,19 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
     BrowserModule,
     AppRoutesModule,
     FormsModule,
+    CustomFormsModule,
     NgbModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase, 'antojitos-chef'),
     AngularFirestoreModule,
-    AngularFireAuthModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
     BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot() // ToastrModule added
+    ToastrModule.forRoot(), // ToastrModule added
+    AngularFireAuthModule
 
 
   ],
-  providers: [ LoginsService, UsersService, AuthGuard, AdminGuard ],
+  providers: [LoginsService, UsersService, AuthGuard, AdminGuard, ProductService, CategoryService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
