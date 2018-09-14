@@ -21,11 +21,14 @@ export class UsersService {
      
     this.auth.authState.subscribe(user => {
       if(user) {
-      this.current = this.fb.doc<User>(`users/${user.email}`).valueChanges();
-      }
+      this.current = this.fb.doc<User>(`users/${user.uid}`).valueChanges();
+      } else {
       return null;
+      }
     })
+    
 }
+
 
 //get all users
 getUsers() {
@@ -46,7 +49,7 @@ getUsers() {
 
 //add user
 addUser(user: User, id: string) {
-  this.usersCollection.doc(id).set(user);
+  this.usersCollection.doc(id).set(user).then( () => console.log("Success")).catch(err => console.log(err));
 }
 
 deleteUser(id: string) {

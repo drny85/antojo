@@ -21,22 +21,20 @@ export class NavbarComponent implements OnInit {
   currentUser;
 
   constructor(public auth: LoginsService, private msg: ToastrService, private route: Router, private userServ: UsersService) {
-    // this.auth.user$.subscribe(user => {
-    //   this.userServ.getUser(user.email).subscribe(current => this.user = current)
-    // })
-  }
-  ngOnInit() {
     this.auth.getState().subscribe(user => {
       
       if (user) {
         this.loggedIn = true;
-        this.userServ.getUser(user.email).subscribe(res => this.user = res);
+        this.userServ.getUser(user.uid).subscribe(res => this.user = res);
         this.userEmail = user.email;
         
       }else {
         this.loggedIn = false;
       }
     })
+  }
+  ngOnInit() {
+  
    
   }
 

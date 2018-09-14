@@ -40,8 +40,11 @@ export class RegisterComponent implements OnInit {
     if(this.psw === this.user.password) {
       // add referral
       this.logServ.register(this.user.email, this.user.password).then(res => {
+       
+        console.log('User: ', this.user);
         this.msg.success('Registration Succefull', 'Registered');
-        this.userServ.addUser(this.user, res.user.email);
+        //adding the user
+        this.userServ.addUser(this.user, res.user.uid);
         this.router.navigate(['/login']);
       })
       .catch(err => this.msg.error(err.message, 'Error'));

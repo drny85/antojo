@@ -1,4 +1,9 @@
+
 import { Component, OnInit } from '@angular/core';
+import { UsersService } from '../../services/users/users.service';
+import { Observable } from 'rxjs';
+import { User } from '../../models/user';
+
 
 
 
@@ -10,16 +15,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  user;
-
-  constructor() { 
-    
-
-  }
+  constructor(private userServ: UsersService) {}
+  
 
 
   ngOnInit() {
-
+    
   }
     
 
