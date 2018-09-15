@@ -5,9 +5,9 @@ import { ToastrService } from 'ngx-toastr';
 import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
 import { CategoryService } from './../../services/category.service';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 @Component({
@@ -15,10 +15,11 @@ import { take } from 'rxjs/operators';
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.css']
 })
-export class EditComponent implements OnInit {
+export class EditComponent implements OnInit, OnDestroy {
 
   categories$;
   id: string;
+  subscription: Subscription;
 
   product: Product = {
     name: '',
@@ -46,11 +47,15 @@ export class EditComponent implements OnInit {
     this.categories$ = this.category.getCategories();
     this.id = this.activeRoute.snapshot.params['id'];
     if(this.id) {
-      this.prodServ.getProduct(this.id).subscribe(prod => this.product = prod);
+     this.subscription =  this.prodServ.getProduct(this.id).subscribe(prod => this.product = prod);
     }
    }
 
   ngOnInit() {
+  }
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
 
   onUpload(event) {
@@ -106,10 +111,11 @@ export class EditComponent implements OnInit {
     if (confirm('Are you sure you want to delete this procuct?')) {
       this.prodServ.deleteProduct(this.id);
       this.message.info('Product has been deleted', 'Deleted!');
-      this.router.navigate(['admin/products']);
-    }
+      this.router.navigate(['/admin/products']);
+    } else {
     this.message.info('No changes were made', 'Canceled');
     return;
+    }
   
   }
 

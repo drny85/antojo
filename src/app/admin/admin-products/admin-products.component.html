@@ -1,7 +1,11 @@
 <div>
-  <a class="pull-right" routerLink="/admin/products/new" class="btn btn-dark">Add New Product</a>
+  <a class="pull-right" routerLink="/admin/products/new" class="btn btn-dark mb-5">Add New Product</a>
+  
+  <input #query (keyup)=filter(query.value) type="text" class="form-control" name="search" id="search" placeholder="Search.....">
 </div>
 <br>
+
+
 <div>
   <table class="table">
     <thead>
@@ -12,10 +16,10 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let prod of products$ | async">
+      <tr *ngFor="let prod of filtered">
         <td class="text-capitalize">{{ prod.name }}</td>
         <td> {{ prod.price | currency:"USD":"symbol-narrow" }}</td>
-        <td><a class="btn btn-secondary" [routerLink]="['/admin/products/', prod.id]" >Edit</a></td>
+        <td><a class="btn btn-secondary" [routerLink]="['/admin/products/', prod.id]" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a></td>
       </tr>
     </tbody>
 

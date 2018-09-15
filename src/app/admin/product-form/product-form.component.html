@@ -3,7 +3,7 @@
         <h3 class="text-center">Adding New Product</h3>
       </div>
   <div class="row">
-    <div class="col-md-7">
+    <div [ngClass]="{'col-md-7': product.name, 'col-md-12': !product.name}">
       <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
           <div class="form-group">
               <label for="item_name">Product Name</label>
@@ -55,11 +55,11 @@
         </form>
 
     </div>
-    <div class="col-md-5">
-        <div class="card" style="width: 30rem;">
+    <div *ngIf="product.name" [ngClass]="{'col-md-5': product.name}">
+        <div  class="card" style="width: 30rem;">
         <img class="card-img-top" [src]="product.picture">
         <div class="card-body">
-          <h5 class="card-title">{{ product.name}}</h5>
+          <h5 class="card-title text-capitalize">{{ product.name}}</h5>
           <p class="card-text">{{ product.price | currency:"USD":"symbol-narrow" }} </p>
         </div>
       </div>

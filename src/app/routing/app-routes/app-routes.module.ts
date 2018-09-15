@@ -27,12 +27,12 @@ const appRoutes: Routes = [
   { path: 'shopping-cart', component: ShoppingCartComponent },
 
   { path: 'order-success', component: OrderSuccessComponent , canActivate: [ AuthGuard ] },
-  { path: 'admin/products', component: AdminProductsComponent, canActivate: [ AuthGuard , AdminGuard] },
-  { path: 'admin/products', component: AdminProductsComponent, canActivate: [ AuthGuard , AdminGuard] },
-  { path: 'admin/products/new', component: ProductFormComponent, canActivate: [ AuthGuard , AdminGuard] },
-  { path: 'admin/products/:id', component: EditComponent, canActivate: [ AuthGuard , AdminGuard] },
+  { path: 'admin/products', component: AdminProductsComponent, canActivate: [ AuthGuard ] },
+  { path: 'admin/products', component: AdminProductsComponent, canActivate: [ AuthGuard] },
+  { path: 'admin/products/new', component: ProductFormComponent, canActivate: [ AuthGuard ] },
+  { path: 'admin/products/:id', component: EditComponent, canActivate: [ AuthGuard ] },
   { path: 'check-out', component: CheckOutComponent, canActivate: [ AuthGuard ]},
-  { path: 'admin/orders', component: OrdersComponent , canActivate: [ AuthGuard, AdminGuard] },
+  { path: 'admin/orders', component: OrdersComponent , canActivate: [ AuthGuard] },
   { path: 'myorders', component: MyordersComponent , canActivate: [ AuthGuard ]},
   { path: '**', component: NotfoundComponent }
 

@@ -24,6 +24,7 @@ export class UsersService {
     this.auth.authState.subscribe(user => {
       if(user) {
       this.current = this.fb.doc<User>(`users/${user.uid}`).valueChanges();
+      return this.current;
       } 
       return null;
       
