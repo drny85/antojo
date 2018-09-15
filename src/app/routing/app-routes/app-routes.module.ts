@@ -19,7 +19,7 @@ import { AdminGuard } from '../../guards/admin-guard.service';
 
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: ProductsComponent },
   
   { path: 'products', component: ProductsComponent },
   { path: 'login', component: LoginComponent },
