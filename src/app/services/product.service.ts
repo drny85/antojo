@@ -24,7 +24,7 @@ export class ProductService {
   }
 
   getProducts() {
-    this.productsColl = this.db.collection<Product>('products', ref => ref.orderBy('name'));
+    this.productsColl = this.db.collection<Product>('products', ref => ref.orderBy('updated', 'desc'));
     this.products = this.productsColl.snapshotChanges().pipe(map(
       actions => actions.map( a => {
         const data = a.payload.doc.data() as Product;

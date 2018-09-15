@@ -25,7 +25,8 @@ export class EditComponent implements OnInit, OnDestroy {
     name: '',
     price: 0,
     category: '',
-    picture: ''
+    picture: '',
+    updated: ''
     
   }
 
@@ -98,6 +99,7 @@ export class EditComponent implements OnInit, OnDestroy {
   
     } else {
       // Update product
+      this.product.updated = new Date().toLocaleString();
       this.prodServ.updateProduct(this.product).then(() => this.message.success('Product Updated', 'Success!'))
       .catch(err => {this.message.error('Something went wrong', 'Error!');
       console.log(err);

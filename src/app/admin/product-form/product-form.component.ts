@@ -25,7 +25,8 @@ export class ProductFormComponent implements OnInit {
     name: '',
     price: 0,
     category: '',
-    picture: ''
+    picture: '',
+    updated: ''
     
   }
 
@@ -94,7 +95,7 @@ export class ProductFormComponent implements OnInit {
   
     } else {
       // add product
-      
+      this.product.updated = new Date().toLocaleString();
       this.prodServ.saveProduct(this.product).then(() => this.message.success('New Product Added', 'Success!'))
       .catch(err => {this.message.error('Something went wrong', 'Error!');
       console.log(err);

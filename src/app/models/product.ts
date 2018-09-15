@@ -4,4 +4,5 @@ export interface Product {
     price: number,
     category: string,
     picture: string
+    updated: string
 }
