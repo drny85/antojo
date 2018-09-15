@@ -1,3 +1,4 @@
+import { EditComponent } from './../../admin/edit/edit.component';
 import { ProductFormComponent } from './../../admin/product-form/product-form.component';
 import { CheckOutComponent } from './../../components/check-out/check-out.component';
 import { AuthGuard } from './../../guards/auth-guard.service';
@@ -26,10 +27,12 @@ const appRoutes: Routes = [
   { path: 'shopping-cart', component: ShoppingCartComponent },
 
   { path: 'order-success', component: OrderSuccessComponent , canActivate: [ AuthGuard ] },
-  { path: 'admin-products', component: AdminProductsComponent, canActivate: [ AuthGuard , AdminGuard] },
+  { path: 'admin/products', component: AdminProductsComponent, canActivate: [ AuthGuard , AdminGuard] },
+  { path: 'admin/products', component: AdminProductsComponent, canActivate: [ AuthGuard , AdminGuard] },
   { path: 'admin/products/new', component: ProductFormComponent, canActivate: [ AuthGuard , AdminGuard] },
+  { path: 'admin/products/:id', component: EditComponent, canActivate: [ AuthGuard , AdminGuard] },
   { path: 'check-out', component: CheckOutComponent, canActivate: [ AuthGuard ]},
-  { path: 'admin-orders', component: OrdersComponent , canActivate: [ AuthGuard, AdminGuard] },
+  { path: 'admin/orders', component: OrdersComponent , canActivate: [ AuthGuard, AdminGuard] },
   { path: 'myorders', component: MyordersComponent , canActivate: [ AuthGuard ]},
   { path: '**', component: NotfoundComponent }
 

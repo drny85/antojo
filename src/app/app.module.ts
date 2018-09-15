@@ -37,6 +37,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { CustomFormsModule } from 'ng2-validation'
 import { AngularFireStorageModule } from 'angularfire2/storage';
+import { EditComponent } from './admin/edit/edit.component';
 
 
 
@@ -55,7 +56,8 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
     MyordersComponent,
     NotfoundComponent,
     RegisterComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    EditComponent
     
   ],
   imports: [

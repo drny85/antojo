@@ -17,17 +17,7 @@ export class AdminGuard implements CanActivate {
   constructor(private userServ: UsersService, private auth: LoginsService, private route: Router) { }
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-
-    return this.userServ.current.pipe(
-      take(1),
-      map(user => user.isAdmin ? true : false),
-      tap(isAdmin => {
-        if(!isAdmin) {
-          console.log('Access denied');
-          this.route.navigate(['/login']);
-        }
-      })
-    )
+    return this.userServ.current.pipe(map(admin => admin.isAdmin));
   }
 
 }

@@ -1,26 +1,25 @@
-import { take } from 'rxjs/operators';
+
 import { Product } from './../../models/product';
-import { Observable } from 'rxjs';
+import { ProductService } from './../../services/product.service';
 import { ToastrService } from 'ngx-toastr';
+import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
+import { CategoryService } from './../../services/category.service';
+
 import { Component, OnInit } from '@angular/core';
-import { CategoryService } from '../../services/category.service';
-import { Router } from '@angular/router';
-import { AngularFireUploadTask, AngularFireStorage } from 'angularfire2/storage';
-
-import { ProductService } from '../../services/product.service';
-
-
-
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-product-form',
-  templateUrl: './product-form.component.html',
-  styleUrls: ['./product-form.component.css']
+  selector: 'app-edit',
+  templateUrl: './edit.component.html',
+  styleUrls: ['./edit.component.css']
 })
-export class ProductFormComponent implements OnInit {
+export class EditComponent implements OnInit {
 
   categories$;
- 
+  id: string;
+
   product: Product = {
     name: '',
     price: 0,
@@ -34,23 +33,25 @@ export class ProductFormComponent implements OnInit {
   uploadProgress: Observable<number>;
   downloadURL: Observable<string>;
   snapshot: Observable<any>;
-  
 
   constructor(
-    private catServ: CategoryService, 
-    private afStorage: AngularFireStorage, 
+    private category: CategoryService, 
+    private activeRoute: ActivatedRoute, 
     private message: ToastrService, 
     private prodServ: ProductService,
-    private router: Router) {
-  
-    this.categories$= this.catServ.getCategories();
-  }
+    private afStorage: AngularFireStorage, 
+    private router: Router
+    ) {
+
+    this.categories$ = this.category.getCategories();
+    this.id = this.activeRoute.snapshot.params['id'];
+    if(this.id) {
+      this.prodServ.getProduct(this.id).subscribe(prod => this.product = prod);
+    }
+   }
 
   ngOnInit() {
-  
   }
-
-
 
   onUpload(event) {
     
@@ -80,7 +81,6 @@ export class ProductFormComponent implements OnInit {
     this.task.then( snap => snap.ref.getDownloadURL().then(urlPic => {this.downloadURL = urlPic; this.product.picture = urlPic}));
     this.message.success('Image succesfully uploaded', 'Great');
    
-
   }
 
   onSubmit({value, valid}: { value: Product, valid: boolean}) {
@@ -91,18 +91,26 @@ export class ProductFormComponent implements OnInit {
       console.log(this.product);
       return;
   
-  
     } else {
-      // add product
-      
-      this.prodServ.saveProduct(this.product).then(() => this.message.success('New Product Added', 'Success!'))
+      // Update product
+      this.prodServ.updateProduct(this.product).then(() => this.message.success('Product Updated', 'Success!'))
       .catch(err => {this.message.error('Something went wrong', 'Error!');
       console.log(err);
     });
       this.router.navigate(['admin/products']);
-      this.message.success('Product Added...', 'Added!' );
-  
+     
     }
+  }
+
+  delete() {
+    if (confirm('Are you sure you want to delete this procuct?')) {
+      this.prodServ.deleteProduct(this.id);
+      this.message.info('Product has been deleted', 'Deleted!');
+      this.router.navigate(['admin/products']);
+    }
+    this.message.info('No changes were made', 'Canceled');
+    return;
+  
   }
 
 }
