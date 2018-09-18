@@ -38,6 +38,11 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
 import { CustomFormsModule } from 'ng2-validation'
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { EditComponent } from './admin/edit/edit.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { DataTableComponent } from './data-table/data-table.component';
+import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import { ProductFilterComponent } from './components/product-filter/product-filter.component';
+import { ProductCardComponent } from './components/product-card/product-card.component';
 
 
 
@@ -57,7 +62,11 @@ import { EditComponent } from './admin/edit/edit.component';
     NotfoundComponent,
     RegisterComponent,
     ProductFormComponent,
-    EditComponent
+    EditComponent,
+    FooterComponent,
+    DataTableComponent,
+    ProductFilterComponent,
+    ProductCardComponent
     
   ],
   imports: [
@@ -72,7 +81,7 @@ import { EditComponent } from './admin/edit/edit.component';
     AngularFireDatabaseModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
-    AngularFireAuthModule
+    AngularFireAuthModule, MatTableModule, MatPaginatorModule, MatSortModule
 
 
   ],

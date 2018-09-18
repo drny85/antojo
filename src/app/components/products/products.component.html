@@ -1,44 +1,23 @@
 
 <div class="row">
-  <div class="col-3">
-    <div class="list-hroup">
-      <a routerLink="/" class="list-group-item list-group-item-action"
-      [class.active]="!category"
-      >All Categories</a>
-      <a *ngFor="let c of categories$ | async" 
-      class="list-group-item list-group-item-action text-capitalize"
-      routerLink="/"
-      [queryParams]="{ category: c.id }"
-      [class.active]="category === c.id"
-      
-      >{{ c.name }}</a>
-    </div>
+  <div class="col-md-3">
+    <product-filter [category]="category"></product-filter>
+</div>
+<div class="col">
+  <div class="row">
+<div class="grid-2">
+    <ng-container *ngFor="let product of filteredProducts">
+      <product-card [product]="product"></product-card>
+    </ng-container>
   </div>
-  <div class="col">
-      <div class="row">
-          <ng-container *ngFor="let prod of filteredProducts; let i = index">
-              <div class="col">
-                <div class="card" style="width: 20rem;">
-                  <img class="card-img-top" [src]="prod.picture">
-                  <div class="card-body">
-                    <h5 class="card-title text-capitalize">{{ prod.name }}</h5>
-                    <p class="card-text">{{ prod.price | currency:"USD":"symbol-narrow" }} </p>
-                    <a class="btn btn-dark btn-block" href="#"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart</a>
-          
-                  </div>
-                
-                </div>
-                </div>
-                
-            
-            
-              <div *ngIf="(i + 1) % 2 === 0" class="w-100"></div>
-          
-            </ng-container>
-            
-            </div>
+</div>
+</div>
+</div>
+
+
+
   
-  </div>
+
 
  
   

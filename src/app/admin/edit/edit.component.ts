@@ -20,6 +20,7 @@ export class EditComponent implements OnInit, OnDestroy {
   categories$;
   id: string;
   subscription: Subscription;
+  //showActions: boolean = false;
 
   product: Product = {
     name: '',

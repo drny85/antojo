@@ -62,14 +62,15 @@
 
     </div>
     <div class="col-md-5">
-        <div class="card" style="width: 30rem;">
+        <!-- <div class="card" style="width: 30rem;">
         <img class="card-img-top" [src]="product.picture">
         <div class="card-body">
-          <h5 class="card-title">{{ product.name}}</h5>
+          <h5 class="card-title text-capitalize">{{ product.name}}</h5>
           <p class="card-text">{{ product.price | currency:"USD":"symbol-narrow" }} </p>
         </div>
       </div>
-      
+       -->
+       <product-card [product]="product" [show-actions]="false"></product-card>
     </div>
   </div>
   

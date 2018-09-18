@@ -1,4 +1,13 @@
-img {
-    width: auto;
-    height: 300px;
+/* img {
+    width: 400px;
+    height: 400px;
+} */
+
+
+.grid-2 {
+    display: grid;
+    grid-column-gap: 50px;
+    grid-row-gap: 30px;
+
+    grid-template-columns: repeat(2, 1fr);
 }
