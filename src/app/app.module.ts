@@ -1,3 +1,4 @@
+import { ProductFilterComponent } from './components/product-filter/product-filter.component';
 import { ProductService } from './services/product.service';
 import { CategoryService } from './services/category.service';
 import { AdminGuard } from './guards/admin-guard.service';
@@ -41,8 +42,10 @@ import { EditComponent } from './admin/edit/edit.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { DataTableComponent } from './data-table/data-table.component';
 import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
-import { ProductFilterComponent } from './components/product-filter/product-filter.component';
+import { ShoppingCartService } from './services/shopping-cart.service';
 import { ProductCardComponent } from './components/product-card/product-card.component';
+
+
 
 
 
@@ -85,7 +88,7 @@ import { ProductCardComponent } from './components/product-card/product-card.com
 
 
   ],
-  providers: [LoginsService, UsersService, AuthGuard, AdminGuard, ProductService, CategoryService ],
+  providers: [LoginsService, UsersService, AuthGuard, AdminGuard, ProductService, CategoryService, ShoppingCartService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

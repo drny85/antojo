@@ -27,7 +27,8 @@ export class EditComponent implements OnInit, OnDestroy {
     price: 0,
     category: '',
     picture: '',
-    updated: ''
+    updated: '',
+    quantity: 0
     
   }
 

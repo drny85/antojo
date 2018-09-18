@@ -26,7 +26,8 @@ export class ProductFormComponent implements OnInit {
     price: 0,
     category: '',
     picture: '',
-    updated: ''
+    updated: '',
+    quantity: 0
     
   }
 

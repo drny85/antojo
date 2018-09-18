@@ -5,4 +5,5 @@ export interface Product {
     category: string,
     picture: string
     updated: string
+    quantity: number
 }

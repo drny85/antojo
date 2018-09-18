@@ -11,3 +11,17 @@
 
     grid-template-columns: repeat(2, 1fr);
 }
+
+@media (max-width: 576px) { 
+    .grid-2 {
+        display: grid;
+        padding: 20px;
+        grid-column-gap: 20px;
+        grid-row-gap: 20px;
+        grid-template-columns: 1fr;
+    }
+    img {
+        width: auto !important;
+        height: auto !important;
+    }
+ }
