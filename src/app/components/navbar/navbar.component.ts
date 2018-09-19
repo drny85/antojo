@@ -51,7 +51,7 @@ export class NavbarComponent implements OnInit {
         // keep track of items in the cart
          this.shoppingCartItemCount +=  (cart[count].quantity);
       }
-      console.log(this.shoppingCartItemCount);
+    
     })
 
   }
