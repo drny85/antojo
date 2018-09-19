@@ -22,11 +22,13 @@ export class NavbarComponent implements OnInit {
   loggedIn: boolean;
   user;
   guest: string;
+  shoppingCartItemCount: number;
   
 
   constructor(public auth: LoginsService, 
     private msg: ToastrService, 
     private route: Router,
+    private shoppingCartService: ShoppingCartService,
     private userServ: UsersService) {
     this.auth.getState().subscribe(user => {
       
@@ -42,6 +44,15 @@ export class NavbarComponent implements OnInit {
   }
   async ngOnInit() {
      
+    let cart$ = (await this.shoppingCartService.getCart()).valueChanges();
+    cart$.subscribe(cart => {
+      this.shoppingCartItemCount = 0;  
+      for (let count in cart) {
+        // keep track of items in the cart
+         this.shoppingCartItemCount +=  (cart[count].quantity);
+      }
+      console.log(this.shoppingCartItemCount);
+    })
 
   }
 

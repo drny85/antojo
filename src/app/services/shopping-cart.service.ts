@@ -6,6 +6,7 @@ import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection 
 import { Product } from '../models/product';
 import {  map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { ShoppingCartInterface } from '../models/shopping-cart';
 
 
 @Injectable({
@@ -28,7 +29,7 @@ export class ShoppingCartService {
     return  this.db.collection('shopping-carts').add({dateCreated: new Date().toLocaleString() });
   }
 
-   async getCart() {
+   async getCart(): Promise<AngularFirestoreCollection<ShoppingCart>> {
     let cartId= await this.getOrCreateCartId();
     return this.db.collection(`shopping-carts/${cartId}/items`);
     
