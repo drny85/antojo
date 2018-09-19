@@ -1,3 +1,4 @@
+import { async } from '@angular/core/testing';
 import { map } from 'rxjs/operators';
 import { ShoppingCart } from './../../models/shoppingCart';
 
@@ -37,8 +38,8 @@ export class ProductCardComponent implements OnInit , OnDestroy {
    
   }
 
-  ngOnInit() {
-   this.subscription =   this.shoppingCartServ.getOneCart(this.product.id).subscribe(cart => this.cart = cart);
+  async ngOnInit() {
+   this.subscription = (await  this.shoppingCartServ.getOneCart(this.product.id)).subscribe(cart => this.cart = cart);
   }
 
   addToCart() {

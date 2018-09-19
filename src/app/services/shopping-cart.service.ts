@@ -64,8 +64,8 @@ export class ShoppingCartService {
   
    }
 
-    getOneCart(id: string) {
-        let cartId = localStorage.getItem('cartId');
+   async getOneCart(id: string) {
+        let cartId = await this.getOrCreateCartId();
         if(cartId) {
         this.cartDoc = this.db.doc(`shopping-carts/${cartId}/items/${id}`);
         this.cart = this.cartDoc.snapshotChanges().pipe(map(actions => {
