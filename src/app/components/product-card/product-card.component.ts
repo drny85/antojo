@@ -41,10 +41,14 @@ export class ProductCardComponent implements OnInit , OnDestroy {
    this.subscription =   this.shoppingCartServ.getOneCart(this.product.id).subscribe(cart => this.cart = cart);
   }
 
-  addToCart(product: Product) {
+  addToCart() {
     
-    this.shoppingCartServ.addToCart(product);
+    this.shoppingCartServ.addToCart(this.product);
 
+  }
+
+  removeFromCart() {
+    this.shoppingCartServ.removeFromCart(this.product).then(() => console.log("remove")).catch((err) => console.log(err));
   }
 
    getQuantity() {

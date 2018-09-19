@@ -6,6 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
 import { LoginsService } from '../../services/logins/logins.service';
 import { User } from '../../models/user';
+import { ShoppingCartService } from '../../services/shopping-cart.service';
+import { async } from '@angular/core/testing';
 
 
 @Component({
@@ -22,7 +24,10 @@ export class NavbarComponent implements OnInit {
   guest: string;
   
 
-  constructor(public auth: LoginsService, private msg: ToastrService, private route: Router, private userServ: UsersService) {
+  constructor(public auth: LoginsService, 
+    private msg: ToastrService, 
+    private route: Router,
+    private userServ: UsersService) {
     this.auth.getState().subscribe(user => {
       
       if (user) {
@@ -35,9 +40,9 @@ export class NavbarComponent implements OnInit {
       }
     })
   }
-  ngOnInit() {
-  
-   
+  async ngOnInit() {
+     
+
   }
 
   logout() {
