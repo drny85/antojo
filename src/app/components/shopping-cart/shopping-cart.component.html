@@ -2,7 +2,7 @@
 <ng-container *ngIf="cart$">
   <p>You have  {{ itemCount }} items in the shopping cart..</p>
  
-  <table class="table">
+  <table *ngIf="itemCount > 0" class="table">
     <thead>
       <tr>
         <th>Product</th>
@@ -14,11 +14,16 @@
       <tr *ngFor="let cart of cart$">
           <td class="text-capitalize">{{ cart.product.name }}</td>
           <td class="text-capitalize">{{ cart.quantity }}</td>
-          <td class="text-capitalize">{{ cart.product.price | currency:"USD":"symbol-narrow"  }}</td>
+          <td class="text-capitalize">{{ (cart.product.price * cart.quantity) | currency:"USD":"symbol-narrow"  }}</td>
       </tr>
        
       </tbody>
       <tfoot>
+        <tr>
+          <th></th>
+          <th></th>
+          <th>{{ totalPrice | currency:"USD":"symbol-narrow" }}</th>
+        </tr>
 
       </tfoot>
   </table>

@@ -6,7 +6,8 @@ import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection 
 import { Product } from '../models/product';
 import {  map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { ShoppingCartInterface } from '../models/shopping-cart';
+
+
 
 
 @Injectable({
@@ -78,10 +79,11 @@ export class ShoppingCartService {
      this.productDoc.get().subscribe(doc => {
        if (doc.exists) {
          let q = doc.data() as Product;
+        
          this.productDoc.update({quantity: q.quantity - 1 });
-       } else {
-         this.productDoc.set({product: product, quantity: 1});
-       }
+         if (q.quantity === 1) {this.productDoc.delete()}
+         
+       } 
      })
   
   

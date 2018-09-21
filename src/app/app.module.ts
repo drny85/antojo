@@ -44,6 +44,8 @@ import { DataTableComponent } from './data-table/data-table.component';
 import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { ShoppingCartService } from './services/shopping-cart.service';
 import { ProductCardComponent } from './components/product-card/product-card.component';
+import { ProductQuantityComponent } from './components/product-quantity/product-quantity.component';
+
 
 
 
@@ -69,7 +71,8 @@ import { ProductCardComponent } from './components/product-card/product-card.com
     FooterComponent,
     DataTableComponent,
     ProductFilterComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    ProductQuantityComponent
     
   ],
   imports: [

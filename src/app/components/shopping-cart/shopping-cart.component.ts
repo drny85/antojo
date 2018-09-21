@@ -20,11 +20,14 @@ export class ShoppingCartComponent implements OnInit {
     (await this.shoppingCartService.getCart()).valueChanges().subscribe(cart => this.cart$ = cart);
     let cart$ = (await this.shoppingCartService.getCart()).valueChanges();
     cart$.subscribe(cart => {
-      this.itemCount = 0;  
+      this.itemCount = 0; 
+      this.totalPrice = 0; 
       for (let count in cart) {
         // keep track of items in the cart
          this.itemCount +=  (cart[count].quantity);
-         console.log('Cart: ',cart[count]);
+         this.totalPrice += (cart[count].product.price);
+        
+          
       }
     
     })
