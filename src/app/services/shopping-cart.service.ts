@@ -121,11 +121,22 @@ export class ShoppingCartService {
 
   async clearCart() { 
     let cartId = await this.getOrCreateCartId();
-    this.cartDoc = this.db.doc('shopping-carts/' + cartId);
-    return this.cartDoc.delete();
+    let items = this.db.collection('shopping-carts/' + cartId + '/items');
+    items.get().forEach(i => i.forEach(res => {
+   
+        return  this.db.doc(`shopping-carts/${cartId}/items/${res.id}`).delete();
+     
+    }))
+      
+   
     
   }
 
 
+  }
+
+
+
+
   
-}
+

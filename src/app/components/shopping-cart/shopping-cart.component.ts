@@ -22,6 +22,8 @@ export class ShoppingCartComponent implements OnInit {
 
   }
   clearCart() { 
+    if (!confirm('Are you sure you want to clear the cart?')) return
+    
     this.shoppingCartService.clearCart().then(() => console.log("Cart Deleted")).catch(err => console.log(err));
 
   }
