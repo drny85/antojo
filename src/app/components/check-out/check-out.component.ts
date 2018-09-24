@@ -1,3 +1,5 @@
+import { UsersService } from './../../services/users/users.service';
+import { User } from './../../models/user';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CheckOutComponent implements OnInit {
 
-  constructor() { }
+  user$;
+
+  constructor(private userService: UsersService) { 
+   this.user$ =  this.userService.user;
+   
+  }
 
   ngOnInit() {
+    console.log(this.user$);
+  }
+
+
+  saveOrder(e) {
+    console.log(e.value);
   }
 
 }

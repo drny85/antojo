@@ -33,7 +33,7 @@ export class ProductCardComponent implements OnInit {
       {
         if (item ) {
          this.itemCount = item.quantity;
-         console.log(this.itemCount);
+        
         }
         else {
           return null;
