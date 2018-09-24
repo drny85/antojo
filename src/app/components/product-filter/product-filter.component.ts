@@ -9,7 +9,6 @@ import { CategoryService } from '../../services/category.service';
 export class ProductFilterComponent implements OnInit {
 
   
-
   categories$;
   @Input('category') category;
 

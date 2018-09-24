@@ -1,3 +1,24 @@
-<p>
-  product-quantity works!
-</p>
+<div class="row no-gutters">
+  <div class="col-2">
+    <button 
+      (click)="removeFromCart()"
+      class="btn btn-secondary btn-block"><i class="fa fa-minus" aria-hidden="true"></i></button> 
+  </div>
+  <div *ngIf="itemCount > 0" class="col text-center">
+     <!-- {{ shoppingCart.getQuantity(product) }} in cart -->
+     {{ itemCount }} in cart
+  </div>
+  <div *ngIf="itemCount === 0" class="col text-center">
+    <!-- {{ shoppingCart.getQuantity(product) }} in cart -->
+    Nothing
+ </div>
+  <div *ngIf="!itemCount" class="col text-center">
+    {{ shoppingCart.getQuantity(product) }} in cart
+    
+ </div>
+  <div class="col-2">
+    <button 
+      (click)="addToCart()"
+      class="btn btn-secondary btn-block"><i class="fa fa-plus" aria-hidden="true"></i></button> 
+  </div>
+</div>
