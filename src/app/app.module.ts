@@ -45,6 +45,7 @@ import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/mate
 import { ShoppingCartService } from './services/shopping-cart.service';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { ProductQuantityComponent } from './components/product-quantity/product-quantity.component';
+import { OrderService } from './services/order.service';
 
 
 
@@ -91,7 +92,7 @@ import { ProductQuantityComponent } from './components/product-quantity/product-
 
 
   ],
-  providers: [LoginsService, UsersService, AuthGuard, AdminGuard, ProductService, CategoryService, ShoppingCartService ],
+  providers: [LoginsService, UsersService, AuthGuard, AdminGuard, ProductService, CategoryService, ShoppingCartService, OrderService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,6 +4,13 @@ export interface User {
     last_name?: string,
     phone?: string,
     email?: string,
-    password?: string
-    isAdmin: boolean;
+    password?: string,
+    isAdmin: boolean,
+    address: {
+        address: string,
+        apt?: string,
+        city: string,
+        state: string,
+        zipcode: string
+    }
 }
