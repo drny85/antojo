@@ -1,3 +1,4 @@
+import { async } from '@angular/core/testing';
 import { Shipping } from './../../models/shipping';
 import { OrderService } from './../../services/order.service';
 import { Product } from './../../models/product';
@@ -8,6 +9,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
 import { Subscription } from 'rxjs';
 import { Order } from '../../models/order';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-check-out',
@@ -35,7 +37,11 @@ export class CheckOutComponent implements OnInit, OnDestroy {
   userId: string;
   userSubscription: Subscription;
 
-  constructor(private userService: UsersService, private shoppingCartServ: ShoppingCartService, private orderServ: OrderService) { 
+  constructor(private userService: UsersService, 
+    private shoppingCartServ: ShoppingCartService, 
+    private orderServ: OrderService,
+    private router: Router
+    ) { 
    
    
    
@@ -59,7 +65,7 @@ export class CheckOutComponent implements OnInit, OnDestroy {
   }
 
 
-  saveOrder(e) {
+ async saveOrder(e) {
     let shipping = e.value;
     let order = new Order(this.userId, shipping, this.cart );
     let orderToSubmmit = { datePlaced: order.datePlaced,
@@ -69,7 +75,8 @@ export class CheckOutComponent implements OnInit, OnDestroy {
 
     }
     
-    this.orderServ.placeOrder(orderToSubmmit).then(() => console.log('Order Submitted')).catch(err => console.log(err));
+   let result = await this.orderServ.placeOrder(orderToSubmmit);
+   this.router.navigate(['/order-success', result.id]);
   }
 
 }

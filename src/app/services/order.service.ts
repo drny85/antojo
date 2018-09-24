@@ -1,3 +1,4 @@
+import { ShoppingCartService } from './shopping-cart.service';
 import { Order } from './../models/order';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Injectable } from '@angular/core';
@@ -10,13 +11,16 @@ export class OrderService {
 
   orderCollection: AngularFirestoreCollection<Order>;
 
-  constructor(private db: AngularFirestore) { }
+  constructor(private db: AngularFirestore, private shoppingCartServ: ShoppingCartService) { }
 
 
-  placeOrder(order: Order) {
+ async placeOrder(order: Order) {
 
-    this.orderCollection = this.db.collection('orders', ref => ref.orderBy('datePlaced'));
+    let result = await this.db.collection('orders', ref => ref.orderBy('datePlaced'));
+    this.shoppingCartServ.clearCart();
+    return result.add(order)
+    
 
-   return this.orderCollection.add(order);
+    
   }
 }

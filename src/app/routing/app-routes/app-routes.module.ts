@@ -27,7 +27,7 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'shopping-cart', component: ShoppingCartComponent },
 
-  { path: 'order-success', component: OrderSuccessComponent , canActivate: [ AuthGuard ] },
+  { path: 'order-success/:id', component: OrderSuccessComponent , canActivate: [ AuthGuard ] },
   { path: 'admin/products', component: AdminProductsComponent, canActivate: [ AuthGuard ] },
   { path: 'admin/products', component: AdminProductsComponent, canActivate: [ AuthGuard] },
   { path: 'admin/products/new', component: ProductFormComponent, canActivate: [ AuthGuard ] },
