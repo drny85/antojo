@@ -1,8 +1,8 @@
 <div style="width: 100%" class="row">
-  <div class="col-md-3">
+  <div class="col-md-3 mx-auto">
     <product-filter [category]="category"></product-filter>
 </div>
-<div class="col">
+<div class="col mx-auto">
  
 <div class="grid-2" *ngIf="cart$ | async as cart">
     <ng-container *ngFor="let product of filteredProducts">

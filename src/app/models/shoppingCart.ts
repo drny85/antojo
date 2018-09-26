@@ -16,7 +16,8 @@ export class ShoppingCart {
 
   getQuantity(product: Product) {
    
-      return product.quantity;
+     
+      
       
   }
   
@@ -25,6 +26,15 @@ export class ShoppingCart {
     for (let productId in this.items) 
       sum += this.items[productId].totalPrice;
     return sum;
+  }
+
+  get cartTotalPrice() {
+    let sum = 0;
+    let total = 0;
+    for (let productId in this.items) 
+      sum += this.items[productId].totalPrice;
+      total +=sum;
+    return total;
   }
   
   get totalItemsCount() {

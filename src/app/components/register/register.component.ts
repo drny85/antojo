@@ -20,6 +20,13 @@ export class RegisterComponent implements OnInit {
     phone: '',
     email: '',
     password: '',
+    address: {
+      address: '',
+      apt: '',
+      city: '',
+      state: '',
+      zipcode: ''
+    },
     isAdmin: false
 
   }

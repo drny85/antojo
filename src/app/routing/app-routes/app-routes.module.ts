@@ -1,3 +1,4 @@
+import { OrderDetailsComponent } from './../../components/orders/order-details/order-details.component';
 import { EditComponent } from './../../admin/edit/edit.component';
 import { ProductFormComponent } from './../../admin/product-form/product-form.component';
 import { CheckOutComponent } from './../../components/check-out/check-out.component';
@@ -35,6 +36,7 @@ const appRoutes: Routes = [
   { path: 'check-out', component: CheckOutComponent, canActivate: [ AuthGuard ]},
   { path: 'admin/orders', component: OrdersComponent , canActivate: [ AuthGuard] },
   { path: 'myorders', component: MyordersComponent , canActivate: [ AuthGuard ]},
+  { path: 'myorders/detail/:id', component: OrderDetailsComponent , canActivate: [ AuthGuard ]},
   { path: '**', component: NotfoundComponent }
 
 ]
