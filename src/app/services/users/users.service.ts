@@ -52,7 +52,8 @@ getUsers() {
 
 //add user
 addUser(user: User, id: string) {
-  this.fb.collection('users').doc(id).set(user).then( () => console.log("Success")).catch(err => console.log(err));
+
+ this.fb.collection('users').doc(id).set(user).then( () => console.log("Success")).catch(err => console.log(err));
 }
 
 deleteUser(id: string) {
