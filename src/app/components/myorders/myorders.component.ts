@@ -34,9 +34,9 @@ export class MyordersComponent implements OnInit, OnDestroy {
       
   }
 
- async ngOnInit() {
+ ngOnInit() {
 
- this.subscription = (await this.authServ.user.subscribe(u => {
+ this.subscription = this.authServ.user.subscribe(u => {
 
     if (u.id) {
 
@@ -44,7 +44,7 @@ export class MyordersComponent implements OnInit, OnDestroy {
 
     }
   
-  }))
+  })
 }
 
  

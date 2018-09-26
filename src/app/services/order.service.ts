@@ -1,6 +1,6 @@
 import { ShoppingCartService } from './shopping-cart.service';
 import { Order } from './../models/order';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -13,6 +13,8 @@ export class OrderService {
 
   orderCollection: AngularFirestoreCollection<Order>;
   orders: Observable<Order[]>;
+  orderDoc: AngularFirestoreDocument<Order>;
+  order: Observable<Order>;
 
   constructor(private db: AngularFirestore, private shoppingCartServ: ShoppingCartService) { }
 
@@ -50,5 +52,6 @@ export class OrderService {
     ))
     return this.orders;
   }
+
 
 }
