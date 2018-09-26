@@ -1,16 +1,13 @@
-export interface User {
-    id?: string,
+export interface Shipping {
     name: string,
     last_name: string,
-    phone: string,
-    email: string,
-    password?: string,
-    isAdmin: boolean,
     address: {
         address: string,
         apt?: string,
         city: string,
         state: string,
         zipcode: string
-    }
+    },
+    phone: string,
+    email: string
 }

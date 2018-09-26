@@ -1,7 +1,7 @@
-/* img {
-    width: 400px;
+img {
+    width: auto;
     height: 400px;
-} */
+}
 
 
 .grid-2 {
@@ -24,4 +24,6 @@
         width: auto !important;
         height: auto !important;
     }
+
+    bottom: 30px;
  }

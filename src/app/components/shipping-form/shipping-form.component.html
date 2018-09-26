@@ -1,0 +1,64 @@
+<div *ngIf="user">
+  <form #shippingForm="ngForm" (ngSubmit)="saveOrder(shippingForm)">
+    <div class="row">
+      <div class="col">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" [(ngModel)]="user.name" required  name="name" placeholder="First name">
+      </div>
+      <div class="col">
+        <label for="lname">Last Name</label>
+        <input type="text" class="form-control" required [(ngModel)]="user.last_name"  name="last_name" placeholder="Last name">
+      </div>
+    </div>
+    <div class="row">
+    <div class="col">
+      <label for="adresss">Address</label>
+      <input type="text" class="form-control" required [(ngModel)]="user.address.address" name="address" placeholder="Address">
+    </div>
+    <div class="col">
+      <label for="apt">Apt /Suite / Floor</label>
+      <input type="text" class="form-control" [(ngModel)]="user.address.apt" name="apt" placeholder="Apt / Suite / Floor">
+    </div>
+  </div>
+  <div class="row">
+  <div class="col">
+      <label for="adresss">City</label>
+      <input type="text" class="form-control" required [(ngModel)]="user.address.city" name="city" placeholder="City">
+    </div>
+    <div class="col">
+      <label for="state">State</label>
+      <input type="text" class="form-control" required [(ngModel)]="user.address.state" name="state" placeholder="State">
+    </div>
+    <div class="col">
+        <label for="zipcode">Zip Code</label>
+        <input type="text" class="form-control" required [(ngModel)]="user.address.zipcode" minlength="5" name="zipcode" placeholder="Zip Code">
+    </div>
+  </div>
+  <div class="row">
+  <div class="col">
+      <label for="phone">Phone</label>
+      <input type="text" class="form-control" required [(ngModel)]="user.phone" name="phone" placeholder="Phone">
+    </div>
+    <div class="col">
+      <label for="apt">Email</label>
+      <input type="text" class="form-control" required  [(ngModel)]="user.email"  name="email" placeholder="Email Address">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+       <label for="message">Instructions for Delivery</label>
+       <textarea name="message" id="" class="form-control" [(ngModel)]="message" cols="30" rows="5" placeholder="Type any helpful information for the delivery guy."></textarea>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col">
+        <button   class="btn btn-danger btn-block" type="reset">Clear Form</button>
+    </div>
+    <div class="col">
+        <button [disabled]="!shippingForm.valid" class="btn btn-success btn-block" type="submit">Save Info</button>
+    </div>
+
+  </div>
+  </form>
+</div>

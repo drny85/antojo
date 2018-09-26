@@ -1,12 +1,14 @@
 import { ActivatedRoute } from '@angular/router';
-import { ShoppingCart } from './../models/shoppingCart';
-import { async } from '@angular/core/testing';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Product } from '../models/product';
 import {  map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { ShoppingCartInterface } from '../models/shopping-cart';
+import { ShoppingCart } from '../models/shoppingCart';
+import { ShoppingCartItem } from '../models/shopping-cart-item';
+
+
+
 
 
 @Injectable({
@@ -15,11 +17,11 @@ import { ShoppingCartInterface } from '../models/shopping-cart';
 export class ShoppingCartService {
 
   productDoc: AngularFirestoreDocument<any>;
-  itemsColl: AngularFirestoreCollection<ShoppingCart>;
-  items: Observable<ShoppingCart[]>;
+  itemsColl: AngularFirestoreCollection<ShoppingCartItem>;
+  items: Observable<ShoppingCart>;
   product: Observable<any>;
-  cartDoc: AngularFirestoreDocument<ShoppingCart>;
-  cart: Observable<ShoppingCart>;
+  cartDoc: AngularFirestoreDocument<ShoppingCartItem>;
+  cart: Observable<ShoppingCartItem>;
  
   constructor(private db: AngularFirestore) { 
     
@@ -27,17 +29,15 @@ export class ShoppingCartService {
 
   private createCart() {
     return  this.db.collection('shopping-carts').add({dateCreated: new Date().toLocaleString() });
-  
+
   }
 
-   async getCart(): Promise<AngularFirestoreCollection<ShoppingCart>> {
-    let cartId= await this.getOrCreateCartId();
-    return this.db.collection(`shopping-carts/${cartId}/items`);
-    
-   
+  private getItem(cartId: string, productId: string) {
+    return this.db.doc(`shopping-carts/${cartId}/items/${productId}`);
   }
 
-  async getOrCreateCartId(): Promise<string> {
+
+  private async getOrCreateCartId(): Promise<string> {
     let cartId = localStorage.getItem('cartId');
     if (!cartId) {
       console.log('no cart');
@@ -50,20 +50,29 @@ export class ShoppingCartService {
     return cartId;
   }
 
-  private getItem(cartId: string, productId: string) {
-    return this.db.doc(`shopping-carts/${cartId}/items/${productId}`);
+  // get a cart 
+   async getCart(): Promise<Observable<ShoppingCart>> {
+    let cartId= await this.getOrCreateCartId();
+    return this.db.collection<ShoppingCartItem>(`shopping-carts/${cartId}/items`).valueChanges().pipe(map(x =>  new ShoppingCart(x)))
+    
   }
 
-  // add to cart
+ // add to cart
   async addToCart(product: Product) {
     let cartId = await this.getOrCreateCartId();
     this.productDoc= this.getItem(cartId, product.id);
      this.productDoc.get().subscribe(doc => {
        if (doc.exists) {
-         let q = doc.data() as Product;
+         let q = doc.data() as ShoppingCartItem;
          this.productDoc.update({quantity: q.quantity + 1 });
        } else {
-         this.productDoc.set({product: product, quantity: 1});
+         this.productDoc.set({
+           id: product.id,
+           name: product.name,
+           price: product.price,
+           picture: product.picture,
+           quantity: 1
+           });
        }
      })
   
@@ -72,16 +81,20 @@ export class ShoppingCartService {
 
    // remove from cart 
   async removeFromCart(product: Product) {
-    //this.updateQuantity(product, -1);
+   // this.updateItem(product, -1);
     let cartId = await this.getOrCreateCartId();
     this.productDoc= this.getItem(cartId, product.id);
      this.productDoc.get().subscribe(doc => {
        if (doc.exists) {
          let q = doc.data() as Product;
+         let remainin = q.quantity;
+         //if(remainin <= 1) this.productDoc.delete();
+        
          this.productDoc.update({quantity: q.quantity - 1 });
-       } else {
-         this.productDoc.set({product: product, quantity: 1});
-       }
+
+         if (q.quantity === 1) {this.productDoc.delete()}
+         
+       } 
      })
   
   
@@ -90,11 +103,12 @@ export class ShoppingCartService {
    async getOneCart(id: string) {
         let cartId = await this.getOrCreateCartId();
         if(cartId) {
-        this.cartDoc = this.db.doc(`shopping-carts/${cartId}/items/${id}`);
+        this.cartDoc = this.db.doc<ShoppingCartItem>(`shopping-carts/${cartId}/items/${id}`);
         this.cart = this.cartDoc.snapshotChanges().pipe(map(actions => {
           if(actions.payload.exists) {
-          let data = actions.payload.data() as ShoppingCart;
-          data.id = actions.payload.id; 
+          let data = actions.payload.data() as ShoppingCartItem;
+         // data.id = actions.payload.id; 
+          data.id = actions.payload.id
           return data;
           } else return null;
           
@@ -104,24 +118,25 @@ export class ShoppingCartService {
       }
    }
 
-  //  // update add to cart or remove
 
-  //  private async updateQuantity(product: Product, change: number) {
-  //     let cartId = await this.getOrCreateCartId();
-  //     this.productDoc= this.getItem(cartId, product.id);
-  //     this.productDoc.get().subscribe(doc => {
-  //       if (doc.exists) {
+  async clearCart() { 
+    let cartId = await this.getOrCreateCartId();
+    let items = this.db.collection('shopping-carts/' + cartId + '/items');
+    items.get().forEach(i => i.forEach(res => {
+   
+        return  this.db.doc(`shopping-carts/${cartId}/items/${res.id}`).delete();
+     
+    }))
+      
+   
+    
+  }
 
-  //         let item = doc.data() as Product;
-  //         console.log('Item:', item);
-  //         this.productDoc.update({product: product, quantity: (item.quantity || 0) + change});
 
-  //       }
-        
-  //     })
+  }
+
+
+
+
   
-  //  }
 
-
-  
-}

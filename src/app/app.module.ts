@@ -44,6 +44,12 @@ import { DataTableComponent } from './data-table/data-table.component';
 import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { ShoppingCartService } from './services/shopping-cart.service';
 import { ProductCardComponent } from './components/product-card/product-card.component';
+import { ProductQuantityComponent } from './components/product-quantity/product-quantity.component';
+import { OrderService } from './services/order.service';
+import { ShoppingCartSummaryComponent } from './components/shopping-cart-summary/shopping-cart-summary.component';
+import { ShippingFormComponent } from './components/shipping-form/shipping-form.component';
+import { OrderDetailsComponent } from './components/orders/order-details/order-details.component';
+
 
 
 
@@ -69,7 +75,11 @@ import { ProductCardComponent } from './components/product-card/product-card.com
     FooterComponent,
     DataTableComponent,
     ProductFilterComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    ProductQuantityComponent,
+    ShoppingCartSummaryComponent,
+    ShippingFormComponent,
+    OrderDetailsComponent
     
   ],
   imports: [
@@ -88,7 +98,7 @@ import { ProductCardComponent } from './components/product-card/product-card.com
 
 
   ],
-  providers: [LoginsService, UsersService, AuthGuard, AdminGuard, ProductService, CategoryService, ShoppingCartService ],
+  providers: [LoginsService, UsersService, AuthGuard, AdminGuard, ProductService, CategoryService, ShoppingCartService, OrderService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

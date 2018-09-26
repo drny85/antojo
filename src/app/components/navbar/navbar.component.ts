@@ -8,6 +8,7 @@ import { LoginsService } from '../../services/logins/logins.service';
 import { User } from '../../models/user';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
 import { async } from '@angular/core/testing';
+import { ShoppingCart } from '../../models/shoppingCart';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class NavbarComponent implements OnInit {
   loggedIn: boolean;
   user;
   guest: string;
-  shoppingCartItemCount: number;
+  cart$: Observable<ShoppingCart>;
   
 
   constructor(public auth: LoginsService, 
@@ -44,15 +45,7 @@ export class NavbarComponent implements OnInit {
   }
   async ngOnInit() {
      
-    let cart$ = (await this.shoppingCartService.getCart()).valueChanges();
-    cart$.subscribe(cart => {
-      this.shoppingCartItemCount = 0;  
-      for (let count in cart) {
-        // keep track of items in the cart
-         this.shoppingCartItemCount +=  (cart[count].quantity);
-      }
-    
-    })
+    this.cart$ = (await this.shoppingCartService.getCart());
 
   }
 

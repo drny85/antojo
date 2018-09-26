@@ -1,26 +1,61 @@
-<h1 class="text-center">Shopping Cart</h1>
-<ng-container *ngIf="cart$">
-  <p>You have  {{ itemCount }} items in the shopping cart..</p>
+<h1>Shopping Cart</h1>
+<div class="animated fadeIn" *ngIf="cart$ | async as cart">
+
+  <div class="row">
+    <div class="col">
+        <p> You have {{ cart.totalItemsCount }} items in your shopping cart. </p>
+       
+    </div>
+    <div class="col">
+        <button 
+        *ngIf="cart.totalItemsCount > 0"
+        (click)="clearCart()"
+        class="btn btn-warning float-right">Clear Shopping Cart</button>
+    </div>
+     
+  </div>
  
+  <br>
   <table class="table">
     <thead>
       <tr>
+        <th></th>
         <th>Product</th>
-        <th>Quantity</th>
-        <th>Price</th>
+        <th class="text-center" >Quantity</th>
+        <th class="text-right" >Price</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let cart of cart$">
-          <td class="text-capitalize">{{ cart.product.name }}</td>
-          <td class="text-capitalize">{{ cart.quantity }}</td>
-          <td class="text-capitalize">{{ cart.product.price | currency:"USD":"symbol-narrow"  }}</td>
+      <tr *ngFor="let item of cart.items">
+        <td>
+          <div *ngIf="item.picture" class="thumbnail">
+            <img width="60" height="60" class="img-circled" [src]="item.picture" alt="">
+          </div>
+        </td>
+        <td class="text-capitalize">
+          {{ item.name }}
+        </td>
+        <td>
+          <product-quantity [product]="item" [shopping-cart]="cart">
+          </product-quantity>
+        </td>
+        <td class="text-right">
+          {{ item.totalPrice | currency:'USD':'symbol-narrow' }}
+        </td>
       </tr>
-       
-      </tbody>
-      <tfoot>
-
-      </tfoot>
-  </table>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th class="text-right">{{ cart.totalPrice | currency:'USD':'symbol-narrow' }}</th>
+      </tr>
+    </tfoot> 
   
-</ng-container>
+  </table>
+    <a *ngIf="cart.totalItemsCount > 0" 
+      routerLink="/check-out"
+      class="btn btn-dark btn-lg"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Check Out</a>
+ 
+</div>
