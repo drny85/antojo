@@ -23,7 +23,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   userEmail: string;
   loggedIn: boolean;
   user;
-  guest: string;
   cart$: Observable<ShoppingCart>;
   subscription: Subscription;
   
@@ -59,14 +58,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-   
     this.auth.logout();
-    
+    this.route.navigate(['/']);
     this.msg.info('You are now logged Out', 'Logged Out');
-    this.guest = 'Guest User';
-    
-    this.route.navigate['/login'];
-    
+   
   }
 
 

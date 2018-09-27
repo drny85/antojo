@@ -50,7 +50,10 @@ export class RegisterComponent implements OnInit {
     if(this.psw === this.user.password) {
       //register the user
       this.logServ.register(this.user.email, this.user.password).then(res => {
+        //set id in localstorage
+        localStorage.setItem('userId', res.user.uid);
         //notify the user about success
+        
         this.msg.success('Registration Succefull', 'Registered');
         //adding the user
         this.userServ.addUser(this.user, res.user.uid);

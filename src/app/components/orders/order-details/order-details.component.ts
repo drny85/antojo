@@ -1,36 +1,53 @@
-import { async } from '@angular/core/testing';
+import { ShoppingCartItem } from './../../../models/shopping-cart-item';
 import { OrderService } from './../../../services/order.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UsersService } from '../../../services/users/users.service';
+import { Location } from '@angular/common';
+
 import { Order } from '../../../models/order';
-import { map, switchMap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-order-details',
   templateUrl: './order-details.component.html',
   styleUrls: ['./order-details.component.css']
 })
-export class OrderDetailsComponent implements OnInit  {
+export class OrderDetailsComponent implements OnInit, OnDestroy  {
 
   id: string
-  order;
   orders: Order[] = [];
-  userId: string;
+  product: any[] = [];
+  subscription: Subscription;
+  
   
 
-  constructor(private activedRoute: ActivatedRoute, private orderServ: OrderService, private auth: UsersService) { 
+  constructor(private activedRoute: ActivatedRoute, private location: Location, private orderServ: OrderService) { 
 
      this.id = this.activedRoute.snapshot.params['id'];
-     this.order =  auth.user.pipe(map(u => u.id));
+    
 
     }
 
    async ngOnInit() {
 
-     let id =  await this.auth.user.pipe(map(u => u.id));
-     console.log(id);
+     let id = await localStorage.getItem('userId');
+    this.subscription = this.orderServ.getOrderByUser(id).subscribe(orders => {this.orders = orders.filter(res => res.items[0].product.id === this.id);
+      console.log(this.orders);
+      this.orders.forEach(res => this.product.push(res.items));
+      console.log(this.product);
+
+    });
+
+     
+    }
+
+    ngOnDestroy() {
+      this.subscription.unsubscribe();
+    }
+
+    goBack() {
+     this.location.back();
     }
 
 

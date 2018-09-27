@@ -24,7 +24,7 @@ password: string;
   }
 
   login() {
-    this.authServ.login(this.email, this.password)
+    this.authServ.login(this.email, this.password).then((res) => localStorage.setItem('userId', res.user.uid) );
     }
 
 }

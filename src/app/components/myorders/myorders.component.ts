@@ -8,6 +8,8 @@ import { OrderService } from '../../services/order.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { switchMap, map } from 'rxjs/operators';
 import { Observable, Subscription } from 'rxjs';
+import { async } from '@angular/core/testing';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-myorders',
@@ -17,34 +19,22 @@ import { Observable, Subscription } from 'rxjs';
 export class MyordersComponent implements OnInit, OnDestroy {
 
   orders: Order[] = [];
-  id: string;
-  orders$;
-  oneOrder;
   subscription: Subscription;
- 
   closeResult: string;
 
   constructor(private orderServ: OrderService, 
     private authServ: UsersService, 
     private modalService: NgbModal) { 
-    
-
-      // this.oneOrder = this.orderServ.getOrderByUser(this.id);
-      // console.log(this.oneOrder);
-      
+  
+  
   }
 
- ngOnInit() {
+async ngOnInit() {
 
- this.subscription = this.authServ.user.subscribe(u => {
-
-    if (u.id) {
-
-    this.orders$ =  this.orderServ.getOrderByUser(`${u.id}`);
-
-    }
-  
-  })
+   let userId = await localStorage.getItem('userId');
+   this.subscription = this.orderServ.getUserId(userId).subscribe(order => {this.orders = order; console.log(this.orders); });
+   
+ 
 }
 
  
@@ -55,6 +45,7 @@ export class MyordersComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
    this.subscription.unsubscribe();
+  
   }
 
 }

@@ -31,11 +31,13 @@ export class LoginsService {
   login(email: string, password: string) {
     let returnURL= this.router.snapshot.queryParamMap.get('returnURL') || '/';
     localStorage.setItem('returnURL', returnURL);
-    this.authServ.auth.signInWithEmailAndPassword(email, password);
+    return this.authServ.auth.signInWithEmailAndPassword(email, password);
     }
 
   logout() {
-    this.authServ.auth.signOut();
-    this.route.navigate(['/login']);
+    let userId = localStorage.getItem('userId');
+    if (userId) localStorage.removeItem('userId');
+    return this.authServ.auth.signOut();
+    
   }
 }
