@@ -29,12 +29,14 @@ export class OrderService {
     
   }
 
-  getOrderByUser(id: string) {
-    return this.db.collection<Order>('orders', ref => ref.where('userId', '==', id)).valueChanges();
-  }
+getOrderByUser(id: string) {
+
+  return this.db.collection<Order>('orders', ref => ref.where('userId', '==', id)).valueChanges();
+  
+}
 
 getUserId(id: string) {
-  this.orderCollection = this.db.collection<Order>('orders', ref => ref.where('userId', '==', id));
+  this.orderCollection = this.db.collection<Order>('orders', ref => ref.where('userId', '==', id).orderBy('datePlaced', 'desc'));
   this.orders = this.orderCollection.snapshotChanges().pipe(map(
     actions => actions.map( a => {
       const data = a.payload.doc.data() as Order;

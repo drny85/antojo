@@ -34,9 +34,16 @@ export class OrderDetailsComponent implements OnInit, OnDestroy  {
      let id = await localStorage.getItem('userId');
     this.subscription = this.orderServ.getOrderByUser(id).subscribe(orders => {this.orders = orders.filter(res => res.items[0].product.id === this.id);
       console.log(this.orders);
-      this.orders.forEach(res => this.product.push(res.items));
+      this.orders.forEach(res => res.items.forEach(order => {
+        this.product.push({name: order.product.name,
+                          picture: order.product.picture,
+                          quantity: order.quantity,
+                          price: order.product.price,
+                          totalPrice: order.totalPrice
+                        })
+      }));
       console.log(this.product);
-
+    
     });
 
      

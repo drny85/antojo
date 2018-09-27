@@ -1,5 +1,5 @@
 
-<div> 
+<div *ngIf="product"> 
   <div class="row">
     <div col>
         <h2 class="text-center mb-4 animated pulse"><i class="fa fa-info" aria-hidden="true"></i> Order Details</h2>
@@ -10,7 +10,7 @@
 
   </div>
     
-    <table *ngIf="orders" class="table">
+    <table class="table">
       <thead>
         <tr>
           <th></th>
@@ -22,50 +22,47 @@
   
       </thead>
       <tbody>
-        <tr *ngFor="let item of product; let i = index">
-          <td *ngIf="item"><img width="50" height="50" class="img" src="{{ item[i].product.picture }}" alt=""></td>
-          <!-- <td class="text-capitalize">{{ isFirst }}</td> -->
-          <td>{{ item | json }}</td>
+        <tr *ngFor="let item of product">
+          <td><img  *ngIf="item.picture" width="50" height="50" class="img" src="{{ item.picture }}" alt=""></td>
+          <td class="text-capitalize">{{ item.name }}</td>
           <td>{{ item.quantity }}</td>
           
-          <td>{{ item[i].product.price | currency:'USD': 'symbol-narrow'  }}</td>
-          <td>{{ item[i].totalPrice | currency:'USD': 'symbol-narrow'  }}</td> 
+          <td>{{ item.price | currency:'USD': 'symbol-narrow'  }}</td>
+          <td>{{ item.totalPrice | currency:'USD': 'symbol-narrow'  }}</td> 
         </tr>
-        <tr *ngFor="let item of orders">
+        <tr>
           <th></th>
           <th></th>
           <th></th>
           <th>Grand Total</th>
-          <th>{{ item.grandTotal | currency:'USD': 'symbol-narrow' }}</th>
+          <th>{{ orders[0].grandTotal | currency:'USD': 'symbol-narrow' }}</th>
         </tr>
         <br>
         <tr>
           <th colspan="5"> <h3 class="text-center alert alert-light">Address Information <i class="fa fa-address-card" aria-hidden="true"></i></h3></th>
         </tr>
         <tr>
-          <th width="1"></th>
-          <th width="30">Adress/Street</th>
-          <th width="20">Apt</th>
-          <th width="20">City</th>
-          <th width="19">Phone</th>
+          <th>Adress/Street</th>
+          <th>Apt</th>
+          <th>City</th>
+          <th>Phone</th>
         </tr>
-        <tr *ngFor="let item of orders">
-          <td width="1"></td>
-          <td width="30" class=""><i class="fa fa-home" aria-hidden="true"></i> {{ item.shipping.address }}</td>
-          <td width="20">{{ item.shipping.apt }}</td>
-          <td width="20">{{ item.shipping.city }}</td>
-          <td width="19" class="text-center"><i class="fa fa-phone" aria-hidden="true"></i> {{ item.shipping.phone }}</td>
+        <tr>
+          <td><i class="fa fa-home" aria-hidden="true"></i> {{ orders[0].shipping.address }}</td>
+          <td>{{ orders[0].shipping.apt }}</td>
+          <td>{{ orders[0].shipping.city }}</td>
+          <td><i class="fa fa-phone" aria-hidden="true"></i> {{ orders[0].shipping.phone }}</td>
 
         </tr>
-        <tr  *ngFor="let item of orders">
+        <tr>
           <td colspan="5">
-            <div *ngIf="item.shipping.message; else noMessage" class="card">
+            <div *ngIf="orders[0].shipping.message != ''; else noMessage" class="card">
                 <div class="card-header">
                   Delivery Instruction
                 </div>
                 <div class="card-body">
                   <blockquote class="blockquote mb-0">
-                    <p>{{ item.shipping.message }}</p>
+                    <p>{{ orders[0].shipping.message }}</p>
                     
                   </blockquote>
                 </div>
@@ -74,7 +71,7 @@
               <ng-template #noMessage>
                   <div class="card">
                       <div class="card-body">
-                          <h4 class="text-center">No Instructuion submitted</h4>
+                          <h4 class="text-center">No Instructuion submitted for delivery</h4>
                       </div>
                     </div>
               </ng-template>
