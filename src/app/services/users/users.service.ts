@@ -1,7 +1,7 @@
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { User } from '../../models/user';
 import { AngularFireAuth } from 'angularfire2/auth';
 
@@ -21,17 +21,16 @@ export class UsersService {
 
   constructor(private fb: AngularFirestore, private auth: AngularFireAuth) { 
      
-    this.auth.authState.subscribe(user => {
-      if(user) {
-      this.current = this.fb.doc<User>(`users/${user.uid}`).valueChanges();
-      return this.current;
-      } 
-      return null;
-      
-    })
-    
-}
-
+    this.user = this.auth.authState.pipe(
+      switchMap(user => {
+        if (user) {
+          return this.fb.doc<User>(`users/${user.uid}`).valueChanges()
+        } else {
+          return of(null)
+        }
+      })
+    )
+  }
 
 //get all users
 getUsers() {
@@ -52,7 +51,8 @@ getUsers() {
 
 //add user
 addUser(user: User, id: string) {
-  this.fb.collection('users').doc(id).set(user).then( () => console.log("Success")).catch(err => console.log(err));
+
+ this.fb.collection('users').doc(id).set(user).then( () => console.log("Success")).catch(err => console.log(err));
 }
 
 deleteUser(id: string) {

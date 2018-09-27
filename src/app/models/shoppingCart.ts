@@ -16,10 +16,12 @@ export class ShoppingCart {
 
   getQuantity(product: Product) {
    
-     
+     return product.quantity;
       
       
   }
+
+
   
   get totalPrice() {
     let sum = 0;

@@ -14,8 +14,9 @@ export class Order {
         this.items = shoppingCart.items.map(i => {
             return {
                 
-                id: i.id,
+                
                 product: {
+                    id: i.id,
                     name: i.name,
                     price: i.price,
                     picture: i.picture,
@@ -27,5 +28,7 @@ export class Order {
             }
         })
     }
+
+    
 
 }

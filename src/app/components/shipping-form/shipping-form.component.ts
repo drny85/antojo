@@ -46,7 +46,6 @@ export class ShippingFormComponent implements OnInit, OnDestroy {
   this.subscription =  (this.userService.user.subscribe(user => {
       this.userId = user.id;
       this.user = user;
-      console.log(this.user);
      }));
   }
 
