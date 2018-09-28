@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { OrderService } from './../../services/order.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -35,7 +36,11 @@ export class ShippingFormComponent implements OnInit, OnDestroy {
     }
   };
 
-  constructor(private userService: UsersService, private router: Router, private orderServ: OrderService) {
+  constructor(
+    private userService: UsersService, 
+    private router: Router, 
+    private notification: ToastrService,
+    private orderServ: OrderService) {
 
 
 
@@ -71,10 +76,15 @@ export class ShippingFormComponent implements OnInit, OnDestroy {
     }
 
     let result = await this.orderServ.placeOrder(orderToSubmmit);
+    if (result) {
+      this.notification.success(`Thank You ${order.shipping.name.toUpperCase()}!`, 'You order has been proccesed.');
+    }
     this.router.navigate(['/order-success', result.id]);
   }
+
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
+
 }
