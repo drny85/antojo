@@ -1,8 +1,16 @@
 <div class="card" *ngIf="cart">
   <div class="card-body">
     <h5 class="card-title text-center">Order Summary</h5>
-    <p class="card-text">You have {{ cart.totalItemsCount}} items in the shopping cart</p>
-    <div>
+    <div class="row">
+      <div class="col">
+        <p class="card-text">You have {{ cart.totalItemsCount}} items in the shopping cart</p>
+      </div>
+      <div class="col">
+        <a routerLink="/shopping-cart" class="btn btn-dark float-right">Add/Edit Cart</a>
+      </div>
+    </div>
+   
+    <div class="table-responsive-sm table-responsive-md" >
       <table class="table">
         <thead>
           <tr class="text-center">
@@ -25,7 +33,7 @@
             </td>
             <td  class="text-center">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item" >
+                    <li class="list-group-item text-capitalize" >
                       {{ item.name }}
                      
                     </li>

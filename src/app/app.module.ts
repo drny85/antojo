@@ -1,3 +1,4 @@
+import { AdminOrderService } from './services/admin-order-service.service';
 import { ProductFilterComponent } from './components/product-filter/product-filter.component';
 import { ProductService } from './services/product.service';
 import { CategoryService } from './services/category.service';
@@ -49,6 +50,7 @@ import { OrderService } from './services/order.service';
 import { ShoppingCartSummaryComponent } from './components/shopping-cart-summary/shopping-cart-summary.component';
 import { ShippingFormComponent } from './components/shipping-form/shipping-form.component';
 import { OrderDetailsComponent } from './components/orders/order-details/order-details.component';
+import { AdminOrderDetailsComponent } from './admin/admin-order-details/admin-order-details.component';
 
 
 
@@ -79,7 +81,8 @@ import { OrderDetailsComponent } from './components/orders/order-details/order-d
     ProductQuantityComponent,
     ShoppingCartSummaryComponent,
     ShippingFormComponent,
-    OrderDetailsComponent
+    OrderDetailsComponent,
+    AdminOrderDetailsComponent
     
   ],
   imports: [
@@ -98,7 +101,7 @@ import { OrderDetailsComponent } from './components/orders/order-details/order-d
 
 
   ],
-  providers: [LoginsService, UsersService, AuthGuard, AdminGuard, ProductService, CategoryService, ShoppingCartService, OrderService ],
+  providers: [LoginsService, UsersService, AuthGuard, AdminGuard, ProductService, CategoryService, ShoppingCartService, OrderService, AdminOrderService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -22,7 +22,7 @@ export class OrderService {
  async placeOrder(order: Order) {
 
     let result = await this.db.collection('orders', ref => ref.orderBy('datePlaced'));
-    this.shoppingCartServ.clearCart();
+    if(result)  this.shoppingCartServ.clearCart();
     return result.add(order)
     
 

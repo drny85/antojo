@@ -6,6 +6,7 @@ import { ShoppingCart } from './../../models/shoppingCart';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { UsersService } from '../../services/users/users.service';
 import { Order } from '../../models/order';
+import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'shipping-form',
@@ -36,36 +37,44 @@ export class ShippingFormComponent implements OnInit, OnDestroy {
 
   constructor(private userService: UsersService, private router: Router, private orderServ: OrderService) {
 
-    
 
-    
-   }
 
-  ngOnInit() {
-   
-  this.subscription =  (this.userService.user.subscribe(user => {
-      this.userId = user.id;
-      this.user = user;
-     }));
+
   }
 
+  async ngOnInit() {
+
+    let id = await localStorage.getItem('userId');
+    if (id) {
+      this.subscription = this.userService.getUser(id).subscribe(user => {this.user = user ; this.userId = user.id});
+      // this.subscription =  (this.userService.user.subscribe(user => {
+      //     this.userId = user.id;
+      //     this.user = user;
+      //    }));
+
+    } else {
+      return null
+    }
+  }
   async saveOrder(e) {
     let shipping = e.value;
-    let order = new Order(this.userId, shipping, this.cart );
-    let orderToSubmmit = { datePlaced: order.datePlaced,
-                           grandTotal: order.grandTotal,
-                           items: order.items,
-                           shipping: order.shipping,
-                           message: this.message,
-                           userId: order.userId
+    let order = new Order(this.userId, shipping, this.cart);
+    let orderToSubmmit = {
+      datePlaced: order.datePlaced,
+      grandTotal: order.grandTotal,
+      items: order.items,
+      shipping: order.shipping,
+      message: this.message,
+      userId: order.userId,
+      status: order.status
 
     }
-    
-   let result = await this.orderServ.placeOrder(orderToSubmmit);
-   this.router.navigate(['/order-success', result.id]);
+
+    let result = await this.orderServ.placeOrder(orderToSubmmit);
+    this.router.navigate(['/order-success', result.id]);
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 }

@@ -1,0 +1,137 @@
+
+<div class="container" *ngIf="order"> 
+  <div class="row">
+    <div col>
+        <h2 class="text-center mb-4 animated pulse"><i class="fa fa-info" aria-hidden="true"></i> Order Details</h2>
+        <p>Order Placed on {{ order.datePlaced }}  </p>
+       
+    </div>
+    <div class="col">
+      <button (click)="goBack()" class="float-right btn btn-dark"><i class="fa fa-arrow-left" aria-hidden="true"></i> Go Back</button>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col">
+      <h2>Status: <span class="badge badge-secondary text-uppercase">{{ order.status }}</span></h2>
+    </div>
+    <div class="col-5">
+      <ng-template #content let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title">Change Order Status</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+           <form #statusForm="ngForm" (ngSubmit)="changeStatus(statusForm.value)">
+             <h3 class="text-center">Please Select a status</h3>
+             <div class="form-group">
+               <label for="Status">Status</label>
+               <select name="status" [(ngModel)]="status" id="status" class="form-control">
+                 <option disabled value="">Select a status</option>
+                 <option value="in-progress">In Progress</option>
+                 <option value="new">New</option>
+                 <option value="almost-ready">Praparing for Delivery</option>
+                 <option value="delivered">Delivered</option>
+                 <option value="delayed">Delayed</option>
+                 <option value="canceled">Canceled</option>
+               </select>
+             </div>
+
+             <div class="modal-footer">
+                <button type="button" class="btn btn-warning" (click)="modal.close('Close click')">Close</button>
+                <button type="submit" class="btn btn-success">Change Status</button>
+              </div>
+
+           </form>
+        </div>
+       
+      </ng-template>
+    </div>
+    <div class="col">
+      <button class="btn btn-outline-primary mb-2 mr-2 float-right btn-block" (click)="openVerticallyCentered(content)">Change Status</button>
+    </div>
+  </div>
+
+  <div class="table-responsive-sm table-responsive-md">
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Item/Items</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Total</th>
+        </tr>
+  
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of order.items">
+          <td><img  *ngIf="item.product.picture" width="50" height="50" class="img" src="{{ item.product.picture }}" alt=""></td>
+          <td class="text-capitalize">{{ item.product.name }}</td>
+          <td>{{ item.quantity }}</td>
+          
+          <td>{{ item.product.price | currency:'USD': 'symbol-narrow'  }}</td>
+          <td>{{ item.totalPrice | currency:'USD': 'symbol-narrow'  }}</td> 
+        </tr>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th>Grand Total</th>
+          <th>{{ order.grandTotal | currency:'USD': 'symbol-narrow' }}</th>
+        </tr>
+        <br>
+        <tr>
+          <th colspan="5"> <h3 class="text-center alert alert-light">Address Information <i class="fa fa-address-card" aria-hidden="true"></i></h3></th>
+        </tr>
+        <tr>
+          <th>Adress/Street</th>
+          <th>Apt</th>
+          <th>City</th>
+          <th>Phone</th>
+        </tr>
+        <tr>
+          <td><i class="fa fa-home" aria-hidden="true"></i> {{ order.shipping.address }}</td>
+          <td>{{ order.shipping.apt }}</td>
+          <td>{{ order.shipping.city }}</td>
+          <td><i class="fa fa-phone" aria-hidden="true"></i> {{ order.shipping.phone }}</td>
+
+        </tr>
+        <tr>
+          <td colspan="5">
+            <div *ngIf="order.shipping.message != ''; else noMessage" class="card">
+                <div class="card-header">
+                  Delivery Instruction
+                </div>
+                <div class="card-body">
+                  <blockquote class="blockquote mb-0">
+                    <p>{{ order.shipping.message }}</p>
+                    
+                  </blockquote>
+                </div>
+              </div>
+              
+              <ng-template #noMessage>
+                  <div class="card">
+                      <div class="card-body">
+                          <h4 class="text-center">No Instructuion submitted for delivery</h4>
+                      </div>
+                    </div>
+              </ng-template>
+            </td>
+        </tr>
+       
+  
+  
+      </tbody>
+      <tfoot>
+  
+      </tfoot>
+  
+    </table>
+  </div>
+  
+  </div>
+  

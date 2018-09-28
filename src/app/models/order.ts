@@ -7,10 +7,12 @@ export class Order {
     datePlaced: string;
     grandTotal: number;
     items: OrderItems[];
+    status: string
 
     constructor(public userId: string, public shipping: Shipping, shoppingCart: ShoppingCart) {
         this.datePlaced = new Date().toLocaleString();
         this.grandTotal = shoppingCart.cartTotalPrice;
+        this.status = 'new';
         this.items = shoppingCart.items.map(i => {
             return {
                 

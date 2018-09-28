@@ -16,7 +16,7 @@
           <td class="text-capitalize">{{ item.shipping.name }} {{ item.shipping.last_name }}</td>
           <td>{{ item.datePlaced }}</td>
           <td>{{ item.grandTotal | currency:'USD': 'symbol-narrow' }}</td>
-          <td><a [routerLink]="['/myorders/detail/', item.id]" class="btn btn-secondary">View Order</a>
+          <td><a [routerLink]="['/admin/orders/details', item.id]" class="btn btn-secondary">View Order</a>
           </td>
        
         </tr>
