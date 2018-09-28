@@ -1,5 +1,5 @@
 
-<div class="container" *ngIf="product"> 
+<div class="container" *ngIf="product && orders"> 
   <div class="row">
     <div col>
         <h2 class="text-center mb-4 animated pulse"><i class="fa fa-info" aria-hidden="true"></i> Order Details</h2>
@@ -56,7 +56,7 @@
         </tr>
         <tr>
           <td colspan="5">
-            <div *ngIf="orders[0].shipping.message != ''; else noMessage" class="card">
+            <div class="card">
                 <div class="card-header">
                   Delivery Instruction
                 </div>

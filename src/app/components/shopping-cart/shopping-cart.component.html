@@ -16,7 +16,7 @@
   </div>
  
   <br>
-  <div class="table-responsive-sm table-responsive-md">
+  <div *ngIf="cart.totalItemsCount > 0" class="table-responsive-sm table-responsive-md">
   <table class="table">
     <thead>
       <tr>
