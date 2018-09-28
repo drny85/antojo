@@ -1,11 +1,11 @@
 import { Location } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { AdminOrderService } from './../../services/admin-order-service.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Order } from '../../models/order';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-admin-order-details',
@@ -43,6 +43,9 @@ export class AdminOrderDetailsComponent implements OnInit, OnDestroy {
   changeStatus(e) {
   
     if(e) {
+      if(e.status === 'delivered') {
+        this.order.delivered = true;
+      }
       this.order.status = this.status
       this.adminOrders.updateOrder(this.order).then(() => this.message.success("UPDATED!", "Order has been updated") ) ;
     }

@@ -45,4 +45,12 @@ export class ShoppingCart {
       count += this.items[productId].quantity;
     return count;
   }
+
+  get numberSold() {
+    let count = 0;
+    for ( let i in this.items) {
+      count += this.items[i].quantity;
+      return count;
+    }
+  }
 }

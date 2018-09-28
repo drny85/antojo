@@ -7,7 +7,9 @@ export class Order {
     datePlaced: string;
     grandTotal: number;
     items: OrderItems[];
-    status: string
+    status: string;
+    delivered: boolean;
+    numberSold: number
 
     constructor(public userId: string, public shipping: Shipping, shoppingCart: ShoppingCart) {
         this.datePlaced = new Date().toLocaleString();

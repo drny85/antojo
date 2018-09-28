@@ -71,7 +71,9 @@ export class ShippingFormComponent implements OnInit, OnDestroy {
       shipping: order.shipping,
       message: this.message,
       userId: order.userId,
-      status: order.status
+      status: order.status,
+      delivered: false,
+      numberSold: this.cart.totalItemsCount + this.cart.numberSold
 
     }
 
