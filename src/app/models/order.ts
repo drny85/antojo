@@ -15,12 +15,13 @@ export class Order {
         this.datePlaced = new Date().toLocaleString();
         this.grandTotal = shoppingCart.cartTotalPrice;
         this.status = 'new';
+        this.id = shoppingCart.randomId;
         this.items = shoppingCart.items.map(i => {
             return {
                 
                 
                 product: {
-                    id: i.id,
+                    id: shoppingCart.randomId,
                     name: i.name,
                     price: i.price,
                     picture: i.picture,

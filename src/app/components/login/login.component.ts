@@ -23,8 +23,16 @@ password: string;
     })
   }
 
-  login() {
-    this.authServ.login(this.email, this.password).then((res) => localStorage.setItem('userId', res.user.uid) );
+ login() {
+    this.authServ.login(this.email, this.password).then((res) => {localStorage.setItem('userId', res.user.uid);
+    let url = localStorage.getItem('returnURL');
+    if (url === '/check-out') {
+      let host = window.location.hostname;
+      window.location.href = host + url;
+    }
+    
+   });
+  
     }
 
 }

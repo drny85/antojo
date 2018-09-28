@@ -24,15 +24,15 @@ export class OrderDetailsComponent implements OnInit, OnDestroy  {
 
   constructor(private activedRoute: ActivatedRoute, private location: Location, private orderServ: OrderService) { 
 
-     this.id = this.activedRoute.snapshot.params['id'];
+     
     
 
     }
 
    async ngOnInit() {
-
-     let id = await localStorage.getItem('userId');
-    this.subscription = this.orderServ.getOrderByUser(id).subscribe(orders => {this.orders = orders.filter(res => res.items[0].product.id === this.id);
+     let id = this.activedRoute.snapshot.params['id'];
+     let userId = await localStorage.getItem('userId');
+    this.subscription = this.orderServ.getOrderByUser(userId).subscribe(orders => {this.orders = orders.filter(res => res.items[0].product.id === id);
       console.log(this.orders);
       this.orders.forEach(res => res.items.forEach(order => {
         this.product.push({name: order.product.name,

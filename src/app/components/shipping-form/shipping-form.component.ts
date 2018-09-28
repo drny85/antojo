@@ -7,7 +7,7 @@ import { ShoppingCart } from './../../models/shoppingCart';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { UsersService } from '../../services/users/users.service';
 import { Order } from '../../models/order';
-import { async } from '@angular/core/testing';
+
 
 @Component({
   selector: 'shipping-form',
@@ -18,7 +18,7 @@ export class ShippingFormComponent implements OnInit, OnDestroy {
 
   @Input('cart') cart: ShoppingCart;
   userId: string;
-  subscription: Subscription
+  subscription: Subscription;
   message: string = '';
 
   user: User = {
@@ -42,21 +42,15 @@ export class ShippingFormComponent implements OnInit, OnDestroy {
     private notification: ToastrService,
     private orderServ: OrderService) {
 
-
-
-
   }
 
   async ngOnInit() {
 
     let id = await localStorage.getItem('userId');
     if (id) {
+      //user subcription 
       this.subscription = this.userService.getUser(id).subscribe(user => {this.user = user ; this.userId = user.id});
-      // this.subscription =  (this.userService.user.subscribe(user => {
-      //     this.userId = user.id;
-      //     this.user = user;
-      //    }));
-
+    
     } else {
       return null
     }

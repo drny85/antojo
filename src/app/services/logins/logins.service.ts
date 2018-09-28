@@ -32,7 +32,8 @@ export class LoginsService {
     let returnURL= this.router.snapshot.queryParamMap.get('returnURL') || '/';
     localStorage.setItem('returnURL', returnURL);
     return this.authServ.auth.signInWithEmailAndPassword(email, password);
-    }
+      
+  }
 
   logout() {
     let userId = localStorage.getItem('userId');
