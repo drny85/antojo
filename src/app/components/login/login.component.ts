@@ -28,7 +28,7 @@ password: string;
     let url = localStorage.getItem('returnURL');
     if (url === '/check-out') {
       let host = window.location.hostname;
-      window.location.href = host + url;
+      window.location.href =  url;
     }
     
    });
