@@ -1,9 +1,7 @@
-import { ShoppingCartItem } from './../../../models/shopping-cart-item';
 import { OrderService } from './../../../services/order.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-
 import { Order } from '../../../models/order';
 import { Subscription } from 'rxjs';
 
@@ -24,9 +22,7 @@ export class OrderDetailsComponent implements OnInit, OnDestroy  {
 
   constructor(private activedRoute: ActivatedRoute, private location: Location, private orderServ: OrderService) { 
 
-     
-    
-
+  
     }
 
    async ngOnInit() {

@@ -1,5 +1,5 @@
 import { Subscription } from 'rxjs';
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Order } from '../../models/order';
 import { AdminOrderService } from '../../services/admin-order-service.service';
 import { ActivatedRoute } from '@angular/router';
@@ -18,16 +18,13 @@ export class OrderSuccessComponent implements OnInit, OnDestroy {
   constructor(private adminOrder: AdminOrderService, private activatedRoute: ActivatedRoute, private modalService: NgbModal) { }
 
   async ngOnInit() {
-
     let id = await this.activatedRoute.snapshot.params['id'];
-    this.subscription = this.adminOrder.getOrder(id).subscribe(order =>  {this.order = order ; console.log("ORDER SUBMITTED: ", this.order)});
-    
+    this.subscription = this.adminOrder.getOrder(id).subscribe(order => this.order = order );
   }
 
   openVerticallyCentered(content) {
     this.modalService.open(content, { centered: true });
   }
-
 
   ngOnDestroy() {
     this.subscription.unsubscribe();

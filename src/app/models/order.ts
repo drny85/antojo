@@ -15,11 +15,8 @@ export class Order {
         this.datePlaced = new Date().toLocaleString();
         this.grandTotal = shoppingCart.cartTotalPrice;
         this.status = 'new';
-        this.id = shoppingCart.randomId;
         this.items = shoppingCart.items.map(i => {
             return {
-                
-                
                 product: {
                     id: shoppingCart.randomId,
                     name: i.name,

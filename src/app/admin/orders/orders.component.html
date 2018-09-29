@@ -7,6 +7,7 @@
             <th>Name</th>
             <th>Date/Time</th>
             <th>Amount</th>
+            <th>Status</th>
             <th>Details</th>
         </tr>
         
@@ -16,6 +17,8 @@
           <td class="text-capitalize">{{ item.shipping.name }} {{ item.shipping.last_name }}</td>
           <td>{{ item.datePlaced }}</td>
           <td>{{ item.grandTotal | currency:'USD': 'symbol-narrow' }}</td>
+          <td [ngClass]="{'bg-success': item.status === 'delivered', 'bg-info': item.status === 'new', 'bg-warning': item.status === 'in-progress'}" 
+              class="text-capitalize font-weight-bold text-center">{{ item.status }} </td>
           <td><a [routerLink]="['/admin/orders/details', item.id]" class="btn btn-secondary">View Order</a>
           </td>
        
