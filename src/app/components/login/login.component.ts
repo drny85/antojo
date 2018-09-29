@@ -1,7 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { Component } from '@angular/core';
 import { LoginsService } from '../../services/logins/logins.service';
 
 @Component({
@@ -9,30 +6,18 @@ import { LoginsService } from '../../services/logins/logins.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
 email: string;
 password: string;
-  constructor(private authServ: LoginsService, private route: Router, private msg: ToastrService) { }
+  constructor(private authServ: LoginsService) { }
 
-  ngOnInit() {
-    this.authServ.getState().subscribe(auth => {
-      if (auth) {
-        this.route.navigate(['/']);
-      }
-    })
-  }
 
  login() {
-    this.authServ.login(this.email, this.password).then((res) => {localStorage.setItem('userId', res.user.uid);
-    let url = localStorage.getItem('returnURL');
-    if (url === '/check-out') {
-      let host = window.location.hostname;
-      window.location.href =  url;
-    }
+    this.authServ.login(this.email, this.password);
     
-   });
-  
     }
 
 }
+
+

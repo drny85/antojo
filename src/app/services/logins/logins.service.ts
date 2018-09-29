@@ -1,3 +1,4 @@
+import { async } from '@angular/core/testing';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
@@ -28,10 +29,10 @@ export class LoginsService {
   }
 
   //return a login promise
-  login(email: string, password: string) {
+ async login(email: string, password: string) {
     let returnURL= this.router.snapshot.queryParamMap.get('returnURL') || '/';
-    localStorage.setItem('returnURL', returnURL);
-    return this.authServ.auth.signInWithEmailAndPassword(email, password);
+   await this.authServ.auth.signInWithEmailAndPassword(email, password).then(res => localStorage.setItem('userId', res.user.uid));
+    this.route.navigateByUrl(returnURL);
       
   }
 
