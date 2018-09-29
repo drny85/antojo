@@ -1,9 +1,10 @@
 
-<div class="container" *ngIf="product && orders"> 
+<div class="container" *ngIf="product && orders[0]; else noOrders"> 
   <div class="row">
-    <div col>
+    <div class="col">
         <h2 class="text-center mb-4 animated pulse"><i class="fa fa-info" aria-hidden="true"></i> Order Details</h2>
     </div>
+    
     <div class="col">
       <button (click)="goBack()" class="float-right btn btn-dark"><i class="fa fa-arrow-left" aria-hidden="true"></i> Go Back</button>
     </div>
@@ -86,5 +87,16 @@
     </table>
   </div>
   
+  
+  
+  </div>
+  <div>
+    <ng-template #noOrders>
+      <div class="card">
+        <div class="card-body">
+          <h3>No Orders to Display...</h3>
+        </div>
+      </div>
+    </ng-template>
   </div>
   

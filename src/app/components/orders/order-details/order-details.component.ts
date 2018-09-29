@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Order } from '../../../models/order';
 import { Subscription } from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class OrderDetailsComponent implements OnInit, OnDestroy  {
   
   
 
-  constructor(private activedRoute: ActivatedRoute, private location: Location, private orderServ: OrderService) { 
+  constructor(private activedRoute: ActivatedRoute, private location: Location, private modalService: NgbModal, private orderServ: OrderService) { 
 
   
     }
@@ -43,6 +44,11 @@ export class OrderDetailsComponent implements OnInit, OnDestroy  {
     });
 
      
+    }
+
+
+    openVerticallyCentered(content) {
+      this.modalService.open(content, { centered: true });
     }
 
     ngOnDestroy() {

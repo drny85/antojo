@@ -1,3 +1,4 @@
+import { DeliveryConfirmationComponent } from './../../components/delivery-confirmation/delivery-confirmation.component';
 import { AdminOrderDetailsComponent } from './../../admin/admin-order-details/admin-order-details.component';
 import { OrderDetailsComponent } from './../../components/orders/order-details/order-details.component';
 import { EditComponent } from './../../admin/edit/edit.component';
@@ -32,6 +33,7 @@ const appRoutes: Routes = [
   { path: 'order-success/:id', component: OrderSuccessComponent , canActivate: [ AuthGuard ] },
   { path: 'admin/products', component: AdminProductsComponent, canActivate: [ AuthGuard ] },
   { path: 'admin/products', component: AdminProductsComponent, canActivate: [ AuthGuard] },
+  { path: 'delivered', component: DeliveryConfirmationComponent, canActivate: [ AuthGuard] },
   { path: 'admin/products/new', component: ProductFormComponent, canActivate: [ AuthGuard ] },
   { path: 'admin/products/:id', component: EditComponent, canActivate: [ AuthGuard ] },
   { path: 'admin/orders/details/:id', component: AdminOrderDetailsComponent, canActivate: [ AuthGuard ] },

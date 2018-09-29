@@ -51,6 +51,7 @@ import { ShoppingCartSummaryComponent } from './components/shopping-cart-summary
 import { ShippingFormComponent } from './components/shipping-form/shipping-form.component';
 import { OrderDetailsComponent } from './components/orders/order-details/order-details.component';
 import { AdminOrderDetailsComponent } from './admin/admin-order-details/admin-order-details.component';
+import { DeliveryConfirmationComponent } from './components/delivery-confirmation/delivery-confirmation.component';
 
 
 
@@ -82,7 +83,8 @@ import { AdminOrderDetailsComponent } from './admin/admin-order-details/admin-or
     ShoppingCartSummaryComponent,
     ShippingFormComponent,
     OrderDetailsComponent,
-    AdminOrderDetailsComponent
+    AdminOrderDetailsComponent,
+    DeliveryConfirmationComponent
     
   ],
   imports: [

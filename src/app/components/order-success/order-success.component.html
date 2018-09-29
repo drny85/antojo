@@ -7,12 +7,12 @@
        
     </div>
     <div class="col">
-      <a routerLink="/" class="float-right btn btn-dark"><i class="fa fa-arrow-left" aria-hidden="true"></i> Order More/ Go Back</a>
+      <a routerLink="/" class=" btn btn-dark"><i class="fa fa-arrow-left" aria-hidden="true"></i> Order More/ Go Back</a>
     </div>
 
   </div>
   <div class="row">
-    <div class="col">
+    <div class="col col-sm-12">
       <h2>Status: <span class="badge badge-secondary text-uppercase">{{ order.status }}</span></h2>
     </div>
     <div class="col-5">
@@ -24,13 +24,9 @@
           </button>
         </div>
         <div class="modal-body">
-          <div class="card">
-            <div class="card-body">
-              <p class="text-center font-weight-bold">{{ order.status | uppercase }}</p>
-            </div>
-          </div>
-         
-          </div>
+          
+           <div [ngClass]="{'bg-success': order.status === 'delivered', 'bg-info': order.status === 'new', 'bg-warning': order.status === 'in-progress'}" class="text-center font-weight-bold"><h1>{{ order.status | uppercase }}</h1></div>
+         </div>
 
              <div class="modal-footer">
                 <button type="button" class="btn btn-warning" (click)="modal.close('Close click')">Close</button>
