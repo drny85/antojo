@@ -1,6 +1,7 @@
 import { ShoppingCart } from './../../models/shoppingCart';
 import { Component, OnInit } from '@angular/core';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -13,7 +14,10 @@ export class ShoppingCartComponent implements OnInit {
   cart$;
   //totalPrice: number;
 
-  constructor(private shoppingCartService: ShoppingCartService) { }
+
+  constructor(private shoppingCartService: ShoppingCartService) { 
+    
+  }
 
    async ngOnInit() {
 

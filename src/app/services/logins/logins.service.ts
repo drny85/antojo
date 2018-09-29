@@ -31,7 +31,7 @@ export class LoginsService {
   //return a login promise
  async login(email: string, password: string) {
     let returnURL= this.router.snapshot.queryParamMap.get('returnURL') || '/';
-   await this.authServ.auth.signInWithEmailAndPassword(email, password).then(res => localStorage.setItem('userId', res.user.uid));
+    await this.authServ.auth.signInWithEmailAndPassword(email, password).then(res => localStorage.setItem('userId', res.user.uid));
     this.route.navigateByUrl(returnURL);
       
   }
