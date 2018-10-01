@@ -52,6 +52,7 @@ import { ShippingFormComponent } from './components/shipping-form/shipping-form.
 import { OrderDetailsComponent } from './components/orders/order-details/order-details.component';
 import { AdminOrderDetailsComponent } from './admin/admin-order-details/admin-order-details.component';
 import { DeliveryConfirmationComponent } from './components/delivery-confirmation/delivery-confirmation.component';
+import { OrderReviewComponent } from './components/shopping-cart-summary/order-review/order-review.component';
 
 
 
@@ -84,7 +85,8 @@ import { DeliveryConfirmationComponent } from './components/delivery-confirmatio
     ShippingFormComponent,
     OrderDetailsComponent,
     AdminOrderDetailsComponent,
-    DeliveryConfirmationComponent
+    DeliveryConfirmationComponent,
+    OrderReviewComponent
     
   ],
   imports: [

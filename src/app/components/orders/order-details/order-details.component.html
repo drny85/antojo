@@ -4,6 +4,29 @@
     <div class="col">
         <h2 class="text-center mb-4 animated pulse"><i class="fa fa-info" aria-hidden="true"></i> Order Details</h2>
     </div>
+    <div class="col">
+      <div>
+          <button class="btn btn-outline-primary mb-2 mr-2 float-right btn-block" (click)="openVerticallyCentered(content)">Check Order Status</button>
+      </div>
+        <ng-template #content let-modal>
+            <div *ngIf="orders[0]" class="modal-header">
+              <h4 class="modal-title">Your Order Status Is:</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              
+               <div [ngClass]="{'bg-success':orders[0].status === 'delivered', 'bg-info':orders[0].status === 'new', 'bg-warning': orders[0].status === 'in-progress'}" class="text-center font-weight-bold"><h1>{{ orders[0].status | uppercase }}</h1></div>
+             </div>
+    
+                 <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" (click)="modal.close('Close click')">Close</button>
+                  
+            </div>
+           
+          </ng-template>
+    </div>
     
     <div class="col">
       <button (click)="goBack()" class="float-right btn btn-dark"><i class="fa fa-arrow-left" aria-hidden="true"></i> Go Back</button>

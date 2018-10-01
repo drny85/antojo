@@ -40,7 +40,6 @@ export class ShoppingCartService {
   private async getOrCreateCartId(): Promise<string> {
     let cartId = localStorage.getItem('cartId');
     if (!cartId) {
-      console.log('no cart');
       let result = await this.createCart();
       localStorage.setItem('cartId', result.id);
       return result.id;

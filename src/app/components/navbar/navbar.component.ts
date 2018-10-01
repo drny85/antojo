@@ -22,7 +22,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   userEmail: string;
   loggedIn: boolean;
-  user;
+  user: User;
   cart$: Observable<ShoppingCart>;
   subscription: Subscription;
   
