@@ -22,6 +22,7 @@ export class Order {
                     name: i.name,
                     price: i.price,
                     picture: i.picture,
+                    addons: i.addons
                 },
                 quantity: i.quantity,
                 totalPrice: i.totalPrice

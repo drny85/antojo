@@ -63,19 +63,26 @@ export class ShoppingCartService {
      this.productDoc.get().subscribe(doc => {
        if (doc.exists) {
          let q = doc.data() as ShoppingCartItem;
-         this.productDoc.update({quantity: q.quantity + 1 });
+         this.productDoc.update({quantity: q.quantity + 1, addons: q.addons });
        } else {
          this.productDoc.set({
            id: product.id,
            name: product.name,
            price: product.price,
            picture: product.picture,
+           addons: {items: []},
            quantity: 1
            });
        }
      })
   
     
+  }
+
+  async updateCart(product: Product) {
+    let cartId = await this.getOrCreateCartId();
+    this.productDoc= this.getItem(cartId, product.id);
+    return this.productDoc.update(product);
   }
 
    // remove from cart 

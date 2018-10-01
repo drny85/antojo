@@ -4,6 +4,7 @@ export interface Product {
     price: number,
     category: string,
     picture: string,
+    addons?: object,
     updated: string,
     quantity: number
 }

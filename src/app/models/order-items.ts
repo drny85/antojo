@@ -4,7 +4,8 @@ export interface OrderItems {
         id?: string,
         name: string,
         price: number,
-        picture: string
+        picture: string,
+        addons?: object
     },
     quantity: number,
     totalPrice: number

@@ -4,13 +4,39 @@
       <h4 class="card-title text-capitalize">{{ product.name }}</h4>
       <p class="card-text">{{ product.price | currency:'USD': 'symbol-narrow' }}</p>
     </div>
-    <div *ngIf="showActions && shoppingCart" class="card-footer">
+    <div #child *ngIf="showActions && shoppingCart" class="card-footer">
       <button 
         *ngIf="!itemCount; else updateQuantity"
-        (click)="addToCart()"
+        (click)="openVerticallyCentered(content)"
         class="btn btn-dark btn-block">Add to Cart</button>
+        <ng-template #content let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title">Adding Item to cart</h4>
+              <button #closeModal type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col">
+                 <p class="font-weight-bold">Quantity:</p> 
+                </div>
+                <div class="col float-left">
+                    <product-quantity [itemCount]="itemCount" [product]="product" [shopping-cart]="shoppingCart"></product-quantity>
+                </div>
+               
+                 
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+              <button type="button" class="btn btn-light" (click)="updateCart(closeModal)" >Add to Cart</button>
+            </div>
+          </ng-template>
+      
       <ng-template #updateQuantity>
         <product-quantity [itemCount]="itemCount" [product]="product" [shopping-cart]="shoppingCart">
+          
         </product-quantity>
       </ng-template>
     </div>

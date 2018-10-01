@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
 import { Product } from '../../models/product';
 import { ShoppingCart } from '../../models/shoppingCart';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -15,9 +16,8 @@ export class ProductQuantityComponent {
   @Input('shopping-cart') shoppingCart: ShoppingCart;
   @Input('itemCount') itemCount: number;
 
-  
 
-  constructor(private cartService: ShoppingCartService) { 
+  constructor(private cartService: ShoppingCartService, private modalService: NgbModal) { 
     
   }
 
