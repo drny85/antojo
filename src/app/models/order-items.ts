@@ -5,6 +5,7 @@ export interface OrderItems {
         name: string,
         price: number,
         picture: string,
+        quantity?: number,
         addons?: object
     },
     quantity: number,

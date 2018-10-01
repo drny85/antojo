@@ -29,15 +29,16 @@ export class ProductCardComponent implements OnInit {
   addToCart() {
 
     this.shoppingCartServ.addToCart(this.product);
+    console.log(this.product);
 
   }
 
-  updateCart(e: HTMLButtonElement) {
+async  updateCart(e: HTMLButtonElement) {
     this.product.addons = { items: ['cebollas', 'ajies', 'tomates']};
     console.log(this.product);
     
-    this.shoppingCartServ.updateCart(this.product);
-    console.log(e.click());
+   await this.shoppingCartServ.addToCart(this.product);
+   console.log(e.click());
   }
 
  async ngOnInit() {
@@ -46,7 +47,7 @@ export class ProductCardComponent implements OnInit {
       {
         if (item ) {
          this.itemCount = item.quantity;
-         console.log(item.quantity);
+         console.log('ItemCoun:',item.quantity);
         
         }
         else {
@@ -57,7 +58,7 @@ export class ProductCardComponent implements OnInit {
   }
 
 async  openVerticallyCentered(content) {
-   await this.addToCart();
+  // await this.addToCart();
     this.modalService.open(content, { centered: true });
   }
 

@@ -22,6 +22,7 @@ export class ProductQuantityComponent {
   }
 
   addToCart() {
+
     this.cartService.addToCart(this.product).then(res => console.log('ADDED')).catch(err => console.log(err));
   }
 

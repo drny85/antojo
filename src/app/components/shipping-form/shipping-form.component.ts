@@ -62,6 +62,7 @@ export class ShippingFormComponent implements OnInit, OnDestroy {
       datePlaced: order.datePlaced,
       grandTotal: order.grandTotal,
       items: order.items,
+      quantity: this.cart.totalItemsCount,
       shipping: order.shipping,
       message: this.message,
       userId: order.userId,
