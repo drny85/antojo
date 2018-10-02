@@ -5,6 +5,7 @@ export interface Product {
     category: string,
     picture: string,
     addons?: object,
+    instruction?: string;
     updated: string,
     quantity: number
 }

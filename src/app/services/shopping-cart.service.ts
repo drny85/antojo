@@ -71,6 +71,7 @@ export class ShoppingCartService {
            price: product.price,
            picture: product.picture,
            addons: product.addons,
+           instruction: product.instruction,
            quantity: 1
            });
        }

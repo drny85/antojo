@@ -17,6 +17,8 @@ export class AdminOrderDetailsComponent implements OnInit, OnDestroy {
   order: Order;
   subscription: Subscription;
   status: string = '';
+  showDetails: boolean = false;
+  buttonDetailsText = 'Show Order Instructions';
 
   constructor(private adminOrders: AdminOrderService, 
     private route: ActivatedRoute, 
@@ -41,6 +43,7 @@ export class AdminOrderDetailsComponent implements OnInit, OnDestroy {
     this.modalService.open(content, { centered: true });
   }
 
+  // check delivered status
   changeStatus(e) {
   
     if(e) {
@@ -54,6 +57,18 @@ export class AdminOrderDetailsComponent implements OnInit, OnDestroy {
     }
 
     this.modalService.dismissAll();
+  }
+
+  // change butto text
+  showDetailsClicked(e) {
+    this.showDetails = !this.showDetails;
+    let text = e.target.innerText as string;
+  
+    if (text.toLowerCase() === 'show order instructions' ) {
+      this.buttonDetailsText = 'Show Order Details';
+    } else {
+      this.buttonDetailsText = 'Show Order Instrucions';
+    }
   }
 
   ngOnDestroy() {

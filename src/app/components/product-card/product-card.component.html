@@ -9,18 +9,32 @@
         *ngIf="!itemCount; else updateQuantity"
         (click)="openLg(content)"
         class="btn btn-dark btn-block">Add to Cart</button>
+
+        <!-- modal template -->
         <ng-template #content let-modal>
-            <div class="modal-header">
-              <h4 class="modal-title">Adding Item to cart</h4>
-              <button #closeModal type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p *ngFor="let item of product.addons"><mat-checkbox value="{{item}}" name="{{ item }}"  (change)="onSelect($event)" >{{ item }}</mat-checkbox></p>
-            </div>
-            {{ itemSelected }}
-            <div class="modal-footer">
+      <div class="modal-header">
+        <h4 class="modal-title text-capitalize">Adding {{ product.name}} to cart</h4>
+        <button #closeModal type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <p class="font-weight-bold">Select the ingridients for this item</p>
+            <p *ngFor="let item of product.addons">
+              <mat-checkbox value="{{item}}" name="{{ item }}" (change)="onSelect($event)">{{ item }}</mat-checkbox>
+            </p>
+          </div>
+          <div class="col">
+            <label class="font-weight-bold" for="message">Special intructions</label>
+            <textarea [(ngModel)]="message" class="form-control" name="message" id="message" placeholder="Dressing on the side? No Mayonnaise?. Let us know!" cols="30" rows="5"></textarea>
+          </div>
+        </div>
+        {{ message }}
+      </div>
+
+<div class="modal-footer">
               <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
               <button type="button" class="btn btn-light" (click)="updateCart(closeModal)" >Add to Cart</button>
             </div>

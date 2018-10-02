@@ -15,7 +15,10 @@
     <div class="col">
       <h2>Status: <span class="badge badge-secondary text-uppercase">{{ order.status }}</span></h2>
     </div>
-    <div class="col-5">
+    <div class="col">
+      <button (click)="showDetailsClicked($event)" class="btn btn-outline-primary mb-2 mr-2 btn-block">{{ buttonDetailsText }}</button>
+    </div>
+    <div class="col">
       <ng-template #content let-modal>
         <div class="modal-header">
           <h4 class="modal-title">Change Order Status</h4>
@@ -53,8 +56,8 @@
       <button class="btn btn-outline-primary mb-2 mr-2 float-right btn-block" (click)="openVerticallyCentered(content)">Change Status</button>
     </div>
   </div>
-
-  <div class="table-responsive-sm table-responsive-md">
+<!-- order Details -->
+  <div *ngIf="!showDetails"  class="table-responsive-sm table-responsive-md">
     <table class="table">
       <thead>
         <tr>
@@ -125,6 +128,38 @@
        
   
   
+      </tbody>
+      <tfoot>
+  
+      </tfoot>
+  
+    </table>
+  </div>
+<!-- order instruction with ingridients -->
+<div *ngIf="showDetails && order" class="table-responsive-sm table-responsive-md">
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Item/Items</th>
+          <th>Quantity</th>
+          <th>Details/Instructions</th>
+          
+        </tr>
+  
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of order.items; let i = index">
+          <td><img  *ngIf="item.product.picture" width="50" height="50" class="img" src="{{ item.product.picture }}" alt=""></td>
+          <td class="text-capitalize">{{ item.product.name }}</td>
+          <td>{{ item.quantity }}</td>
+          <td >
+              <!-- <p class="font-weight-bold"> -->
+              <p>{{ item.product.addons | json  }}</p>
+             
+           
+          </td> 
+        </tr>
       </tbody>
       <tfoot>
   

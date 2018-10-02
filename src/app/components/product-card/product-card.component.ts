@@ -24,6 +24,7 @@ export class ProductCardComponent implements OnInit {
   addons: object;
   selected = {};
   itemSelected = [];
+  message = '';
   
   
   constructor(private shoppingCartServ: ShoppingCartService, private modalService: NgbModal)  { 
@@ -44,15 +45,14 @@ export class ProductCardComponent implements OnInit {
       delete  this.selected[e.source.value];
     }
     
-    console.log(this.selected);
   }
 
    
 
 async  updateCart(event: HTMLButtonElement) {
-  
-  console.log(this.product);
+
   this.product.addons = this.selected;
+  this.product.instruction = this.message;
     
    await this.shoppingCartServ.addToCart(this.product);
    event.click();

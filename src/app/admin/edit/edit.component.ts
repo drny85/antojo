@@ -34,7 +34,8 @@ export class EditComponent implements OnInit, OnDestroy {
     picture: '',
     updated: '',
     quantity: 0,
-    addons: ['']
+    addons: [''],
+    instruction: ''
     
   }
 

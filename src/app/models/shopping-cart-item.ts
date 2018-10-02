@@ -7,6 +7,7 @@ export class ShoppingCartItem {
   picture: string;
   price: number; 
   addons?: object[];
+  instruction?: string;
   quantity: number; 
 
   constructor(init?: Partial<ShoppingCartItem>) {
