@@ -25,11 +25,7 @@ export class ProductFormComponent implements OnInit {
 
   toppings = new FormControl();
   toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
-  
-
   addons: [string];
-
-  addonsToAdd = [];
  
   product: Product = {
     name: '',
@@ -114,9 +110,7 @@ export class ProductFormComponent implements OnInit {
   
   
     } else {
-     for (let i in this.addons) {
-       console.log(i);
-     }
+    
       // add product
       this.product.updated = new Date().toLocaleString();
       this.product.addons = this.addons;

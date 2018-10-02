@@ -70,7 +70,7 @@ export class ShoppingCartService {
            name: product.name,
            price: product.price,
            picture: product.picture,
-           addons: {items: []},
+           addons: product.addons,
            quantity: 1
            });
        }

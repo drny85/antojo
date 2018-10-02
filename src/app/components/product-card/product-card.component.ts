@@ -1,10 +1,12 @@
-import { async } from '@angular/core/testing';
+
 import { ShoppingCart } from '../../models/shoppingCart';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ShoppingCartService } from './../../services/shopping-cart.service';
 import { Product } from './../../models/product';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { MatCheckboxChange } from '@angular/material';
+
 
 
 @Component({
@@ -19,11 +21,13 @@ export class ProductCardComponent implements OnInit {
   @Input('shopping-cart') shoppingCart: ShoppingCart;
   @Input('itemCount') itemCount: number;
 
-  
+  addons: object;
+  selected = {};
+  itemSelected = [];
   
   
   constructor(private shoppingCartServ: ShoppingCartService, private modalService: NgbModal)  { 
-   
+    
   }
 
   addToCart() {
@@ -33,16 +37,31 @@ export class ProductCardComponent implements OnInit {
 
   }
 
-async  updateCart(e: HTMLButtonElement) {
-    this.product.addons = { items: ['cebollas', 'ajies', 'tomates']};
-    console.log(this.product);
+   onSelect(e: MatCheckboxChange) {
+    if (e.checked) {
+      this.selected[e.source.value] = e.source.value;
+    } else {
+      delete  this.selected[e.source.value];
+    }
+    
+    console.log(this.selected);
+  }
+
+   
+
+async  updateCart(event: HTMLButtonElement) {
+  
+  console.log(this.product);
+  this.product.addons = this.selected;
     
    await this.shoppingCartServ.addToCart(this.product);
-   console.log(e.click());
+   event.click();
   }
 
  async ngOnInit() {
-   
+
+   this.addons = await this.product.addons;
+
     (await this.shoppingCartServ.getOneCart(this.product.id)).subscribe(item => 
       {
         if (item ) {
@@ -57,9 +76,9 @@ async  updateCart(e: HTMLButtonElement) {
     
   }
 
-async  openVerticallyCentered(content) {
+async  openLg(content) {
   // await this.addToCart();
-    this.modalService.open(content, { centered: true });
+    this.modalService.open(content, { size: 'lg' });
   }
 
 }

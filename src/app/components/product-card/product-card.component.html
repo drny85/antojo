@@ -7,7 +7,7 @@
     <div #child *ngIf="showActions && shoppingCart" class="card-footer">
       <button 
         *ngIf="!itemCount; else updateQuantity"
-        (click)="openVerticallyCentered(content)"
+        (click)="openLg(content)"
         class="btn btn-dark btn-block">Add to Cart</button>
         <ng-template #content let-modal>
             <div class="modal-header">
@@ -17,10 +17,9 @@
               </button>
             </div>
             <div class="modal-body">
-              <div class="row">
-                <!-- card body -->
-                </div>
+              <p *ngFor="let item of product.addons"><mat-checkbox value="{{item}}" name="{{ item }}"  (change)="onSelect($event)" >{{ item }}</mat-checkbox></p>
             </div>
+            {{ itemSelected }}
             <div class="modal-footer">
               <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
               <button type="button" class="btn btn-light" (click)="updateCart(closeModal)" >Add to Cart</button>
