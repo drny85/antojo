@@ -1,3 +1,4 @@
+import { FormControl } from '@angular/forms';
 
 import { Product } from './../../models/product';
 import { ProductService } from './../../services/product.service';
@@ -8,7 +9,7 @@ import { CategoryService } from './../../services/category.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-edit',
@@ -21,6 +22,10 @@ export class EditComponent implements OnInit, OnDestroy {
   id: string;
   subscription: Subscription;
   //showActions: boolean = false;
+  toppings = new FormControl();
+  toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
+  addons: [string];
+ 
 
   product: Product = {
     name: '',
@@ -28,7 +33,8 @@ export class EditComponent implements OnInit, OnDestroy {
     category: '',
     picture: '',
     updated: '',
-    quantity: 0
+    quantity: 0,
+    addons: ['']
     
   }
 
@@ -102,6 +108,7 @@ export class EditComponent implements OnInit, OnDestroy {
     } else {
       // Update product
       this.product.updated = new Date().toLocaleString();
+      this.product.addons = this.addons;
       this.prodServ.updateProduct(this.product).then(() => this.message.success('Product Updated', 'Success!'))
       .catch(err => {this.message.error('Something went wrong', 'Error!');
       console.log(err);

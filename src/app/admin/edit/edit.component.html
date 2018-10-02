@@ -41,6 +41,25 @@
                 Category is required
               </div>
           </div>
+
+          <div class="form-group">
+            <mat-form-field>
+              <mat-select name="addons" (change)="onChange($event)" [(ngModel)]="addons" placeholder="Addons" [formControl]="toppings" multiple>
+                <mat-option *ngFor="let topping of toppingList"   [value]="topping">{{topping}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div *ngIf="product.addons; else noAddons">
+              <p class="font-weight-bold"> Addons Already Included</p>
+              <ul class="list-inline" *ngFor="let item of product.addons">
+                <li class="list-inline-item">{{ item }}</li>
+              </ul>
+            </div>
+            <hr>
+            <ng-template #noAddons>
+                <p class="font-weight-bold">No Addons for this product</p>
+            </ng-template>
+          </div>
+
           <div class="form-group">
             <label for="pic">Update Image</label>
             <button type="button" class="btn btn-info btn-block" (click)="item_pic.click()">Select Image</button>

@@ -1,13 +1,15 @@
-import { take } from 'rxjs/operators';
+
 import { Product } from './../../models/product';
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { CategoryService } from '../../services/category.service';
 import { Router } from '@angular/router';
 import { AngularFireUploadTask, AngularFireStorage } from 'angularfire2/storage';
-
 import { ProductService } from '../../services/product.service';
+import { FormControl } from '@angular/forms';
+
+
 
 
 
@@ -20,6 +22,14 @@ import { ProductService } from '../../services/product.service';
 export class ProductFormComponent implements OnInit {
 
   categories$;
+
+  toppings = new FormControl();
+  toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
+  
+
+  addons: [string];
+
+  addonsToAdd = [];
  
   product: Product = {
     name: '',
@@ -27,7 +37,9 @@ export class ProductFormComponent implements OnInit {
     category: '',
     picture: '',
     updated: '',
-    quantity: 0
+    quantity: 0,
+    addons: ['']
+    
     
   }
 
@@ -50,6 +62,10 @@ export class ProductFormComponent implements OnInit {
 
   ngOnInit() {
   
+  }
+
+  onChange(e) {
+   console.log(e);
   }
 
 
@@ -91,12 +107,19 @@ export class ProductFormComponent implements OnInit {
       // add error
       console.log('error');
       console.log(this.product);
+      for (let i in this.addons) {
+        console.log(i);
+      }
       return;
   
   
     } else {
+     for (let i in this.addons) {
+       console.log(i);
+     }
       // add product
       this.product.updated = new Date().toLocaleString();
+      this.product.addons = this.addons;
       this.prodServ.saveProduct(this.product).then(() => this.message.success('New Product Added', 'Success!'))
       .catch(err => {this.message.error('Something went wrong', 'Error!');
       console.log(err);

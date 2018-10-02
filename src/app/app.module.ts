@@ -1,3 +1,4 @@
+
 import { AdminOrderService } from './services/admin-order-service.service';
 import { ProductFilterComponent } from './components/product-filter/product-filter.component';
 import { ProductService } from './services/product.service';
@@ -6,6 +7,7 @@ import { AdminGuard } from './guards/admin-guard.service';
 import { AuthGuard } from './guards/auth-guard.service';
 import { LoginsService } from './services/logins/logins.service';
 import { UsersService } from './services/users/users.service';
+
 
 import { environment } from './../environments/environment';
 import { AppRoutesModule } from './routing/app-routes/app-routes.module';
@@ -33,7 +35,7 @@ import { AdminProductsComponent } from './admin/admin-products/admin-products.co
 import { OrdersComponent } from './admin/orders/orders.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MyordersComponent } from './components/myorders/myorders.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
@@ -42,7 +44,7 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 import { EditComponent } from './admin/edit/edit.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { DataTableComponent } from './data-table/data-table.component';
-import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import { MatTableModule, MatPaginatorModule, MatSortModule, MatCheckboxModule, MatSelectModule } from '@angular/material';
 import { ShoppingCartService } from './services/shopping-cart.service';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { ProductQuantityComponent } from './components/product-quantity/product-quantity.component';
@@ -53,6 +55,8 @@ import { OrderDetailsComponent } from './components/orders/order-details/order-d
 import { AdminOrderDetailsComponent } from './admin/admin-order-details/admin-order-details.component';
 import { DeliveryConfirmationComponent } from './components/delivery-confirmation/delivery-confirmation.component';
 import { OrderReviewComponent } from './components/shopping-cart-summary/order-review/order-review.component';
+
+
 
 
 
@@ -93,11 +97,14 @@ import { OrderReviewComponent } from './components/shopping-cart-summary/order-r
     BrowserModule,
     AppRoutesModule,
     FormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     CustomFormsModule,
     NgbModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase, 'antojitos-chef'),
     AngularFirestoreModule,
     AngularFireStorageModule,
+    MatCheckboxModule,
+    MatSelectModule,
     AngularFireDatabaseModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added

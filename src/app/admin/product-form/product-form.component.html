@@ -41,6 +41,15 @@
               </div>
           </div>
           <div class="form-group">
+            <mat-form-field>
+              <mat-select name="addons" (change)="onChange($event)" [(ngModel)]="addons" placeholder="Toppings" [formControl]="toppings" multiple>
+                <mat-option *ngFor="let topping of toppingList"   [value]="topping">{{topping}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          
+         
+          <div class="form-group">
             <label for="pic">Upload Image</label>
             <button type="button" class="btn btn-info btn-block" (click)="item_pic.click()">Select Image</button>
           </div>
@@ -66,6 +75,9 @@
       
     </div>
   </div>
-  
+
+  {{ addons | json }}
+
  
+  
 </div>
