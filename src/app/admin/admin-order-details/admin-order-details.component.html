@@ -144,6 +144,7 @@
           <th>Item/Items</th>
           <th>Quantity</th>
           <th>Instructions/Addons</th>
+          <th>Special Instruction</th>
           
         </tr>
   
@@ -157,7 +158,10 @@
               <ul class="list-inline">
                 <li class="list-inline-item"><p class="mr-5">{{ item.product.addons }}</p></li>
               </ul>
-          </td> 
+          </td>
+          <td>
+            <p class="font-weight-bold text-left font-italic">{{ item.product.instruction }}</p>
+          </td>
         </tr>
       </tbody>
       <tfoot>
