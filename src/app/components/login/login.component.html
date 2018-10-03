@@ -1,5 +1,9 @@
 <div class="row">
+  
   <div class="col-md-6 mx-auto">
+      <div id="error" *ngIf="errorMsg">
+          <p class="alert alert-warning">{{ errorMsg }}</p>
+        </div>
     <div class="card">
       <div class="card-body">
         <h1 class="text-center pb-4 pt-3">
