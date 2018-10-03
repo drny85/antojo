@@ -1,3 +1,4 @@
+import { AddonsService } from './../../services/addons.service';
 import { FormControl } from '@angular/forms';
 
 import { Product } from './../../models/product';
@@ -20,10 +21,11 @@ export class EditComponent implements OnInit, OnDestroy {
 
   categories$;
   id: string;
+  addonSubscription: Subscription; 
   subscription: Subscription;
   //showActions: boolean = false;
   toppings = new FormControl();
-  toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
+  toppingList: string[] = []
   addons: [string];
  
 
@@ -51,7 +53,8 @@ export class EditComponent implements OnInit, OnDestroy {
     private message: ToastrService, 
     private prodServ: ProductService,
     private afStorage: AngularFireStorage, 
-    private router: Router
+    private router: Router,
+    private addonsServ: AddonsService
     ) {
 
     this.categories$ = this.category.getCategories();
@@ -59,13 +62,18 @@ export class EditComponent implements OnInit, OnDestroy {
     if(this.id) {
      this.subscription =  this.prodServ.getProduct(this.id).subscribe(prod => this.product = prod);
     }
+    this.addonSubscription = this.addonsServ.getAddons().subscribe(addons => {this.toppingList = addons[0].items.sort();
+    
+    })
    }
 
   ngOnInit() {
+    
   }
 
   ngOnDestroy(){
     this.subscription.unsubscribe();
+    this.addonSubscription.unsubscribe();
   }
 
   onUpload(event) {

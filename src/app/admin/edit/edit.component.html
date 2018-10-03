@@ -46,13 +46,13 @@
        
             <mat-form-field>
               <mat-select name="addons" (change)="onChange($event)" [(ngModel)]="addons" placeholder="Addons" [formControl]="toppings" multiple>
-                <mat-option *ngFor="let topping of toppingList"   [value]="topping">{{topping}}</mat-option>
+                <mat-option class="text-capitalize" *ngFor="let topping of toppingList"   [value]="topping">{{topping}}</mat-option>
               </mat-select>
             </mat-form-field>
             <div *ngIf="product.addons; else noAddons">
               <p class="font-weight-bold"> Addons Already Included</p>
               <ul class="list-inline" *ngFor="let item of product.addons">
-                <li class="list-inline-item">{{ item }}</li>
+                <li class="list-inline-item text-capitalize">{{ item }}</li>
               </ul>
             </div>
             <hr>
