@@ -1,10 +1,10 @@
-<div *ngIf="product" style="width: 70rem;">
+<div *ngIf="product">
     <div>
         <h3 class="text-center">Update A Product</h3>
       </div>
       <br>
   <div class="row">
-    <div class="col-md-7">
+    <div class="col-md-7 col-xs-12">
       <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
           <div class="form-group">
               <label for="item_name">Product Name</label>
@@ -65,15 +65,15 @@
             <label for="pic">Update Image</label>
             <button type="button" class="btn btn-info btn-block" (click)="item_pic.click()">Select Image</button>
           </div>
-          <div hidden class="form-control col">
+          <div hidden class="form-group col">
             <input class="form-control" type="file" (change)="onUpload($event)" name="pic" id="pic" accept=".png,.jpg, .jpeg"  ngModel #item_pic>
         </div>
         <br>
-        <div class="row">
-          <div class="col-md-6">
-              <button [disabled]="!myForm.form.valid" type="submit" class="btn btn-dark btn-block">UpdateProduct</button>
+        <div class="row form-group">
+          <div class="col-md-6 col-xs-6">
+              <button [disabled]="!myForm.form.valid" type="submit" class="btn btn-dark btn-block mr-5">UpdateProduct</button>
           </div>
-          <div class="col-md-6">    
+          <div class="col-md-6 col-xs-6">    
           <button type="button" (click)="delete()" class="btn btn-danger btn-block"><i class="fa fa-trash" aria-hidden="true"></i> Delete Product</button>
           </div>
         </div>
@@ -81,7 +81,7 @@
         </form>
 
     </div>
-    <div class="col-md-5">
+    <div class="col-md-5 d-none d-sm-block">
         <!-- <div class="card" style="width: 30rem;">
         <img class="card-img-top" [src]="product.picture">
         <div class="card-body">

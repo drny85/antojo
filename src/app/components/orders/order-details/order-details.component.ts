@@ -36,7 +36,9 @@ export class OrderDetailsComponent implements OnInit, OnDestroy  {
                           picture: order.product.picture,
                           quantity: order.quantity,
                           price: order.product.price,
-                          totalPrice: order.totalPrice
+                          totalPrice: order.totalPrice,
+                          addons: order.product.addons,
+                          instruction: order.product.instruction
                         })
       }));
       console.log(this.product);
@@ -44,6 +46,10 @@ export class OrderDetailsComponent implements OnInit, OnDestroy  {
     });
 
      
+    }
+
+    openBackDropCustomClass(content) {
+      this.modalService.open(content, {backdropClass: 'light-blue-backdrop'});
     }
 
 

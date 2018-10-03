@@ -33,53 +33,90 @@
     </div>
 
   </div>
-  <div class="table-responsive-sm table-responsive-md">
+  <div class="table-responsive-sm table-responsive-xs table-responsive-md">
     <table class="table">
       <thead>
         <tr>
-          <th></th>
+          <th class="d-none d-sm-block"></th>
           <th>Item/Items</th>
           <th>Quantity</th>
           <th>Price</th>
           <th>Total</th>
+          <th></th>
         </tr>
   
       </thead>
       <tbody>
         <tr *ngFor="let item of product">
-          <td><img  *ngIf="item.picture" width="50" height="50" class="img" src="{{ item.picture }}" alt=""></td>
+          <td class="d-none d-sm-block"><img  *ngIf="item.picture" width="50" height="50" class="img" src="{{ item.picture }}" alt=""></td>
           <td class="text-capitalize">{{ item.name }}</td>
           <td>{{ item.quantity }}</td>
           
           <td>{{ item.price | currency:'USD': 'symbol-narrow'  }}</td>
           <td>{{ item.totalPrice | currency:'USD': 'symbol-narrow'  }}</td> 
+          <td><button class="btn btn-outline-dark" (click)="openBackDropCustomClass(content)">View Addons</button></td>
+          <!-- ng template modal with addons -->
+          <ng-template #content let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title">Addons Included</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div *ngIf="orders" class="modal-body">
+              <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center card-title">Ingridients/Addons Requested.</h3>
+                </div>
+                <div class="card-body">
+                    <ul class="list-inline">
+                        <li class="list-inline-item text-center"><p class="mr-5">{{ item.addons }}</li>
+                      </ul>
+                </div>
+              </div>
+              <div class="card"> 
+                <div class="card-header">
+                  <h3 class="text-center card-title">Special Request</h3></div>
+                <div class="card-body">
+                 <p>{{ item.instruction }}</p> 
+                </div>
+
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+            </div>
+          </ng-template>
         </tr>
         <tr>
-          <th></th>
+          <th class="d-none d-sm-block"></th>
           <th></th>
           <th></th>
           <th>Grand Total</th>
           <th>{{ orders[0].grandTotal | currency:'USD': 'symbol-narrow' }}</th>
+          <th></th>
         </tr>
         <br>
         <tr>
           <th colspan="5"> <h3 class="text-center alert alert-light">Address Information <i class="fa fa-address-card" aria-hidden="true"></i></h3></th>
         </tr>
         <tr>
-          <th>Adress/Street</th>
+          <th colspan="2">Adress/Street</th>
           <th>Apt</th>
           <th>City</th>
-          <th>Phone</th>
+          <th colspan="2">Phone</th>
         </tr>
         <tr>
-          <td><i class="fa fa-home" aria-hidden="true"></i> {{ orders[0].shipping.address }}</td>
+          
+          <td colspan="2"><i class="fa fa-home" aria-hidden="true"></i> {{ orders[0].shipping.address }}</td>
           <td class="text-uppercase">{{ orders[0].shipping.apt }}</td>
           <td>{{ orders[0].shipping.city }}</td>
-          <td><i class="fa fa-phone" aria-hidden="true"></i> {{ orders[0].shipping.phone }}</td>
+          <td colspan="2"> <p><i class="fa fa-phone" aria-hidden="true"></i> {{ orders[0].shipping.phone }}</p></td>
 
         </tr>
         <tr>
-          <td colspan="5">
+          <td colspan="6">
             <div class="card">
                 <div class="card-header">
                   Delivery Instruction

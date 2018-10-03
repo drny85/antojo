@@ -22,7 +22,6 @@ export class ProductCardComponent implements OnInit {
   @Input('itemCount') itemCount: number;
 
   addons: object;
-  selected = {};
   itemSelected = [];
   message = '';
   
@@ -40,9 +39,13 @@ export class ProductCardComponent implements OnInit {
 
    onSelect(e: MatCheckboxChange) {
     if (e.checked) {
-      this.selected[e.source.value] = e.source.value;
+      //add item if not in array
+      if (this.itemSelected.indexOf(e.source.value) === -1) this.itemSelected.push(e.source.value);
+      console.log('Addons:', this.itemSelected);
     } else {
-      delete  this.selected[e.source.value];
+      //revome item of already in.
+      this.itemSelected.pop();
+      console.log('Addons-2:', this.itemSelected);
     }
     
   }
@@ -51,7 +54,7 @@ export class ProductCardComponent implements OnInit {
 
 async  updateCart(event: HTMLButtonElement) {
 
-  this.product.addons = this.selected;
+  this.product.addons = this.itemSelected;
   this.product.instruction = this.message;
     
    await this.shoppingCartServ.addToCart(this.product);

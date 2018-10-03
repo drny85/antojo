@@ -4,7 +4,7 @@ export interface Product {
     price: number,
     category: string,
     picture: string,
-    addons?: object,
+    addons?: string[]
     instruction?: string;
     updated: string,
     quantity: number
