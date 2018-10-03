@@ -20,18 +20,28 @@ password: string;
      if(err.code === 'auth/argument-error') {
     
       this.errorMsg = 'Password and Email required';
+      this.timeOut5sec();
      } else if (err.code === 'auth/wrong-password') {
        this.errorMsg = 'Invalid password or email does not exist';
+       this.timeOut5sec();
      } else if (err.code === 'auth/too-many-requests') {
        this.errorMsg = 'Too many unsuccelfull tries. Please try again later.'
+       this.timeOut5sec();
      }
      else {
        this.errorMsg = 'User not found.'
+       this.timeOut5sec();
      }
      
     }));
     
     
+    }
+
+    timeOut5sec() {
+    
+      setTimeout(() => {this.errorMsg = '';}, 5000);
+  
     }
 
 }

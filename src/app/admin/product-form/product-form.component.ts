@@ -1,13 +1,16 @@
+import { MatCheckboxChange, MatSelectChange } from '@angular/material';
+import { Addons } from './../../models/addons';
 
 import { Product } from './../../models/product';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
 import { CategoryService } from '../../services/category.service';
 import { Router } from '@angular/router';
 import { AngularFireUploadTask, AngularFireStorage } from 'angularfire2/storage';
 import { ProductService } from '../../services/product.service';
 import { FormControl } from '@angular/forms';
+import { AddonsService } from '../../services/addons.service';
 
 
 
@@ -19,12 +22,14 @@ import { FormControl } from '@angular/forms';
   templateUrl: './product-form.component.html',
   styleUrls: ['./product-form.component.css']
 })
-export class ProductFormComponent implements OnInit {
+export class ProductFormComponent implements OnInit, OnDestroy {
 
   categories$;
 
+  subscription: Subscription;
+
   toppings = new FormControl();
-  toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
+  toppingList;
   addons: [string];
  
   product: Product = {
@@ -50,22 +55,20 @@ export class ProductFormComponent implements OnInit {
     private catServ: CategoryService, 
     private afStorage: AngularFireStorage, 
     private message: ToastrService, 
+    private addonsServ: AddonsService,
     private prodServ: ProductService,
     private router: Router) {
   
     this.categories$= this.catServ.getCategories();
   }
 
-  ngOnInit() {
+ngOnInit() {
+   this.subscription = this.addonsServ.getAddons().subscribe(addons => {this.toppingList = addons[0].items.sort();
+    
+    })
+  }
+
   
-  }
-
-  onChange(e) {
-   console.log(e);
-  }
-
-
-
   onUpload(event) {
     
     const id = Math.random().toString(36).substring(2);
@@ -103,9 +106,7 @@ export class ProductFormComponent implements OnInit {
       // add error
       console.log('error');
       console.log(this.product);
-      for (let i in this.addons) {
-        console.log(i);
-      }
+    
       return;
   
   
@@ -122,6 +123,10 @@ export class ProductFormComponent implements OnInit {
       this.message.success('Product Added...', 'Added!' );
   
     }
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

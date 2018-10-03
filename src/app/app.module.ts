@@ -1,3 +1,4 @@
+import { AddonsService } from './services/addons.service';
 
 import { AdminOrderService } from './services/admin-order-service.service';
 import { ProductFilterComponent } from './components/product-filter/product-filter.component';
@@ -112,7 +113,7 @@ import { OrderReviewComponent } from './components/shopping-cart-summary/order-r
 
 
   ],
-  providers: [LoginsService, UsersService, AuthGuard, AdminGuard, ProductService, CategoryService, ShoppingCartService, OrderService, AdminOrderService ],
+  providers: [LoginsService, UsersService, AuthGuard, AdminGuard, ProductService, CategoryService, ShoppingCartService, OrderService, AdminOrderService, AddonsService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
