@@ -1,10 +1,11 @@
 import { OrderService } from './../../../services/order.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Order } from '../../../models/order';
 import { Subscription } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 @Component({
@@ -45,7 +46,7 @@ export class OrderDetailsComponent implements OnInit, OnDestroy  {
     
     });
 
-     
+    
     }
 
     openBackDropCustomClass(content) {

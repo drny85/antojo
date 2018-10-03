@@ -33,7 +33,7 @@ const appRoutes: Routes = [
   { path: 'order-success/:id', component: OrderSuccessComponent , canActivate: [ AuthGuard ] },
   { path: 'admin/products', component: AdminProductsComponent, canActivate: [ AuthGuard ] },
   { path: 'admin/products', component: AdminProductsComponent, canActivate: [ AuthGuard] },
-  { path: 'delivered', component: DeliveryConfirmationComponent, canActivate: [ AuthGuard] },
+  { path: 'delivered/:id', component: DeliveryConfirmationComponent, canActivate: [ AuthGuard] },
   { path: 'admin/products/new', component: ProductFormComponent, canActivate: [ AuthGuard ] },
   { path: 'admin/products/:id', component: EditComponent, canActivate: [ AuthGuard ] },
   { path: 'admin/orders/details/:id', component: AdminOrderDetailsComponent, canActivate: [ AuthGuard ] },

@@ -1,5 +1,5 @@
 
-<div class="container" *ngIf="order"> 
+<div class="container" #pdfcontent *ngIf="order"> 
   <div class="row">
     <div col>
         <h2 class="text-center mb-4 animated pulse"><i class="fa fa-info" aria-hidden="true"></i> Order Details</h2>
@@ -9,7 +9,6 @@
     <div class="col">
       <button (click)="goBack()" class="float-right btn btn-dark"><i class="fa fa-arrow-left" aria-hidden="true"></i> Go Back</button>
     </div>
-
   </div>
   <div class="row">
     <div class="col">

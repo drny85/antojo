@@ -1,3 +1,66 @@
-<p>
-  delivery-confirmation works!
-</p>
+<div *ngIf="order">
+  <div class="card" #pdfcontent>
+    <div class="card-header">
+      <h2 class= "mb-4">Order Delivery Report</h2>
+      <p class="font-weight-bold">Order Placed On: {{ order.datePlaced }}</p>
+    </div>
+    <div class="card-body">
+        <h3 class="text-capitalize"> Customer: {{ order.shipping.name }} {{ order.shipping.last_name}}</h3>
+      <div >
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Items</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Total</th>
+            </tr>
+            
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of order.items">
+              <td class="text-capitalize">{{ item.product.name}}</td>
+              <td>{{ item.quantity }}</td>
+              <td>{{ item.product.price | currency:'USD': 'symbol-narrow' }}</td>
+              <td>{{ item.totalPrice | currency:'USD': 'symbol-narrow' }}</td> 
+            </tr>
+            <tr>
+              <th></th>
+              <th></th>
+              <th>Grand Total</th>
+              <th>{{ order.grandTotal }}</th>
+            </tr>
+            <tr>
+              <!-- <th *ngIf="order.items.product.instruction"><b>Special Instruction:</b>  {{ order.items.product.instruction }}</th> -->
+            </tr>
+            <tr><th colspan="4" class="text-center alert alert-dark">Delivery Information</th></tr>
+
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="2"><b>Delivery Address: </b> {{ order.shipping.address }} </td>
+              <td *ngIf="order.shipping.apt"><b>Apt: </b> {{ order.shipping.apt }}</td>
+              <td><b>City: </b> {{ order.shipping.city }}</td>
+              
+            </tr>
+            <tr>
+              <td colspan="4"><b>Phone: </b>{{ order.shipping.phone }}</td>
+              
+            </tr>
+            <tr>
+              <td colspan="4"><p *ngIf="order.shipping.message"><b>Delivery Instruction:</b>  {{ order.shipping.message }}</p></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <p class="thank font-italic mb-5">Thanks <span class="text-capitalize">{{ order.shipping.name}}</span> for your business.</p>
+    <p class="logo text-center"> Somos Antojitos Chef, <span class="font-italic">Donde tu antojo es un arte.</span> </p>
+    <img class="img float-right" width="60" height="60" src="../../../assets/footer_logo.png" alt="logo">
+    <div>
+     
+    </div>
+  </div>
+</div>

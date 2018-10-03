@@ -2,7 +2,7 @@ import { Location } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { AdminOrderService } from './../../services/admin-order-service.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Order } from '../../models/order';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
@@ -21,7 +21,8 @@ export class AdminOrderDetailsComponent implements OnInit, OnDestroy {
   buttonDetailsText = 'Show Order Instructions';
 
   constructor(private adminOrders: AdminOrderService, 
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
+    private router: Router,
     private location: Location,
     private message: ToastrService,
     private modalService: NgbModal) {
@@ -32,7 +33,7 @@ export class AdminOrderDetailsComponent implements OnInit, OnDestroy {
   let id = await this.route.snapshot.params['id'];
   this.subscription = this.adminOrders.getOrder(id).subscribe(order => { this.order = order; console.log(this.order);
    })
-
+   
   }
 
   goBack() {
@@ -50,6 +51,8 @@ export class AdminOrderDetailsComponent implements OnInit, OnDestroy {
       if(e.status === 'delivered') {
 
         this.order.delivered = true;
+        this.router.navigate(['delivered/'+ this.order.id]);
+
       }
       this.order.status = this.status
       this.adminOrders.updateOrder(this.order).then(() => this.message.success("UPDATED!", "Order has been updated") ) ;
@@ -70,6 +73,7 @@ export class AdminOrderDetailsComponent implements OnInit, OnDestroy {
       this.buttonDetailsText = 'Show Order Instrucions';
     }
   }
+
 
   ngOnDestroy() {
     this.subscription.unsubscribe();

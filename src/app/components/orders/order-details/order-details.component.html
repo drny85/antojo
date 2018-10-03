@@ -1,5 +1,5 @@
 
-<div class="container" *ngIf="product && orders[0]; else noOrders"> 
+<div class="container" #pdfcontent *ngIf="product && orders[0]; else noOrders"> 
   <div class="row">
     <div class="col">
         <h2 class="text-center mb-4 animated pulse"><i class="fa fa-info" aria-hidden="true"></i> Order Details</h2>
