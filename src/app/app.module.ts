@@ -56,6 +56,7 @@ import { OrderDetailsComponent } from './components/orders/order-details/order-d
 import { AdminOrderDetailsComponent } from './admin/admin-order-details/admin-order-details.component';
 import { DeliveryConfirmationComponent } from './components/delivery-confirmation/delivery-confirmation.component';
 import { OrderReviewComponent } from './components/shopping-cart-summary/order-review/order-review.component';
+import { ManageAddonsComponent } from './admin/manage-addons/manage-addons.component';
 
 
 
@@ -91,7 +92,8 @@ import { OrderReviewComponent } from './components/shopping-cart-summary/order-r
     OrderDetailsComponent,
     AdminOrderDetailsComponent,
     DeliveryConfirmationComponent,
-    OrderReviewComponent
+    OrderReviewComponent,
+    ManageAddonsComponent
     
   ],
   imports: [
