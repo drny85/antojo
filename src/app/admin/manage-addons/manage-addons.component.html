@@ -1,14 +1,27 @@
-<div *ngIf="toppingList">
+<div *ngIf="addons">
   <div class="card">
     <div class="card-header">
       <h3>Addons Already Included</h3>
     </div>
     <div class="card-body">
         <ul class="list-group">
-            <li *ngFor="let  addon of toppingList; let i = index" class="list-group-item text-capitalize">{{ addon }} <span><button (click)="deleteAddon(addon)" class="btn btn-danger float-right"><i class="fa fa-trash" aria-hidden="true"></i> Remove</button></span></li>
+            <li *ngFor="let addon of addons; let i = index" class="list-group-item text-capitalize">{{ addon.name }} <span><button (click)="deleteAddon(addon.id)" class="btn btn-danger float-right"><i class="fa fa-trash" aria-hidden="true"></i> Remove</button></span></li>
           </ul>
     </div>
+    <div class="card-footer">
+      <div>
+        <form #myForm="ngForm" (ngSubmit)="addAddon(myForm)">
+          <div class="form-group">
+            <label for="addon">Addon Name</label>
+            <input type="text" class="form-control" required [(ngModel)]="addon.name" name="addon" id="addon">
+            <br>
+            <button type="submit" class="btn btn-dark" [disabled]="!myForm.form.valid">Save Addon</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
+
   
 </div>
 

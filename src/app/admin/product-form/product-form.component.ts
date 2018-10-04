@@ -63,7 +63,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   }
 
 ngOnInit() {
-   this.subscription = this.addonsServ.getAddons().subscribe(addons => {this.toppingList = addons[0].items.sort();
+   this.subscription = this.addonsServ.getAddons().subscribe(addons => {this.toppingList = addons;
     
     })
   }

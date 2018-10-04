@@ -1,5 +1,5 @@
 export interface Addons {
     id?: string;
-    items: string[];
+    name: string
     
 }

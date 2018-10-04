@@ -43,11 +43,11 @@
           <div *ngIf="toppingList" class="form-group">
             <mat-form-field>
               <mat-select name="addons" [(ngModel)]="addons" placeholder="Addons" [formControl]="toppings" multiple>
-                <mat-option class="text-capitalize" *ngFor="let topping of toppingList;"   [value]="topping">{{ topping }}</mat-option>
+                <mat-option class="text-capitalize" *ngFor="let topping of toppingList;"   [value]="topping.name">{{ topping.name }}</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
-          <div>{{ addons }}</div>
+          <div>{{ addons | json }}</div>
           
          
           <div class="form-group">
