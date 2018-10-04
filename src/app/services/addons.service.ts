@@ -23,7 +23,6 @@ export class AddonsService {
       actions => actions.map( a => {
         const data = a.payload.doc.data() as Addons;
         data.id = a.payload.doc.id;
-        console.log(data);
         return data;
       })
     ))
@@ -34,8 +33,6 @@ export class AddonsService {
     this.addonsColl = this.db.collection<Addons>('addons');
     return this.addonsColl.add(addon);
   }
-
- 
 
   deleteAddon(id: string) {
     return this.db.doc<Addons>(`addons/${id}`).delete();

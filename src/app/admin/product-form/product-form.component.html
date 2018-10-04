@@ -1,12 +1,18 @@
 <div *ngIf="product">
-    <div>
-        <h3 class="text-center">Adding New Product</h3>
+    <div class="row">
+      <div class="col">
+          <h3 class="text-center">Adding New Product</h3>
       </div>
+      <div class="col">
+          <a routerLink="/admin/addons" class="btn btn-dark float-right">Manage Addons</a>
+      </div> 
+  </div>
+  <hr>
   <div class="row">
     <div [ngClass]="{'col-md-7': product.name, 'col-md-12': !product.name}">
       <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
           <div class="form-group">
-              <label for="item_name">Product Name</label>
+              <label for="item_name" class="font-weight-bold">Product Name</label>
               <input [(ngModel)]="product.name" id="item_name" type="text" #prod_name="ngModel" name="name"  class="form-control"
               [ngClass]="{'is-invalid': prod_name.touched && prod_name.errors, 'is-valid': prod_name.valid}"
               required>
@@ -47,9 +53,7 @@
               </mat-select>
             </mat-form-field>
           </div>
-          <div>{{ addons | json }}</div>
-          
-         
+        
           <div class="form-group">
             <label for="pic">Upload Image</label>
             <button type="button" class="btn btn-info btn-block" (click)="item_pic.click()">Select Image</button>
