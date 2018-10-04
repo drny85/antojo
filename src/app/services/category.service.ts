@@ -33,12 +33,14 @@ export class CategoryService {
     return this.categories;
   }
 
-  getAddons() {
-    this.addOnsColl = this.db.collection<Addons>(`categories/addons/items`, ref => ref.orderBy('name'));
-    // this.addons = this.addOnsColl.snapshotChanges().pipe(map(
-    //   actions => actions.map(a = > {
-    //     const data = a.payload.doc.data() as Addons;
-    //   })
-    // ))
+  addCategory(category: Category) {
+
+    return this.db.collection<Category>(`categories`).doc(`${category.name}`).set(category);
+
   }
+
+  deleteCategory(id: string) {
+    return this.db.doc(`categories/${id}`).delete();
+  }
+
 }

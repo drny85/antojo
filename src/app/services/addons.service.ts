@@ -18,7 +18,7 @@ export class AddonsService {
   constructor(private db: AngularFirestore) { }
 
   getAddons() {
-    this.addonsColl = this.db.collection<Addons>('addons');
+    this.addonsColl = this.db.collection<Addons>('addons', ref => ref.orderBy('name'));
     this.addons = this.addonsColl.snapshotChanges().pipe(map(
       actions => actions.map( a => {
         const data = a.payload.doc.data() as Addons;

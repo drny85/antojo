@@ -1,6 +1,27 @@
-
+<div *ngIf="orders$ | async as order">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="!status" routerLink="/admin/orders/">All Orders</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="status === 'new'" routerLink="/admin/orders/" [queryParams]="{ status: 'new' }">New</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="status === 'delivered'" routerLink="/admin/orders/" [queryParams]="{ status: 'delivered' }">Delivered</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="status === 'almost-ready'" routerLink="/admin/orders/" [queryParams]="{ status: 'almost-ready' }">In Progress</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="status === 'delayed'" routerLink="/admin/orders/" [queryParams]="{ status: 'delayed' }">Delayed</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="status === 'canceled'" routerLink="/admin/orders/" [queryParams]="{ status: 'canceled' }">Canceled</a>
+    </li>
+  </ul>
+</div>
 <div *ngIf="orders$">
-    <h2 class="text-center mb-5">All Orders</h2>
+    <h2 class="text-center mb-3 text-capitalize"> {{ status }}</h2>
     <table class="table">
       <thead>
         <tr>
@@ -13,7 +34,7 @@
         
       </thead>
       <tbody>
-        <tr *ngFor="let item of orders$ | async">
+        <tr *ngFor="let item of filteredStatus">
           <td class="text-capitalize">{{ item.shipping.name }} {{ item.shipping.last_name }}</td>
           <td>{{ item.datePlaced }}</td>
           <td>{{ item.grandTotal | currency:'USD': 'symbol-narrow' }}</td>
@@ -21,6 +42,7 @@
               class="text-capitalize font-weight-bold text-center">{{ item.status }} </td>
           <td><a [routerLink]="['/admin/orders/details', item.id]" class="btn btn-secondary">View Order</a>
           </td>
+        
        
         </tr>
        

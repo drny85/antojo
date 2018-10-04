@@ -57,6 +57,7 @@ import { AdminOrderDetailsComponent } from './admin/admin-order-details/admin-or
 import { DeliveryConfirmationComponent } from './components/delivery-confirmation/delivery-confirmation.component';
 import { OrderReviewComponent } from './components/shopping-cart-summary/order-review/order-review.component';
 import { ManageAddonsComponent } from './admin/manage-addons/manage-addons.component';
+import { ManageCategoryComponent } from './admin/manage-category/manage-category.component';
 
 
 
@@ -93,7 +94,8 @@ import { ManageAddonsComponent } from './admin/manage-addons/manage-addons.compo
     AdminOrderDetailsComponent,
     DeliveryConfirmationComponent,
     OrderReviewComponent,
-    ManageAddonsComponent
+    ManageAddonsComponent,
+    ManageCategoryComponent
     
   ],
   imports: [
