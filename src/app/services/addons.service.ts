@@ -12,7 +12,8 @@ export class AddonsService {
   addonsColl: AngularFirestoreCollection<Addons>;
   addons: Observable<Addons[]>;
 
-  addon: AngularFirestoreDocument<Addons>;
+  addonDoc: AngularFirestoreDocument<Addons>;
+  addon: Addons;
 
   constructor(private db: AngularFirestore) { }
 
@@ -29,5 +30,15 @@ export class AddonsService {
     return this.addons;
   }
 
-  
+  addAddon(addon: string) {
+    this.addonDoc = this.db.collection('addons').doc(addon);
+    return this.addonDoc;
+  }
+
+  updateAddons(addon: Addons) {
+   this.addonDoc = this.db.doc<Addons>('addons/'+ addon.id);
+   return this.addonDoc.update(addon);
+  }
+
+
 }
