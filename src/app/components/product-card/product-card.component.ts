@@ -52,18 +52,18 @@ export class ProductCardComponent implements OnInit {
 
    
 
-async  updateCart(event: HTMLButtonElement) {
+updateCart(event: HTMLButtonElement) {
 
   this.product.addons = this.itemSelected;
   this.product.instruction = this.message;
     
-   await this.shoppingCartServ.addToCart(this.product);
+   this.shoppingCartServ.addToCart(this.product);
    event.click();
   }
 
  async ngOnInit() {
 
-   this.addons = await this.product.addons;
+   this.addons = this.product.addons;
 
     (await this.shoppingCartServ.getOneCart(this.product.id)).subscribe(item => 
       {
