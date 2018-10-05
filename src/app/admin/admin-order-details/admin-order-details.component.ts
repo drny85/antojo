@@ -53,7 +53,10 @@ export class AdminOrderDetailsComponent implements OnInit, OnDestroy {
         this.order.delivered = true;
         this.router.navigate(['delivered/'+ this.order.id]);
 
+      }else {
+        this.order.delivered = false;
       }
+
       this.order.status = this.status
       this.adminOrders.updateOrder(this.order).then(() => this.message.success("UPDATED!", "Order has been updated") ) ;
     

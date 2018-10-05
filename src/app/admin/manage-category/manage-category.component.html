@@ -1,0 +1,31 @@
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">Adding Categories</h3>
+  </div>
+  <div class="card-body">
+    <form #categoryForm="ngForm" (ngSubmit)="addCategory()">
+      <div class="form-group">
+          <label for="name">Category Name</label>
+          <input #catName required name="name" [(ngModel)]="category.name" type="text" class="form-control" id="id">
+        </div>
+        <div class="form-group">
+          <button class="btn btn-dark" [disabled]="!categoryForm.form.valid" type="submit">Add Category</button>
+        </div>
+
+    </form>
+  </div>
+
+</div>
+<div *ngIf="categories$">
+  <div class="card">
+    <div class="card-header">
+      <h3 class="text-center">Categories List</h3>
+    </div>
+    <div class="card-body">
+      <ul class="list-group" *ngFor="let  category of categories$ | async ">
+        <li (click)="fillName($event)" class="list-group-item text-capitalize">{{ category.name }} <span><button (click)="deleteCategory(category.id)" class="btn btn-danger float-right"><i class="fa fa-trash" aria-hidden="true"></i> Remove</button></span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

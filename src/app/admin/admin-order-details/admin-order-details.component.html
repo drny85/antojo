@@ -2,9 +2,12 @@
 <div class="container" #pdfcontent *ngIf="order"> 
   <div class="row">
     <div col>
-        <h2 class="text-center mb-4 animated pulse"><i class="fa fa-info" aria-hidden="true"></i> Order Details</h2>
+        <h2 class="text-center mb-4 animated pulse text-capitalize"><i class="fa fa-info" aria-hidden="true"></i> {{ order.shipping.name }} {{ order.shipping.last_name }}`  Order Details</h2>
         <p>Order Placed on {{ order.datePlaced }}  </p>
        
+    </div>
+    <div *ngIf="order.status === 'delivered'" class="col">
+      <a [routerLink]="['/delivered/', order.id]" class="btn btn-secondary float-right"><i class="fa fa-print" aria-hidden="true"></i> Print Invoice</a>
     </div>
     <div class="col">
       <button (click)="goBack()" class="float-right btn btn-dark"><i class="fa fa-arrow-left" aria-hidden="true"></i> Go Back</button>
@@ -124,9 +127,6 @@
               </ng-template>
             </td>
         </tr>
-       
-  
-  
       </tbody>
       <tfoot>
   
@@ -155,7 +155,7 @@
           <td>{{ item.quantity }}</td>
           <td >
               <ul class="list-inline">
-                <li class="list-inline-item"><p class="mr-5">{{ item.product.addons }}</p></li>
+                <li class="list-inline-item"><p class="mr-5 text-capitalize">{{ item.product.addons }}</p></li>
               </ul>
           </td>
           <td>
