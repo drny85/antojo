@@ -23,9 +23,8 @@ export class EditComponent implements OnInit, OnDestroy {
   id: string;
   addonSubscription: Subscription; 
   subscription: Subscription;
-  //showActions: boolean = false;
   toppings = new FormControl();
-  toppingList: string[] = []
+  toppingList;
   addons: [string];
  
 
@@ -62,7 +61,7 @@ export class EditComponent implements OnInit, OnDestroy {
     if(this.id) {
      this.subscription =  this.prodServ.getProduct(this.id).subscribe(prod => this.product = prod);
     }
-    this.addonSubscription = this.addonsServ.getAddons().subscribe(addons => {this.toppingList = addons[0].items.sort();
+    this.addonSubscription = this.addonsServ.getAddons().subscribe(addons => {this.toppingList = addons;
     
     })
    }
