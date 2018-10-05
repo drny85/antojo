@@ -3,7 +3,7 @@
     <h3 class="card-title">Adding Categories</h3>
   </div>
   <div class="card-body">
-    <form #categoryForm="ngForm" (ngSubmit)="addCategory(categoryForm)">
+    <form #categoryForm="ngForm" (ngSubmit)="addCategory()">
       <div class="form-group">
           <label for="name">Category Name</label>
           <input #catName required name="name" [(ngModel)]="category.name" type="text" class="form-control" id="id">
