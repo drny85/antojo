@@ -12,21 +12,17 @@
 
         <!-- modal template -->
         <ng-template  #content let-modal>
-      <div class="modal-header ">
+      <div class="modal-header animated fadeInUp">
         <h4 class="modal-title text-capitalize">Adding {{ product.name}} to cart</h4>
         <button #closeModal type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body animated fadeInRight">
         <div class="row">
           <div class="col">
             <p class="font-weight-bold">Select the ingridients for this item</p>
-<<<<<<< HEAD
             <p *ngFor="let item of product.addons" class="text-capitalize">
-=======
-            <p *ngFor="let item of product.addons"  class="text-capitalize">
->>>>>>> 94fa4ec6bdd45db42e946cafdc3725f405033f4d
               <mat-checkbox value="{{item}}" name="{{ item }}" (change)="onSelect($event)">{{ item }}</mat-checkbox>
             </p>
           </div>

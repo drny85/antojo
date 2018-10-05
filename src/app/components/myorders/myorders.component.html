@@ -4,7 +4,7 @@
   <div class="table-responsive-md table-responsive-sm">
 
  
-  <table *ngIf="orders" class="table">
+  <table *ngIf="orders" class="table animated fadeInRight">
     <thead>
       <tr>
         <th>Name</th>
@@ -19,7 +19,7 @@
       <tr *ngFor="let item of orders">
         <td class="text-capitalize">{{ item.shipping.name }} {{ item.shipping.last_name }}</td>
         <td>{{ item.datePlaced }}</td>
-        <td [ngClass]="{'bg-success': item.status === 'delivered', 'bg-info': item.status === 'new', 'bg-warning': item.status === 'in-progress'}"  class="text-capitalize">{{ item.status }}</td>
+        <td [ngClass]="{'bg-success': item.status === 'delivered', 'bg-info': item.status === 'new', 'bg-danger': item.status === 'canceled', 'bg-warning': item.status === 'in-progress'}"  class="text-capitalize">{{ item.status }}</td>
         <td>{{ item.grandTotal | currency:'USD': 'symbol-narrow' }}</td>
         <td><a [routerLink]="['/myorders/detail/', item.items[0].product.id]" class="btn btn-secondary">View Order</a></td>
        
