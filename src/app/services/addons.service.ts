@@ -18,26 +18,24 @@ export class AddonsService {
   constructor(private db: AngularFirestore) { }
 
   getAddons() {
-    this.addonsColl = this.db.collection<Addons>('addons');
+    this.addonsColl = this.db.collection<Addons>('addons', ref => ref.orderBy('name'));
     this.addons = this.addonsColl.snapshotChanges().pipe(map(
       actions => actions.map( a => {
         const data = a.payload.doc.data() as Addons;
         data.id = a.payload.doc.id;
-        console.log(data);
         return data;
       })
     ))
     return this.addons;
   }
 
-  addAddon(addon: string) {
-    this.addonDoc = this.db.collection('addons').doc(addon);
-    return this.addonDoc;
+  addAddon(addon: Addons) {
+    this.addonsColl = this.db.collection<Addons>('addons');
+    return this.addonsColl.add(addon);
   }
 
-  updateAddons(addon: Addons) {
-   this.addonDoc = this.db.doc<Addons>('addons/'+ addon.id);
-   return this.addonDoc.update(addon);
+  deleteAddon(id: string) {
+    return this.db.doc<Addons>(`addons/${id}`).delete();
   }
 
 

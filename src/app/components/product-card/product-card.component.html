@@ -22,7 +22,7 @@
         <div class="row">
           <div class="col">
             <p class="font-weight-bold">Select the ingridients for this item</p>
-            <p *ngFor="let item of product.addons">
+            <p *ngFor="let item of product.addons"  class="text-capitalize">
               <mat-checkbox value="{{item}}" name="{{ item }}" (change)="onSelect($event)">{{ item }}</mat-checkbox>
             </p>
           </div>

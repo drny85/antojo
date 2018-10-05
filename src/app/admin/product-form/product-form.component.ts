@@ -13,10 +13,6 @@ import { FormControl } from '@angular/forms';
 import { AddonsService } from '../../services/addons.service';
 
 
-
-
-
-
 @Component({
   selector: 'app-product-form',
   templateUrl: './product-form.component.html',
@@ -25,9 +21,7 @@ import { AddonsService } from '../../services/addons.service';
 export class ProductFormComponent implements OnInit, OnDestroy {
 
   categories$;
-
   subscription: Subscription;
-
   toppings = new FormControl();
   toppingList;
   addons: [string];
@@ -63,12 +57,11 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   }
 
 ngOnInit() {
-   this.subscription = this.addonsServ.getAddons().subscribe(addons => {this.toppingList = addons[0].items.sort();
+   this.subscription = this.addonsServ.getAddons().subscribe(addons => {this.toppingList = addons;
     
     })
   }
 
-  
   onUpload(event) {
     
     const id = Math.random().toString(36).substring(2);
@@ -78,7 +71,7 @@ ngOnInit() {
     let name = file.name;
     let ext = fileType.split('/', 1);
 
-    if (imagSize > 3000000) {
+    if (imagSize > 10000000) {
 
       this.message.error('File is too large', 'Error Uploading');
       return;
@@ -97,7 +90,6 @@ ngOnInit() {
     this.task.then( snap => snap.ref.getDownloadURL().then(urlPic => {this.downloadURL = urlPic; this.product.picture = urlPic}));
     this.message.success('Image succesfully uploaded', 'Great');
    
-
   }
 
   onSubmit({value, valid}: { value: Product, valid: boolean}) {
