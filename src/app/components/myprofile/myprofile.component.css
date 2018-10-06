@@ -20,3 +20,7 @@
   .example-container > * {
     width: 100%;
   }
+
+  b {
+      margin-right: 5px;
+  }

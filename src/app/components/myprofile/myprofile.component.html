@@ -58,9 +58,6 @@
                       <mat-form-field *ngIf="user.address.zipcode">
                           <input name="zipcode" [(ngModel)]="user.address.zipcode" matInput placeholder="Zip Code">
                       </mat-form-field>
-                      <mat-form-field *ngIf="user.picture">
-                          <input type="file" name="picture" [(ngModel)]="user.picture" matInput placeholder="Zip Code">
-                      </mat-form-field>
                   
                      <button hidden #update type="submit"></button>
                     </div>
@@ -83,5 +80,4 @@
 
     </div>
 
-      {{ user | json }}
 </div>
