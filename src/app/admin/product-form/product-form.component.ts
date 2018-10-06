@@ -25,6 +25,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   toppings = new FormControl();
   toppingList;
   addons: [string];
+  flavor: string;
  
   product: Product = {
     name: '',

@@ -45,7 +45,7 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 import { EditComponent } from './admin/edit/edit.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { DataTableComponent } from './data-table/data-table.component';
-import { MatTableModule, MatPaginatorModule, MatSortModule, MatCheckboxModule, MatSelectModule } from '@angular/material';
+import { MatTableModule, MatPaginatorModule, MatSortModule, MatCheckboxModule, MatSelectModule, MatRadioModule, MatIconModule } from '@angular/material';
 import { ShoppingCartService } from './services/shopping-cart.service';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { ProductQuantityComponent } from './components/product-quantity/product-quantity.component';
@@ -58,6 +58,7 @@ import { DeliveryConfirmationComponent } from './components/delivery-confirmatio
 import { OrderReviewComponent } from './components/shopping-cart-summary/order-review/order-review.component';
 import { ManageAddonsComponent } from './admin/manage-addons/manage-addons.component';
 import { ManageCategoryComponent } from './admin/manage-category/manage-category.component';
+import { MyprofileComponent } from './components/myprofile/myprofile.component';
 
 
 
@@ -95,7 +96,8 @@ import { ManageCategoryComponent } from './admin/manage-category/manage-category
     DeliveryConfirmationComponent,
     OrderReviewComponent,
     ManageAddonsComponent,
-    ManageCategoryComponent
+    ManageCategoryComponent,
+    MyprofileComponent
     
   ],
   imports: [
@@ -110,6 +112,8 @@ import { ManageCategoryComponent } from './admin/manage-category/manage-category
     AngularFireStorageModule,
     MatCheckboxModule,
     MatSelectModule,
+    MatRadioModule,
+    MatIconModule,
     AngularFireDatabaseModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added

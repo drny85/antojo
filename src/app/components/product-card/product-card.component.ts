@@ -33,19 +33,18 @@ export class ProductCardComponent implements OnInit {
   addToCart() {
 
     this.shoppingCartServ.addToCart(this.product);
-    console.log(this.product);
-
+  
   }
 
    onSelect(e: MatCheckboxChange) {
     if (e.checked) {
       //add item if not in array
       if (this.itemSelected.indexOf(e.source.value) === -1) this.itemSelected.push(e.source.value);
-      console.log('Addons:', this.itemSelected);
+  
     } else {
       //revome item of already in.
       this.itemSelected.pop();
-      console.log('Addons-2:', this.itemSelected);
+    
     }
     
   }
@@ -69,8 +68,7 @@ updateCart(event: HTMLButtonElement) {
       {
         if (item ) {
          this.itemCount = item.quantity;
-         console.log('ItemCoun:',item.quantity);
-        
+         
         }
         else {
           return null;

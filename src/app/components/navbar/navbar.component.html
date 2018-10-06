@@ -26,6 +26,9 @@
           </ng-template>
         </a>
         <div *ngIf="user" ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li *ngIf="loggedIn" class="nav-item pull-right">
+                <a routerLink="/myprofile" class="nav-link" >My Profile</a>
+              </li>
           <ng-container *ngIf="user.isAdmin">
             <a class="dropdown-item" routerLink="admin/products">Manage Products</a>
             <a class="dropdown-item" routerLink="admin/orders">Manage Orders</a>

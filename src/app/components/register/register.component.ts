@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit {
       address: '',
       apt: '',
       city: '',
-      state: '',
+      state: 'New York',
       zipcode: ''
     },
     isAdmin: false
@@ -49,7 +49,7 @@ export class RegisterComponent implements OnInit {
     } 
     if(this.psw === this.user.password) {
       //register the user
-      this.logServ.register(this.user.email, this.user.password).then(res => {
+      this.logServ.register(this.user.email.toLowerCase(), this.user.password).then(res => {
         //set id in localstorage
         localStorage.setItem('userId', res.user.uid);
         //notify the user about success
@@ -57,7 +57,7 @@ export class RegisterComponent implements OnInit {
         this.msg.success('Registration Succefull', 'Registered');
         //adding the user
         this.userServ.addUser(this.user, res.user.uid);
-        this.router.navigate(['/login']);
+        this.router.navigate(['/']);
       })
       .catch(err => this.msg.error(err.message, 'Error'));
       

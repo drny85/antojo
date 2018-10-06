@@ -14,7 +14,7 @@ password: string;
 
 
  login() {
-   let login = this.authServ.login(this.email, this.password);
+   let login = this.authServ.login(this.email.toLowerCase(), this.password);
    console.log(login.then(res => console.log('Res:',res)).catch((err) => {
      console.log('Error:',err as string);
      if(err.code === 'auth/argument-error') {

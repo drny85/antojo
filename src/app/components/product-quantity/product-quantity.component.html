@@ -1,10 +1,10 @@
-<div class="row no-gutters">
-  <div class="col-2">
+<div class="grid-3">
+  <div class="">
     <button 
       (click)="removeFromCart()"
-      class="btn btn-secondary btn-block"><i class="fa fa-minus" aria-hidden="true"></i></button> 
+      class="btn btn-secondary float-left"><mat-icon><i class="material-icons md-24">remove</i></mat-icon></button> 
   </div>
-  <div *ngIf="itemCount > 0" class="col text-center text-justify">
+  <div *ngIf="itemCount > 0" class="text-center text-justify">
      <!-- {{ shoppingCart.getQuantity(product) }} in cart -->
      {{ itemCount }} in cart
   </div>
@@ -12,13 +12,13 @@
     <!-- {{ shoppingCart.getQuantity(product) }} in cart -->
     Nothing
  </div>
-  <div *ngIf="!itemCount" class="col text-center  justify-content-md-center">
+  <div *ngIf="!itemCount" class="text-center text-justify">
    <p class="text-center">{{ shoppingCart.getQuantity(product) }} </p> 
     
  </div>
-  <div class="col-2">
+  <div class="">
     <button 
       (click)="addToCart()"
-      class="btn btn-secondary btn-block"><i class="fa fa-plus" aria-hidden="true"></i></button> 
+      class="btn btn-secondary float-right"><mat-icon><i class="material-icons md-24">add</i></mat-icon></button> 
   </div>
 </div>

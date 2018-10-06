@@ -1,3 +1,4 @@
+import { Addons } from './../../models/addons';
 import { AddonsService } from './../../services/addons.service';
 import { FormControl } from '@angular/forms';
 
@@ -7,7 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
 import { CategoryService } from './../../services/category.service';
 
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component,  OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 
@@ -17,15 +18,16 @@ import { Observable, Subscription } from 'rxjs';
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.css']
 })
-export class EditComponent implements OnInit, OnDestroy {
+export class EditComponent implements OnDestroy{
 
   categories$;
   id: string;
   addonSubscription: Subscription; 
   subscription: Subscription;
   toppings = new FormControl();
-  toppingList;
+  toppingList: Addons[] =[]
   addons: [string];
+  newAddons: [string];
  
 
   product: Product = {
@@ -60,15 +62,15 @@ export class EditComponent implements OnInit, OnDestroy {
     this.id = this.activeRoute.snapshot.params['id'];
     if(this.id) {
      this.subscription =  this.prodServ.getProduct(this.id).subscribe(prod => this.product = prod);
+    
     }
     this.addonSubscription = this.addonsServ.getAddons().subscribe(addons => {this.toppingList = addons;
-    
+   
     })
+
+    
    }
 
-  ngOnInit() {
-    
-  }
 
   ngOnDestroy(){
     this.subscription.unsubscribe();
