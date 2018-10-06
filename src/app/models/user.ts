@@ -5,7 +5,9 @@ export interface User {
     phone: string,
     email: string,
     password?: string,
-    isAdmin: boolean,
+    isAdmin?: boolean,
+    joined?: string,
+    picture?: string,
     address: {
         address: string,
         apt?: string,

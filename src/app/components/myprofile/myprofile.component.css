@@ -1,0 +1,22 @@
+.example-card {
+    max-width: 400px;
+  }
+
+  .example-header-image {
+    background-size: cover;
+  }
+
+  .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-column-gap: 10px;
+  }
+
+  .example-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .example-container > * {
+    width: 100%;
+  }

@@ -20,6 +20,7 @@ export class RegisterComponent implements OnInit {
     phone: '',
     email: '',
     password: '',
+    joined: new Date().toLocaleString(),
     address: {
       address: '',
       apt: '',

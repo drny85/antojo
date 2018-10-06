@@ -45,7 +45,7 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 import { EditComponent } from './admin/edit/edit.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { DataTableComponent } from './data-table/data-table.component';
-import { MatTableModule, MatPaginatorModule, MatSortModule, MatCheckboxModule, MatSelectModule, MatRadioModule, MatIconModule, MatBadgeModule } from '@angular/material';
+import { MatTableModule, MatPaginatorModule, MatSortModule, MatCheckboxModule, MatSelectModule, MatRadioModule, MatIconModule, MatBadgeModule, MatCardModule, MatListModule, MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { ShoppingCartService } from './services/shopping-cart.service';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { ProductQuantityComponent } from './components/product-quantity/product-quantity.component';
@@ -112,8 +112,13 @@ import { MyprofileComponent } from './components/myprofile/myprofile.component';
     AngularFireStorageModule,
     MatCheckboxModule,
     MatSelectModule,
+    MatButtonModule,
     MatRadioModule,
     MatIconModule,
+    MatCardModule,
+    MatInputModule,
+    MatListModule,
+    MatFormFieldModule,
     MatBadgeModule,
     AngularFireDatabaseModule,
     BrowserAnimationsModule, // required animations module

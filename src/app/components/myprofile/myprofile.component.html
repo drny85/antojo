@@ -1,3 +1,87 @@
-<p>
-  myprofile works!
-</p>
+<div class="grid-2" *ngIf="user">
+  <div>
+    <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title class="text-capitalize"><h3>{{ user.name }} {{ user.last_name }}</h3></mat-card-title>
+          <mat-card-subtitle>Member since: {{ user.joined }}</mat-card-subtitle>
+        </mat-card-header>
+        <img (click)=changePicture($event) *ngIf="user.picture; else noPicture" mat-card-image src="{{ user.picture }}" alt="user.name">
+        <ng-template #noPicture>
+            <img (click)=changePicture($event) mat-card-image src="http://pngimages.net/sites/default/files/user-png-image-15189.png" alt="{{ user.name }}">
+        </ng-template>
+        <mat-card-content>
+            <mat-list role="list">
+                <mat-list-item role="listitem"><b>Address:</b>  {{ user.address.address }}</mat-list-item>
+                <mat-list-item *ngIf="user.address.apt" role="listitem"><b>Apt:</b>  {{ user.address.apt }}</mat-list-item>
+                <mat-list-item role="listitem"><b>City/State: </b>  {{ user.address.city }} {{ user.address.state }}</mat-list-item>
+                <mat-list-item role="listitem"><b>Phone: </b>  {{ user.phone }} </mat-list-item>
+                <mat-list-item role="listitem"><b>Email: </b>  {{ user.email }} </mat-list-item>
+               
+             
+            </mat-list>
+        </mat-card-content>
+        <mat-card-actions>
+        <button color="primary"  (click)="openLg(content)" mat-raised-button>Edit Info.</button>
+          <!-- modal template -->
+          <ng-template #content let-modal>
+            <div class="modal-header animated fadeInUp">
+              <h4 class="modal-title text-capitalize">Update My Profile</h4>
+              <button #closeModal type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form #profile="ngForm"  (ngSubmit)="updateUser(profile, closeModal)">
+                  <div class="example-container">
+                      <mat-form-field>
+                        <input name="name" [(ngModel)]="user.name" matInput placeholder="Name">
+                      </mat-form-field>
+                      <mat-form-field>
+                          <input name="last_name" [(ngModel)]="user.last_name" matInput placeholder="Last Name">
+                      </mat-form-field>
+                      <mat-form-field>
+                          <input name="phone" [(ngModel)]="user.phone" matInput placeholder="Phone">
+                      </mat-form-field>
+                      <mat-form-field>
+                          <input name="email" [(ngModel)]="user.email" matInput placeholder="Email">
+                      </mat-form-field>
+                      <mat-form-field>
+                          <input name="address" [(ngModel)]="user.address.address" matInput placeholder="Address">
+                      </mat-form-field>
+                      <mat-form-field *ngIf="user.address.apt">
+                          <input name="apt" [(ngModel)]="user.address.apt" matInput placeholder="Apt">
+                      </mat-form-field>
+                      <mat-form-field>
+                          <input name="city" [(ngModel)]="user.address.city" matInput placeholder="City">
+                      </mat-form-field>
+                      <mat-form-field *ngIf="user.address.zipcode">
+                          <input name="zipcode" [(ngModel)]="user.address.zipcode" matInput placeholder="Zip Code">
+                      </mat-form-field>
+                      <mat-form-field *ngIf="user.picture">
+                          <input type="file" name="picture" [(ngModel)]="user.picture" matInput placeholder="Zip Code">
+                      </mat-form-field>
+                  
+                     <button hidden #update type="submit"></button>
+                    </div>
+              </form>
+              
+        
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-warning" (click)="modal.close('Close click')">Close</button>
+              <button type="button" color="primary" mat-raised-button (click)="update.click()" > Update </button>
+            </div>
+          </ng-template>
+         
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <div>
+      <h2>Other Information</h2>
+
+    </div>
+
+      {{ user | json }}
+</div>

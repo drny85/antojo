@@ -62,7 +62,7 @@ deleteUser(id: string) {
 
 updateUser(user: User) {
   this.userDoc = this.fb.doc(`users/${user.id}`);
-  this.userDoc.update(user);
+  return this.userDoc.update(user);
 
 }
 
