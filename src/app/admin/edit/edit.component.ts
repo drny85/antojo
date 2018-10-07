@@ -1,3 +1,4 @@
+import { FlavorsService } from './../../services/flavors.service';
 import { Addons } from './../../models/addons';
 import { AddonsService } from './../../services/addons.service';
 import { FormControl } from '@angular/forms';
@@ -24,11 +25,13 @@ export class EditComponent implements OnDestroy{
   id: string;
   addonSubscription: Subscription; 
   subscription: Subscription;
+  flavorSubscription: Subscription;
   toppings = new FormControl();
-  toppingList: Addons[] =[]
+  flavors = new FormControl();
+  toppingList;
   addons: [string];
-  newAddons: [string];
- 
+  flavorsList;
+  flavorsItem: [string]
 
   product: Product = {
     name: '',
@@ -55,6 +58,7 @@ export class EditComponent implements OnDestroy{
     private prodServ: ProductService,
     private afStorage: AngularFireStorage, 
     private router: Router,
+    private flavorServ: FlavorsService,
     private addonsServ: AddonsService
     ) {
 
@@ -67,6 +71,10 @@ export class EditComponent implements OnDestroy{
     this.addonSubscription = this.addonsServ.getAddons().subscribe(addons => {this.toppingList = addons;
    
     })
+
+    this.flavorSubscription = this.flavorServ.getFlavors().subscribe(flavors => {this.flavorsList = flavors;
+    
+    });
 
     
    }
@@ -119,6 +127,7 @@ export class EditComponent implements OnDestroy{
       // Update product
       this.product.updated = new Date().toLocaleString();
       this.product.addons = this.addons;
+      this.product.flavors = this.flavorsItem;
       this.prodServ.updateProduct(this.product).then(() => this.message.success('Product Updated', 'Success!'))
       .catch(err => {this.message.error('Something went wrong', 'Error!');
       console.log(err);

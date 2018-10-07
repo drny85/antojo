@@ -63,7 +63,7 @@ export class ShoppingCartService {
      this.productDoc.get().subscribe(doc => {
        if (doc.exists) {
          let q = doc.data() as ShoppingCartItem;
-         this.productDoc.update({quantity: q.quantity + 1, addons: q.addons });
+         this.productDoc.update({quantity: q.quantity + 1, addons: q.addons, flavors: q.flavors });
        } else {
          this.productDoc.set({
            id: product.id,
@@ -71,6 +71,7 @@ export class ShoppingCartService {
            price: product.price,
            picture: product.picture,
            addons: product.addons,
+           flavors: product.flavors,
            instruction: product.instruction,
            quantity: 1
            });

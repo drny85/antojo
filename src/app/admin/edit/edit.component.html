@@ -41,6 +41,24 @@
                 Category is required
               </div>
           </div>
+          <div *ngIf="flavorsList" class="form-group">
+              <mat-form-field>
+                <mat-select name="flavors" [(ngModel)]="flavorsItem" placeholder="Flavor" [formControl]="flavors" multiple>
+                  <mat-option class="text-capitalize" *ngFor="let flavor of flavorsList;" [value]="flavor.name">{{
+                    flavor.name }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div *ngIf="product.flavors; else noFlavors">
+                  <p class="font-weight-bold"> Flavors Already Included</p>
+                  <ul class="list-inline" *ngFor="let item of product.flavors">
+                    <li class="list-inline-item text-capitalize">{{ item }}</li>
+                  </ul>
+                </div>
+           <hr>
+           <ng-template #noFlavors>
+              <p class="font-weight-bold">No Flavors for this product</p>
+          </ng-template>
+        </div>
 
           <div class="form-group">
        

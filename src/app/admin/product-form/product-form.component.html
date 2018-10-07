@@ -1,101 +1,94 @@
 <div *ngIf="product">
-    <div class="row">
-      <div class="col">
-          <h3 class="text-center">Adding New Product</h3>
-      </div>
-      <div class="col">
-          <a routerLink="/admin/addons" class="btn btn-dark float-right">Manage Addons</a>
-      </div> 
+  <div class="row">
+    <div class="col">
+      <h3 class="text-center">Adding New Product</h3>
+    </div>
+    <div class="col">
+      <a routerLink="/admin/addons" class="btn btn-dark float-right">Manage Addons</a>
+    </div>
   </div>
   <hr>
   <div class="row">
     <div [ngClass]="{'col-md-7': product.name, 'col-md-12': !product.name}">
       <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
-          <div class="form-group">
-              <label for="item_name" class="font-weight-bold">Product Name</label>
-              <input [(ngModel)]="product.name" id="item_name" type="text" #prod_name="ngModel" name="name"  class="form-control"
-              [ngClass]="{'is-invalid': prod_name.touched && prod_name.errors, 'is-valid': prod_name.valid}"
+        <div class="form-group">
+          <label for="item_name" class="font-weight-bold">Product Name</label>
+          <input [(ngModel)]="product.name" id="item_name" type="text" #prod_name="ngModel" name="name" class="form-control"
+            [ngClass]="{'is-invalid': prod_name.touched && prod_name.errors, 'is-valid': prod_name.valid}" required>
+          <div class="invalid-feedback" *ngIf="prod_name.errors?.required">
+            Name is required..
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="item_price">Price</label>
+          <div class="input-group-prepend">
+            <span class="input-group-text">$</span>
+            <input [(ngModel)]="product.price" id="item_price" type="number" #prod_price="ngModel" name="price" [min]="0"
+              class="form-control" [ngClass]="{'is-invalid': prod_price.touched && prod_name.errors, 'is-valid': prod_price.valid}"
               required>
-              <div class="invalid-feedback" *ngIf="prod_name.errors?.required">
-                  Name is required..
-              </div>
           </div>
-          <div class="form-group">
-              <label for="item_price">Price</label>
-              <div class="input-group-prepend">
-                <span class="input-group-text">$</span>
-                <input [(ngModel)]="product.price" id="item_price" type="number" #prod_price="ngModel" name="price" [min]="0" class="form-control" 
-                [ngClass]="{'is-invalid': prod_price.touched && prod_name.errors, 'is-valid': prod_price.valid}"
-                required>
-              </div>
-              <div class="invalid-feedback" *ngIf="prod_price.errors?.min">
-                  Price should be 0 or higher
-              </div>
-              
-              
+          <div class="invalid-feedback" *ngIf="prod_price.errors?.min">
+            Price should be 0 or higher
           </div>
-          <div class="form-group">
-              <label for="item_category">Category</label>
-              <select [(ngModel)]="product.category" class="form-control" #prod_category="ngModel" name="category" id="item_category" 
-              [ngClass]="{'is-invalid': prod_category.touched && prod_category.errors, 'is-valid': prod_category.valid}"
-              required>
-                <option disabled value="">Select a category</option>
-                <option class="text-capitalize" *ngFor="let c of categories$ | async" [value]="c.id">{{ c.name }}</option>
-              </select>
-              <div class="invalid-feedback" *ngIf="prod_category.errors?.required">
-                Category is required
-              </div>
+        </div>
+
+        <div class="form-group">
+          <label for="item_category">Category</label>
+          <select [(ngModel)]="product.category" class="form-control" #prod_category="ngModel" name="category" id="item_category"
+            [ngClass]="{'is-invalid': prod_category.touched && prod_category.errors, 'is-valid': prod_category.valid}"
+            required>
+            <option disabled value="">Select a category</option>
+            <option class="text-capitalize" *ngFor="let c of categories$ | async" [value]="c.id">{{ c.name }}</option>
+          </select>
+          <div class="invalid-feedback" *ngIf="prod_category.errors?.required">
+            Category is required
           </div>
-        <div class="row">
-          <div class="col">
-            <mat-radio-group name="flavors" class="example-radio-group" [(ngModel)]="flavor">
-              <mat-radio-button class="example-radio-button" name="flavor1" value="pollo">
-               Pollo
-              </mat-radio-button>
-              <mat-radio-button class="example-radio-button" name="flavor2" value="camarones">
-                  Camarones
-                 </mat-radio-button>
-            </mat-radio-group>
-          </div>
-          <div class="col">
-            <div *ngIf="toppingList" class="form-group">
+        </div>
+
+        <div *ngIf="flavorsList" class="form-group">
               <mat-form-field>
-                <mat-select name="addons" [(ngModel)]="addons" placeholder="Addons" [formControl]="toppings" multiple>
-                  <mat-option class="text-capitalize" *ngFor="let topping of toppingList;" [value]="topping.name">{{
-                    topping.name }}</mat-option>
+                <mat-select name="flavors" [(ngModel)]="flavorsItem" placeholder="Flavor" [formControl]="flavors" multiple>
+                  <mat-option class="text-capitalize" *ngFor="let flavor of flavorsList;" [value]="flavor.name">{{
+                    flavor.name }}</mat-option>
                 </mat-select>
               </mat-form-field>
-            </div>
-
-          </div>
-
+           
         </div>
-          
-          <div class="form-group">
-            <label for="pic">Upload Image</label>
-            <button type="button" class="btn btn-info btn-block" (click)="item_pic.click()">Select Image</button>
+          <div *ngIf="toppingList" class="form-group">
+            <mat-form-field>
+              <mat-select name="addons" [(ngModel)]="addons" placeholder="Addons" [formControl]="toppings" multiple>
+                <mat-option class="text-capitalize" *ngFor="let topping of toppingList;" [value]="topping.name">{{
+                  topping.name }}</mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
-          <div hidden class="form-control col">
-            <input required class="form-control" type="file" (change)="onUpload($event)" name="pic" id="pic" accept=".png,.jpg, .jpeg"  ngModel #item_pic>
+
+        <div class="form-group">
+          <label for="pic">Upload Image</label>
+          <button type="button" class="btn btn-info btn-block" (click)="item_pic.click()">Select Image</button>
+        </div>
+        <div hidden class="form-control col">
+          <input required class="form-control" type="file" (change)="onUpload($event)" name="pic" id="pic" accept=".png,.jpg, .jpeg"
+            ngModel #item_pic>
         </div>
         <br>
         <div>
           <button [disabled]="!myForm.form.valid" type="submit" class="btn btn-dark btn-block">Add Product</button>
         </div>
-          
-        </form>
+
+      </form>
 
     </div>
     <br>
     <div *ngIf="product.name" [ngClass]="{'col-md-5': product.name}">
-        <div  class="card">
+      <div class="card">
         <img class="card-img-top" [src]="product.picture">
         <div class="card-body">
           <h5 class="card-title text-capitalize">{{ product.name}}</h5>
           <p class="card-text">{{ product.price | currency:"USD":"symbol-narrow" }} </p>
         </div>
       </div>
-      
+
     </div>
   </div>
 </div>

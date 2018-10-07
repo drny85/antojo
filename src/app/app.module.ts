@@ -13,7 +13,7 @@ import { UsersService } from './services/users/users.service';
 import { environment } from './../environments/environment';
 import { AppRoutesModule } from './routing/app-routes/app-routes.module';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, OnInit } from '@angular/core';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -59,6 +59,7 @@ import { OrderReviewComponent } from './components/shopping-cart-summary/order-r
 import { ManageAddonsComponent } from './admin/manage-addons/manage-addons.component';
 import { ManageCategoryComponent } from './admin/manage-category/manage-category.component';
 import { MyprofileComponent } from './components/myprofile/myprofile.component';
+import { ManageFlavorComponent } from './admin/manage-flavor/manage-flavor.component';
 
 
 
@@ -97,7 +98,8 @@ import { MyprofileComponent } from './components/myprofile/myprofile.component';
     OrderReviewComponent,
     ManageAddonsComponent,
     ManageCategoryComponent,
-    MyprofileComponent
+    MyprofileComponent,
+    ManageFlavorComponent
     
   ],
   imports: [
@@ -130,4 +132,6 @@ import { MyprofileComponent } from './components/myprofile/myprofile.component';
   providers: [LoginsService, UsersService, AuthGuard, AdminGuard, ProductService, CategoryService, ShoppingCartService, OrderService, AdminOrderService, AddonsService ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+
+}
