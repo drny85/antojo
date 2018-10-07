@@ -43,7 +43,7 @@ export class ProductCardComponent implements OnInit {
    onSelect(e: MatCheckboxChange) {
     if (e.checked) {
       //add item if not in array
-      if (this.itemSelected.indexOf(e.source.value) === -1) this.itemSelected.push(e.source.value);
+      if (this.itemSelected.indexOf(<string>e.source.value) === -1) this.itemSelected.push(<string>e.source.value);
   
     } else {
       //revome item of already in.
@@ -60,7 +60,7 @@ export class ProductCardComponent implements OnInit {
     } else {
       this.enableAddBtn = false;
     }
-    console.log('Selected',this.flavorsSelected);
+    
   }
 
    
@@ -69,11 +69,11 @@ async updateCart(event: HTMLButtonElement) {
 
   this.product.addons = this.itemSelected;
   this.product.instruction = this.message;
-  this.product.flavors = this.flavorsSelected[0];
-  //this.shoppingCart.items[0].flavors = this.flavorsSelected;
-  if (!this.flavorsSelected[0]) return;
+  this.product.flavors = this.flavorsSelected;
 
-  if(this.flavorsSelected[0]) {
+  if (!this.flavorsSelected) return;
+
+  if(this.flavorsSelected) {
    
     await this.shoppingCartServ.addToCart(this.product);
     event.click();
