@@ -26,7 +26,6 @@ export class ManageFlavorComponent implements OnInit {
 
 addFlavor() {
  this.flavorServ.addFlavor(this.flavor).then(() => console.log(this.flavor));
- this.flavor.id = '';
  this.flavor.name = '';
 }
 

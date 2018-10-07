@@ -23,6 +23,7 @@ export class Order {
                     price: i.price,
                     picture: i.picture,
                     addons: i.addons,
+                    flavor: i.flavors,
                     instruction: i.instruction
                 },
                 quantity: i.quantity,

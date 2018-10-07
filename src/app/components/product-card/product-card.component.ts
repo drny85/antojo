@@ -5,7 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ShoppingCartService } from './../../services/shopping-cart.service';
 import { Product } from './../../models/product';
 import { Component, Input, OnInit } from '@angular/core';
-import { MatCheckboxChange } from '@angular/material';
+import { MatCheckboxChange, MatRadioChange } from '@angular/material';
 
 
 
@@ -22,14 +22,15 @@ export class ProductCardComponent implements OnInit {
   @Input('itemCount') itemCount: number;
 
   addons: object;
-  flavors: object;
-  flavorsSelected: string;
+  flavors: string[] | string;
+  flavorSelected: string;
+  flavorsSelected= [];
   itemSelected = [];
   message = '';
   
   
   constructor(private shoppingCartServ: ShoppingCartService, private modalService: NgbModal)  { 
-    
+   
   }
 
   addToCart() {
@@ -48,7 +49,14 @@ export class ProductCardComponent implements OnInit {
       this.itemSelected.pop();
     
     }
-    
+   
+  }
+
+  onCheckedBox(e: MatRadioChange) {
+    if (e.value) {
+      this.flavorsSelected[0] = e.value;
+    }
+    console.log('Selected',this.flavorsSelected);
   }
 
    
@@ -56,9 +64,9 @@ export class ProductCardComponent implements OnInit {
 async updateCart(event: HTMLButtonElement) {
 
   this.product.addons = this.itemSelected;
-  this.product.flavors[0] = this.flavorsSelected
-  console.log('P;', this.product.flavors);
   this.product.instruction = this.message;
+  this.product.flavors = this.flavorsSelected[0];
+  //this.shoppingCart.items[0].flavors = this.flavorsSelected;
     
   await this.shoppingCartServ.addToCart(this.product);
    event.click();
@@ -66,9 +74,8 @@ async updateCart(event: HTMLButtonElement) {
 
  async ngOnInit() {
 
-   this.addons = await this.product.addons;
-   this.flavors = await this.product.flavors;
-   console.log(this.flavors);
+  this.addons = this.product.addons;
+  this.flavors = this.product.flavors;
 
     (await this.shoppingCartServ.getOneCart(this.product.id)).subscribe(item => 
       {
