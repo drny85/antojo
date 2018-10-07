@@ -20,6 +20,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProductsComponent } from '../../components/products/products.component';
 import { AdminGuard } from '../../guards/admin-guard.service';
 import { MyprofileComponent } from '../../components/myprofile/myprofile.component';
+import { ManageFlavorComponent } from '../../admin/manage-flavor/manage-flavor.component';
 
 
 
@@ -37,6 +38,7 @@ const appRoutes: Routes = [
   { path: 'admin/products', component: AdminProductsComponent, canActivate: [ AuthGuard] },
   { path: 'admin/categories', component: ManageCategoryComponent, canActivate: [ AuthGuard] },
   { path: 'admin/addons', component: ManageAddonsComponent, canActivate: [ AuthGuard] },
+  { path: 'admin/flavors', component: ManageFlavorComponent, canActivate: [ AuthGuard] },
   
   { path: 'myprofile', component: MyprofileComponent, canActivate: [ AuthGuard] },
   { path: 'delivered/:id', component: DeliveryConfirmationComponent, canActivate: [ AuthGuard] },

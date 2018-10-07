@@ -2,7 +2,8 @@ import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Order } from './../../models/order';
 import { OrderService } from './../../services/order.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterContentChecked, AfterContentInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -18,18 +19,16 @@ export class OrdersComponent implements OnInit {
   filteredStatus: Order[] = [];
   subscription: Subscription;
 
-  constructor(private orderServ: OrderService, private activeRoute: ActivatedRoute) { 
+  constructor(private orderServ: OrderService, private activeRoute: ActivatedRoute, private msg: ToastrService) { 
     
   }
 
  async ngOnInit() {
   this.orders$ = (await this.orderServ.getAllOrders());
   this.populateOrders();
+  
 
   }
-
-
-
 
   private populateOrders() { 
    

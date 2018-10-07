@@ -51,12 +51,12 @@ export class ProductCardComponent implements OnInit {
 
    
 
-updateCart(event: HTMLButtonElement) {
+async updateCart(event: HTMLButtonElement) {
 
   this.product.addons = this.itemSelected;
   this.product.instruction = this.message;
     
-   this.shoppingCartServ.addToCart(this.product);
+  await this.shoppingCartServ.addToCart(this.product);
    event.click();
   }
 

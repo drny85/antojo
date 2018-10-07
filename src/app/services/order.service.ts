@@ -41,7 +41,6 @@ getUserId(id: string) {
     actions => actions.map( a => {
       const data = a.payload.doc.data() as Order;
       data.id = a.payload.doc.id;
-      console.log(data);
       return data;
     })
   ))
@@ -61,7 +60,6 @@ getUserId(id: string) {
       actions => actions.map( a => {
         const data = a.payload.doc.data() as Order;
         data.id = a.payload.doc.id;
-        console.log(data);
         return data;
       })
     ))

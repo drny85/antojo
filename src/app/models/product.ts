@@ -5,7 +5,8 @@ export interface Product {
     category: string,
     picture: string,
     addons?: string[]
-    instruction?: string;
+    instruction?: string,
     updated: string,
+    flavors?: string[],
     quantity: number
 }

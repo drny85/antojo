@@ -7,6 +7,7 @@ export class ShoppingCartItem {
   picture: string;
   price: number; 
   addons?: string[];
+  flavors?: string[];
   instruction?: string;
   quantity: number; 
 

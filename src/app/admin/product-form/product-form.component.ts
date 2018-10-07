@@ -1,3 +1,5 @@
+import { Flavors } from './../../models/flavors';
+import { FlavorsService } from './../../services/flavors.service';
 import { MatCheckboxChange, MatSelectChange } from '@angular/material';
 import { Addons } from './../../models/addons';
 
@@ -22,10 +24,13 @@ export class ProductFormComponent implements OnInit, OnDestroy {
 
   categories$;
   subscription: Subscription;
+  flavorSubscription: Subscription;
   toppings = new FormControl();
+  flavors = new FormControl();
   toppingList;
   addons: [string];
-  flavor: string;
+  flavorsList;
+  flavorsItem: [string]
  
   product: Product = {
     name: '',
@@ -34,7 +39,8 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     picture: '',
     updated: '',
     quantity: 0,
-    addons: ['']
+    addons: [''],
+    flavors: ['']
     
     
   }
@@ -52,6 +58,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     private message: ToastrService, 
     private addonsServ: AddonsService,
     private prodServ: ProductService,
+    private flavorServ: FlavorsService,
     private router: Router) {
   
     this.categories$= this.catServ.getCategories();
@@ -61,6 +68,9 @@ ngOnInit() {
    this.subscription = this.addonsServ.getAddons().subscribe(addons => {this.toppingList = addons;
     
     })
+  this.flavorSubscription = this.flavorServ.getFlavors().subscribe(flavors => {this.flavorsList = flavors;
+    console.log(this.flavorsList);
+  });
   }
 
   onUpload(event) {
@@ -108,6 +118,7 @@ ngOnInit() {
       // add product
       this.product.updated = new Date().toLocaleString();
       this.product.addons = this.addons;
+      this.product.flavors = this.flavorsItem;
       this.prodServ.saveProduct(this.product).then(() => this.message.success('New Product Added', 'Success!'))
       .catch(err => {this.message.error('Something went wrong', 'Error!');
       console.log(err);
@@ -120,6 +131,7 @@ ngOnInit() {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    this.flavorSubscription.unsubscribe();
   }
 
 }
