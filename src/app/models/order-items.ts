@@ -7,7 +7,7 @@ export interface OrderItems {
         picture: string,
         quantity?: number,
         addons?: object,
-        flavors?: string,
+        flavors?: object,
         instruction: string
     },
     quantity: number,
