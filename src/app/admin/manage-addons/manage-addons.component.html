@@ -1,6 +1,17 @@
 <div *ngIf="addons">
   <div class="card">
     <div class="card-header">
+        <div>
+          <h3 class="text-center">Adding New Addon</h3>
+            <form #myForm="ngForm" (ngSubmit)="addAddon(myForm)">
+              <div class="form-group">
+                <label for="addon">Addon Name</label>
+                <input type="text" class="form-control" required [(ngModel)]="addon.name" name="addon" id="addon">
+                <br>
+                <button type="submit" class="btn btn-dark" [disabled]="!myForm.form.valid">Save Addon</button>
+              </div>
+            </form>
+          </div>
       <div class="row">
         <div class="col">
             <h3>Addons Already Included</h3>
@@ -17,16 +28,7 @@
           </ul>
     </div>
     <div class="card-footer">
-      <div>
-        <form #myForm="ngForm" (ngSubmit)="addAddon(myForm)">
-          <div class="form-group">
-            <label for="addon">Addon Name</label>
-            <input type="text" class="form-control" required [(ngModel)]="addon.name" name="addon" id="addon">
-            <br>
-            <button type="submit" class="btn btn-dark" [disabled]="!myForm.form.valid">Save Addon</button>
-          </div>
-        </form>
-      </div>
+     
     </div>
   </div>
 

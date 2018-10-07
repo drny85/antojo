@@ -22,6 +22,8 @@ export class ProductCardComponent implements OnInit {
   @Input('itemCount') itemCount: number;
 
   addons: object;
+  flavors: object;
+  flavorsSelected: string;
   itemSelected = [];
   message = '';
   
@@ -54,6 +56,8 @@ export class ProductCardComponent implements OnInit {
 async updateCart(event: HTMLButtonElement) {
 
   this.product.addons = this.itemSelected;
+  this.product.flavors[0] = this.flavorsSelected
+  console.log('P;', this.product.flavors);
   this.product.instruction = this.message;
     
   await this.shoppingCartServ.addToCart(this.product);
@@ -62,7 +66,9 @@ async updateCart(event: HTMLButtonElement) {
 
  async ngOnInit() {
 
-   this.addons = this.product.addons;
+   this.addons = await this.product.addons;
+   this.flavors = await this.product.flavors;
+   console.log(this.flavors);
 
     (await this.shoppingCartServ.getOneCart(this.product.id)).subscribe(item => 
       {
@@ -74,6 +80,7 @@ async updateCart(event: HTMLButtonElement) {
           return null;
         }
       });
+    
     
   }
 
