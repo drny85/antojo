@@ -49,7 +49,7 @@
       <tbody>
         <tr *ngFor="let item of product">
           <td class="d-none d-sm-block"><img  *ngIf="item.picture" width="50" height="50" class="img" src="{{ item.picture }}" alt=""></td>
-          <td class="text-capitalize">{{ item.name }}</td>
+          <td class="text-capitalize"><p class="font-weight-bold">{{ item.name }}</p><p class="text-italic">{{ item.flavors }}</p></td>
           <td>{{ item.quantity }}</td>
           
           <td>{{ item.price | currency:'USD': 'symbol-narrow'  }}</td>

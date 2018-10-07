@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { Order } from '../../../models/order';
 import { Subscription } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Product } from '../../../models/product';
 
 
 
@@ -39,6 +40,7 @@ export class OrderDetailsComponent implements OnInit, OnDestroy  {
                           price: order.product.price,
                           totalPrice: order.totalPrice,
                           addons: order.product.addons,
+                          flavors: order.product.flavors,
                           instruction: order.product.instruction
                         })
       }));
