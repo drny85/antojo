@@ -27,6 +27,7 @@ export class ProductCardComponent implements OnInit {
   flavorsSelected= [];
   itemSelected = [];
   message = '';
+  enableAddBtn: boolean = false;
   
   
   constructor(private shoppingCartServ: ShoppingCartService, private modalService: NgbModal)  { 
@@ -54,7 +55,10 @@ export class ProductCardComponent implements OnInit {
 
   onCheckedBox(e: MatRadioChange) {
     if (e.value) {
+      this.enableAddBtn = true;
       this.flavorsSelected[0] = e.value;
+    } else {
+      this.enableAddBtn = false;
     }
     console.log('Selected',this.flavorsSelected);
   }
@@ -67,9 +71,15 @@ async updateCart(event: HTMLButtonElement) {
   this.product.instruction = this.message;
   this.product.flavors = this.flavorsSelected[0];
   //this.shoppingCart.items[0].flavors = this.flavorsSelected;
+  if (!this.flavorsSelected[0]) return;
+
+  if(this.flavorsSelected[0]) {
+   
+    await this.shoppingCartServ.addToCart(this.product);
+    event.click();
+  } 
     
-  await this.shoppingCartServ.addToCart(this.product);
-   event.click();
+ 
   }
 
  async ngOnInit() {
@@ -87,8 +97,6 @@ async updateCart(event: HTMLButtonElement) {
           return null;
         }
       });
-    
-    
   }
 
 async  openLg(content) {
