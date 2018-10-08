@@ -28,6 +28,7 @@ export class ProductCardComponent implements OnInit {
   itemSelected = [];
   message = '';
   enableAddBtn: boolean = false;
+  noFlavorsAdded: boolean = false;
   
   
   constructor(private shoppingCartServ: ShoppingCartService, private modalService: NgbModal)  { 
@@ -57,6 +58,7 @@ export class ProductCardComponent implements OnInit {
     if (e.value) {
       this.enableAddBtn = true;
       this.flavorsSelected[0] = e.value;
+      console.log(this.product.flavors.length);
     } else {
       this.enableAddBtn = false;
     }
@@ -84,6 +86,8 @@ async updateCart(event: HTMLButtonElement) {
 
  async ngOnInit() {
 
+  
+
   this.addons = this.product.addons;
   this.flavors = this.product.flavors;
 
@@ -97,6 +101,8 @@ async updateCart(event: HTMLButtonElement) {
           return null;
         }
       });
+
+      
   }
 
 async  openLg(content) {
