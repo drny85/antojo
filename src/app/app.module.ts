@@ -13,7 +13,7 @@ import { UsersService } from './services/users/users.service';
 import { environment } from './../environments/environment';
 import { AppRoutesModule } from './routing/app-routes/app-routes.module';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, OnInit } from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -60,6 +60,7 @@ import { ManageAddonsComponent } from './admin/manage-addons/manage-addons.compo
 import { ManageCategoryComponent } from './admin/manage-category/manage-category.component';
 import { MyprofileComponent } from './components/myprofile/myprofile.component';
 import { ManageFlavorComponent } from './admin/manage-flavor/manage-flavor.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common'
 
 
 
@@ -129,7 +130,7 @@ import { ManageFlavorComponent } from './admin/manage-flavor/manage-flavor.compo
 
 
   ],
-  providers: [LoginsService, UsersService, AuthGuard, AdminGuard, ProductService, CategoryService, ShoppingCartService, OrderService, AdminOrderService, AddonsService ],
+  providers: [{provide: LocationStrategy , useClass: HashLocationStrategy},LoginsService, UsersService, AuthGuard, AdminGuard, ProductService, CategoryService, ShoppingCartService, OrderService, AdminOrderService, AddonsService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { 
