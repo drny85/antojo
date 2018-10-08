@@ -72,8 +72,8 @@ export class AdminOrderDetailsComponent implements OnInit, OnDestroy {
   
     if (text.toLowerCase() === 'show order instructions' ) {
       this.buttonDetailsText = 'Show Order Details';
-    } else {
-      this.buttonDetailsText = 'Show Order Instrucions';
+    } else if (text.toLowerCase() === 'show order details'){
+      this.buttonDetailsText = 'Show Order Instructions';
     }
   }
 

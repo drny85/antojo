@@ -19,8 +19,8 @@
           </thead>
           <tbody>
             <tr *ngFor="let item of order.items">
-              <td class="text-capitalize">{{ item.product.name}}</td>
-              <td>{{ item.quantity }}</td>
+              <td class="text-capitalize"><p class="font-weight-bold">{{ item.product.name}}</p> <p><i>{{ item.product.flavors }}</i></p></td>
+              <td>{{ item.quantity }} </td>
               <td>{{ item.product.price | currency:'USD': 'symbol-narrow' }}</td>
               <td>{{ item.totalPrice | currency:'USD': 'symbol-narrow' }}</td> 
             </tr>
