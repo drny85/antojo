@@ -58,8 +58,8 @@
   
   </table>
 </div>
-    <a *ngIf="cart.totalItemsCount > 0" 
-      routerLink="/check-out"
-      class="btn btn-dark btn-lg"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Check Out</a>
+    <button *ngIf="cart.totalItemsCount > 0" 
+      (click)="checkOut(cart)"
+      class="btn btn-dark btn-lg"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Check Out</button>
  
 </div>

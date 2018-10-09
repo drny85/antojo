@@ -1,7 +1,7 @@
 import { ShoppingCart } from './../../models/shoppingCart';
 import { Component, OnInit } from '@angular/core';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -15,7 +15,7 @@ export class ShoppingCartComponent implements OnInit {
   //totalPrice: number;
 
 
-  constructor(private shoppingCartService: ShoppingCartService) { 
+  constructor(private shoppingCartService: ShoppingCartService, private router: Router) { 
     
   }
 
@@ -30,6 +30,17 @@ export class ShoppingCartComponent implements OnInit {
     
     this.shoppingCartService.clearCart().then(() => console.log("Cart Deleted")).catch(err => console.log(err));
 
+  }
+
+  checkOut(cart: ShoppingCart) {
+    let price = cart.totalPrice;
+    let diff = (10  - cart.totalPrice).toFixed(2); 
+    if(price < 10) {
+      alert(`$10.00 Minimum for Delivery. Please just add $${diff} or more`);
+      return
+    } else {
+      this.router.navigate(['/check-out']);
+    }
   }
 
 }
