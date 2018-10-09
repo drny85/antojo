@@ -1,0 +1,21 @@
+<div class="content">
+   
+<div class="row2" *ngIf="products">
+<a [routerLink]="['/']" routerLinkActive="router-link-active" >
+<ngb-carousel >
+        <ng-template *ngFor="let product of products" ngbSlide>
+          <img [src]="product.picture" alt="Random first slide">
+          <div class="carousel-caption">
+            <h3 style="color:black" class="text-capitalize">{{ product.name }}</h3>
+            <p style="color:black">Price: {{ product.price | currency:'USD': 'symbol-narrow' }}</p>
+          </div>
+        </ng-template>
+        
+      </ngb-carousel>
+    </a>
+
+</div>
+<div class="row3">
+    <app-footer></app-footer>
+</div>
+</div>

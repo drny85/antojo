@@ -17,6 +17,9 @@
       <li *ngIf="cart$ | async as cart" class="nav-item d-none d-sm-block">
         <a class="nav-link" routerLink="/shopping-cart"> <mat-icon matBadge=" {{ cart.totalItemsCount }}" matBadgeColor="primary">local_grocery_store</mat-icon></a>
       </li>
+      <li class="nav-item">
+          <a routerLink="/home" class="nav-link" >Home</a>
+        </li>
       
       <li *ngIf="loggedIn" ngbDropdown class="nav-item dropdown">
         <a ngbDropdownToggle class="nav-link dropdown-toggle text-capitalize" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -29,6 +32,7 @@
             <li *ngIf="loggedIn" class="nav-item pull-right">
                 <a routerLink="/myprofile" class="nav-link" >My Profile</a>
               </li>
+             
           <ng-container *ngIf="user.isAdmin">
             <a class="dropdown-item" routerLink="admin/products">Manage Products</a>
             <a class="dropdown-item" routerLink="admin/orders">Manage Orders</a>

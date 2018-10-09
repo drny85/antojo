@@ -1,3 +1,4 @@
+import { HomeComponent } from './../../components/home/home.component';
 import { AdminAuthGuard } from './../../guards/admin-auth.guard';
 
 import { ManageCategoryComponent } from './../../admin/manage-category/manage-category.component';
@@ -31,6 +32,7 @@ const appRoutes: Routes = [
   { path: '', component: ProductsComponent },
   
   { path: 'products', component: ProductsComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'products/:prodId', component: ProductsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },

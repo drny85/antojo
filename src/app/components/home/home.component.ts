@@ -1,8 +1,10 @@
+import { Product } from './../../models/product';
+import { Subscription } from 'rxjs';
+import { ProductService } from './../../services/product.service';
 
-import { Component, OnInit } from '@angular/core';
-import { UsersService } from '../../services/users/users.service';
-import { Observable } from 'rxjs';
-import { User } from '../../models/user';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 
@@ -11,16 +13,33 @@ import { User } from '../../models/user';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  providers: [NgbCarouselConfig] 
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
-  constructor(private userServ: UsersService) {}
+  showFiller = false;
+  prodSub: Subscription;
+  products: Product[] = [];
+
+  constructor(private productServ: ProductService, private config: NgbCarouselConfig) {
+    this.config.interval = 3000;
+  }
   
 
 
   ngOnInit() {
-    
+
+  
+  this.prodSub = this.productServ.getProducts().subscribe(products => {
+    if(products) {
+     this.products = products;
+    }
+     });
+   
+  }
+  ngOnDestroy() {
+    this.prodSub.unsubscribe();
   }
     
 
