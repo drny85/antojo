@@ -7,7 +7,7 @@
       <li class="list-inline-item text-capitalize">{{ flavor }}</li>
     </ul>
   </div>
-  <div #child *ngIf="showActions && shoppingCart && product.addons.length > 0; else noAddons" class="card-footer">
+  <div #child *ngIf="showActions && shoppingCart && product.flavors?.length > 0; else noAddons" class="card-footer">
     <button *ngIf="!itemCount; else updateQuantity" (click)="openLg(content)" class="btn btn-dark btn-block">Add to
       Cart</button>
 
@@ -44,7 +44,7 @@
         </div>
         <div>
           <label class="font-weight-bold" for="message">Special intructions</label>
-          <textarea [(ngModel)]="message" class="form-control" name="message" id="message" placeholder="Dressing on the side? No Mayonnaise?. Let us know!"
+          <textarea [(ngModel)]="message" class="form-control" name="message" id="message" placeholder="Dressing on the side? No Mayonnaise?. If you want an item not listed, ask for it here. We will add it. Let us know!"
             cols="30" rows="5"></textarea>
         </div>
 
