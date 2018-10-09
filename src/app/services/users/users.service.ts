@@ -32,6 +32,15 @@ export class UsersService {
     )
   }
 
+get isAdmin(){
+  let userId = localStorage.getItem('userId');
+  if(userId) {
+    return this.getUser(userId).pipe(map(user => user.isAdmin));
+  } else {
+    return false || null;
+  }
+}
+
 //get all users
 getUsers() {
   this.usersCollection = this.fb.collection<User>('users', ref => ref.orderBy('name'));

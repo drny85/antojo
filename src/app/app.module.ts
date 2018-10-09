@@ -1,10 +1,10 @@
+import { AdminAuthGuard } from './guards/admin-auth.guard';
 import { AddonsService } from './services/addons.service';
 
 import { AdminOrderService } from './services/admin-order-service.service';
 import { ProductFilterComponent } from './components/product-filter/product-filter.component';
 import { ProductService } from './services/product.service';
 import { CategoryService } from './services/category.service';
-import { AdminGuard } from './guards/admin-guard.service';
 import { AuthGuard } from './guards/auth-guard.service';
 import { LoginsService } from './services/logins/logins.service';
 import { UsersService } from './services/users/users.service';
@@ -130,7 +130,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common'
 
 
   ],
-  providers: [{provide: LocationStrategy , useClass: HashLocationStrategy},LoginsService, UsersService, AuthGuard, AdminGuard, ProductService, CategoryService, ShoppingCartService, OrderService, AdminOrderService, AddonsService ],
+  providers: [{provide: LocationStrategy , useClass: HashLocationStrategy},LoginsService, UsersService, AuthGuard, AdminAuthGuard, ProductService, CategoryService, ShoppingCartService, OrderService, AdminOrderService, AddonsService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { 
