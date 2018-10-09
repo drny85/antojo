@@ -119,6 +119,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common'
     MatRadioModule,
     MatIconModule,
     MatCardModule,
+    MatTableModule,
     MatInputModule,
     MatListModule,
     MatFormFieldModule,
