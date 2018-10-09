@@ -1,20 +1,18 @@
 <div *ngIf="product.name" class="card top">
-    <img width="400" height="300" *ngIf="product.picture" class="card-img-top" [src]="product.picture" alt="{{ product.name }}">
-    <div class="card-body">
-      <h4 class="card-title text-capitalize">{{ product.name }}</h4>
-      <p class="card-text">{{ product.price | currency:'USD': 'symbol-narrow' }}</p>
-      <ul class="list-inline" *ngFor="let flavor of product.flavors">
-        <li class="list-inline-item text-capitalize">{{ flavor }}</li>
-      </ul>
-    </div>
-    <div #child *ngIf="showActions && shoppingCart" class="card-footer">
-      <button 
-        *ngIf="!itemCount; else updateQuantity"
-        (click)="openLg(content)"
-        class="btn btn-dark btn-block">Add to Cart</button>
+  <img width="400" height="300" *ngIf="product.picture" class="card-img-top" [src]="product.picture" alt="{{ product.name }}">
+  <div class="card-body">
+    <h4 class="card-title text-capitalize">{{ product.name }}</h4>
+    <p class="card-text">{{ product.price | currency:'USD': 'symbol-narrow' }}</p>
+    <ul class="list-inline" *ngFor="let flavor of product.flavors">
+      <li class="list-inline-item text-capitalize">{{ flavor }}</li>
+    </ul>
+  </div>
+  <div #child *ngIf="showActions && shoppingCart && product.addons.length > 0; else noAddons" class="card-footer">
+    <button *ngIf="!itemCount; else updateQuantity" (click)="openLg(content)" class="btn btn-dark btn-block">Add to
+      Cart</button>
 
-        <!-- modal template -->
-        <ng-template  #content let-modal>
+    <!-- modal template -->
+    <ng-template #content let-modal>
       <div class="modal-header animated fadeInUp">
         <h4 class="modal-title text-capitalize">Adding {{ product.name}} to cart</h4>
         <button #closeModal type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -23,19 +21,20 @@
       </div>
       <div class="modal-body animated fadeInRight">
         <div class="row">
-            <div *ngIf="flavors" class="col">
-                <p class="font-weight-bold">Select Type/Flavor</p>
-                <p class="text-capitalize">
-              
-                  <mat-radio-group class="example-radio-group" [(ngModel)]="flavorSelected">
-                    <mat-radio-button (change)="onCheckedBox($event)" class="example-radio-button" *ngFor="let flavor of flavors" [value]="flavor">
-                      {{ flavor }}
-                    </mat-radio-button>
-                  </mat-radio-group>
-                </p>
-                <p *ngIf="!enableAddBtn"><i class="alert  alert-warning">Pick one</i></p>
-              
-              </div>
+          <div *ngIf="flavors" class="col">
+            <p class="font-weight-bold">Select Type/Flavor</p>
+            <p class="text-capitalize">
+
+              <mat-radio-group class="example-radio-group" [(ngModel)]="flavorSelected">
+                <mat-radio-button (change)="onCheckedBox($event)" class="example-radio-button" *ngFor="let flavor of flavors"
+                  [value]="flavor">
+                  {{ flavor }}
+                </mat-radio-button>
+              </mat-radio-group>
+            </p>
+            <p *ngIf="!enableAddBtn"><i class="alert  alert-warning">Pick one</i></p>
+
+          </div>
           <div class="col">
             <p class="font-weight-bold">Select Addons/Items</p>
             <p *ngFor="let item of product.addons" class="text-capitalize">
@@ -44,22 +43,39 @@
           </div>
         </div>
         <div>
-            <label class="font-weight-bold" for="message">Special intructions</label>
-            <textarea [(ngModel)]="message" class="form-control" name="message" id="message" placeholder="Dressing on the side? No Mayonnaise?. Let us know!" cols="30" rows="5"></textarea>
+          <label class="font-weight-bold" for="message">Special intructions</label>
+          <textarea [(ngModel)]="message" class="form-control" name="message" id="message" placeholder="Dressing on the side? No Mayonnaise?. Let us know!"
+            cols="30" rows="5"></textarea>
         </div>
+
       </div>
 
-<div class="modal-footer">
-              <button type="button" class="btn btn-warning" (click)="modal.close('Close click')">Close</button>
-              <button [disabled]="!enableAddBtn && product.flavors" type="button" class="btn btn-success" (click)="updateCart(closeModal)" >Add to Cart</button>
-            </div>
-          </ng-template>
-      
-      <ng-template #updateQuantity>
-        <product-quantity [itemCount]="itemCount" [product]="product" [shopping-cart]="shoppingCart">
-          
-        </product-quantity>
-      </ng-template>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" (click)="modal.close('Close click')">Close</button>
+        <button [disabled]="!enableAddBtn && product.flavors" type="button" class="btn btn-success" (click)="updateCart(closeModal)">Add
+          to Cart</button>
+      </div>
+    </ng-template>
+
+    <ng-template #updateQuantity>
+      <product-quantity [itemCount]="itemCount" [product]="product" [shopping-cart]="shoppingCart">
+
+      </product-quantity>
+    </ng-template>
+  </div>
+
+  <!-- if item has no addons -->
+  <ng-template #noAddons>
+    <div class="card-footer">
+
+      <button *ngIf="!itemCount; else updateQuantity2" class="btn btn-dark btn-block" (click)="updateCart()"> Add to
+        Cart</button>
     </div>
-  </div>    
-  
+  </ng-template>
+  <ng-template #updateQuantity2>
+    <product-quantity [itemCount]="itemCount" [product]="product" [shopping-cart]="shoppingCart">
+
+    </product-quantity>
+  </ng-template>
+
+</div>

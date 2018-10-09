@@ -117,8 +117,8 @@ ngOnInit() {
     
       // add product
       this.product.updated = new Date().toLocaleString();
-      this.product.addons = this.addons;
-      this.product.flavors = this.flavorsItem;
+      this.product.addons = this.addons || [];
+      this.product.flavors = this.flavorsItem || [];
       this.prodServ.saveProduct(this.product).then(() => this.message.success('New Product Added', 'Success!'))
       .catch(err => {this.message.error('Something went wrong', 'Error!');
       console.log(err);
