@@ -1,5 +1,4 @@
 import { Order } from './../../models/order';
-import { map } from 'rxjs/operators';
 import { Observable, Subscription } from 'rxjs';
 import { UsersService } from './../../services/users/users.service';
 import { Router } from '@angular/router';
@@ -9,7 +8,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LoginsService } from '../../services/logins/logins.service';
 import { User } from '../../models/user';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
-import { async } from '@angular/core/testing';
 import { ShoppingCart } from '../../models/shoppingCart';
 import { OrderService } from '../../services/order.service';
 

@@ -35,9 +35,9 @@ export class ProductCardComponent implements OnInit {
    
   }
 
-  addToCart() {
+ async addToCart() {
 
-    this.shoppingCartServ.addToCart(this.product);
+   await this.shoppingCartServ.addToCart(this.product);
   
   }
 
