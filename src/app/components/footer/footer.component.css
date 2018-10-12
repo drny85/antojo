@@ -25,6 +25,11 @@
 	width: 40%;
 }
 
+.footer-company-about {
+	font-family: 'Srisakdi', cursive;
+    font-size: 18px;
+}
+
 /* The company logo */
 
 .footer-distributed h3{
