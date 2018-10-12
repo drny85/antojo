@@ -53,7 +53,7 @@
 
       <div class="modal-footer">
         <button type="button" class="btn btn-warning" (click)="modal.close('Close click')">Close</button>
-        <button [disabled]="!enableAddBtn" type="button" class="btn btn-success" (click)="updateCart(closeModal)">Add
+        <button [disabled]="!enableAddBtn && product.addons.length === 0" type="button" class="btn btn-success" (click)="updateCart(closeModal)">Add
           to Cart</button>
       </div>
     </ng-template>

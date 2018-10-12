@@ -59,7 +59,7 @@ export class ProductCardComponent implements OnInit {
     if (e.value) {
       this.enableAddBtn = true;
       this.flavorsSelected[0] = e.value;
-      console.log(this.product.flavors.length);
+    
     } else {
       this.enableAddBtn = false;
     }
@@ -68,11 +68,13 @@ export class ProductCardComponent implements OnInit {
 
 async updateCart(event?: HTMLButtonElement) {
 
+  if(this.flavorsSelected.length < 1) {
+    alert('Please Make a Selection.');
+    return
+  }
   this.product.addons = this.itemSelected;
   this.product.instruction = this.message;
   this.product.flavors = this.flavorsSelected;
-
-  if (!this.flavorsSelected) return;
 
   if(this.flavorsSelected) {
    
@@ -105,14 +107,7 @@ async updateCart(event?: HTMLButtonElement) {
   }
 
 async  openLg(content) {
-  // await this.addToCart();
-    if(this.flavors.length > 0 ) {
-      this.enableAddBtn = false;
-      
-    } else {
-     
-      this.enableAddBtn = true;
-    }
+  
     this.modalService.open(content, { size: 'lg' });
   }
 
