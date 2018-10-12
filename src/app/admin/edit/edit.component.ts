@@ -126,8 +126,8 @@ export class EditComponent implements OnDestroy{
     } else {
       // Update product
       this.product.updated = new Date().toLocaleString();
-      this.product.addons = this.addons || this.product.addons;
-      this.product.flavors = this.flavorsItem || this.product.flavors;
+      this.product.addons = this.addons || this.product.addons || [];
+      this.product.flavors = this.flavorsItem || this.product.flavors || [];
       this.prodServ.updateProduct(this.product).then(() => this.message.success('Product Updated', 'Success!'))
       .catch(err => {this.message.error('Something went wrong', 'Error!');
       console.log(err);

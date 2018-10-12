@@ -1,16 +1,16 @@
-<h1>Shopping Cart</h1>
+<h3 class="mb-3">Shopping Cart</h3>
 <div class="animated fadeIn" *ngIf="cart$ | async as cart">
 
   <div class="row">
     <div class="col">
-        <p> You have {{ cart.totalItemsCount }} items in your shopping cart. </p>
+        <p> {{ cart.totalItemsCount }} Items in Cart. </p>
        
     </div>
     <div class="col">
         <button 
         *ngIf="cart.totalItemsCount > 0"
         (click)="clearCart()"
-        class="btn btn-warning float-right">Clear Shopping Cart</button>
+        class="btn btn-warning float-right">Empty Cart</button>
     </div>
      
   </div>
@@ -22,7 +22,7 @@
       <tr>
         <th></th>
         <th>Product</th>
-        <th class="text-center" >Quantity</th>
+        <th class="text-center" >Qty</th>
         <th class="text-right" >Price</th>
       </tr>
     </thead>
@@ -58,8 +58,11 @@
   
   </table>
 </div>
-    <button *ngIf="cart.totalItemsCount > 0" 
+<div *ngIf="cart.totalItemsCount > 0">
+    <button 
       (click)="checkOut(cart)"
-      class="btn btn-dark btn-lg"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Check Out</button>
+      class="btn btn-dark btn-lg mr-5"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Check Out</button>
+      <a [routerLink]="['/']" class="btn btn-info btn-lg" >More Antojitos</a>
+</div>
  
 </div>

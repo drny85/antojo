@@ -3,10 +3,10 @@
     <h5 class="card-title text-center">Order Summary</h5>
     <div class="row">
       <div class="col">
-        <p class="card-text">You have {{ cart.totalItemsCount}} items in the shopping cart</p>
+        <p class="card-text">{{ cart.totalItemsCount}} Items in Cart</p>
       </div>
       <div class="col">
-        <a routerLink="/shopping-cart" class="btn btn-dark float-right">Add/Edit Cart</a>
+        <a routerLink="/shopping-cart" class="btn btn-dark float-right mb-2">Add/Edit Cart</a>
       </div>
     </div>
    
@@ -14,7 +14,7 @@
       <table class="table">
         <thead>
           <tr class="text-center">
-            <th>Quantity</th>
+            <th>Qty</th>
             <th>Items</th>
             <th>Price</th>
           </tr>
