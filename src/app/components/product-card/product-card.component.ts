@@ -108,7 +108,7 @@ async updateCart(event?: HTMLButtonElement) {
 
 async  openLg(content) {
   
-    this.modalService.open(content, { size: 'lg' });
+    this.modalService.open(content, { centered: true });
   }
 
 }

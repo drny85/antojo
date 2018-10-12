@@ -23,3 +23,14 @@
     font-style: italic;
 }
 
+.dark-modal .modal-content {
+  background-color: #84ad79;
+  color: white;
+}
+.dark-modal .close {
+  color: white;
+}
+.light-blue-backdrop {
+  background-color: #5cb3fd;
+}
+
