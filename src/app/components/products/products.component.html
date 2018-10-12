@@ -1,7 +1,20 @@
 <div style="width: 100%" class="row">
-  <div class="col-md-3 mx-auto">
+  <div class="col-md-3 mx-auto d-none d-sm-block">
     <product-filter [category]="category"></product-filter>
 </div>
+<div class="col mx-auto d-block d-sm-none">
+    <div ngbDropdown class="d-inline-block">
+      <button class="btn btn-outline-secondary btn-block mb-2" id="dropdownBasic1" ngbDropdownToggle>Filter Products</button><span *ngIf="category; else noCategory" 
+      class="text-center text-capitalize spanCat">Viewing: {{ category }}</span>
+      <ng-template #noCategory>
+          <span
+          class="text-center text-capitalize spanCat">Viewing: All Products</span>
+      </ng-template>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <product-filter [category]="category"></product-filter>
+      </div>
+    </div>
+  </div>
 <div class="col mx-auto">
  
 <div class="grid-2" *ngIf="cart$ | async as cart">

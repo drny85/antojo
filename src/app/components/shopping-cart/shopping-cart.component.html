@@ -59,10 +59,11 @@
   </table>
 </div>
 <div *ngIf="cart.totalItemsCount > 0">
+    <a [routerLink]="['/']" class="btn btn-info btn-lg mr-2" >More Antojitos</a>
     <button 
       (click)="checkOut(cart)"
-      class="btn btn-dark btn-lg mr-2"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Check Out</button>
-      <a [routerLink]="['/']" class="btn btn-info btn-lg" >More Antojitos</a>
+      class="btn btn-dark btn-lg"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Check Out</button>
+      
 </div>
  
 </div>

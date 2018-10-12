@@ -3,6 +3,11 @@ img {
     height: 400px;
 }
 
+.spanCat {
+    font-family: 'Cookie', cursive;
+    font-size: 1.1rem;
+}
+
 
 .grid-2 {
     display: grid;
@@ -25,5 +30,5 @@ img {
         height: auto !important;
     }
 
-    bottom: 30px;
+    
  }
