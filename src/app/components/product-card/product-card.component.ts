@@ -88,7 +88,6 @@ async updateCart(event?: HTMLButtonElement) {
 
   this.addons = this.product.addons;
   this.flavors = this.product.flavors;
-  console.log(this.product.addons);
 
     (await this.shoppingCartServ.getOneCart(this.product.id)).subscribe(item => 
       {
