@@ -7,7 +7,7 @@
       <li class="list-inline-item text-capitalize">{{ flavor }}</li>
     </ul>
   </div>
-  <div #child *ngIf="showActions && shoppingCart && product.flavors?.length > 0 && !product.addons?.length > 0; else noAddons" class="card-footer">
+  <div #child *ngIf="showActions && shoppingCart && product.addons?.length > 0; else noAddons" class="card-footer">
     <button *ngIf="!itemCount; else updateQuantity" (click)="openLg(content)" class="btn btn-dark btn-block">Add to
       Cart</button>
 
@@ -21,7 +21,7 @@
       </div>
       <div class="modal-body animated fadeInRight">
         <div class="row">
-          <div *ngIf="flavors" class="col">
+          <div *ngIf="flavors.length > 0" class="col">
             <p class="font-weight-bold">Select Type/Flavor</p>
             <p class="text-capitalize">
 
