@@ -140,11 +140,15 @@ export class ShoppingCartService {
     
   }
 
+   async getItemsCount() {
+    let cartId = await this.getOrCreateCartId();
+    if ( cartId) return this.db.collection<ShoppingCartItem>('shopping-carts/' + cartId + '/items');
+    
 
   }
 
 
-
+}
 
   
 

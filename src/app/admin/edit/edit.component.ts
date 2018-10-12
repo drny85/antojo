@@ -69,10 +69,7 @@ export class EditComponent implements OnDestroy{
     
     }
     this.addonSubscription = this.addonsServ.getAddons().subscribe(addons => {this.toppingList = addons;
-      for (let i in this.toppingList) {
-        console.log(this.toppingList[i]);
-      }
-   
+      
     })
 
     this.flavorSubscription = this.flavorServ.getFlavors().subscribe(flavors => {this.flavorsList = flavors;

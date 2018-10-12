@@ -1,3 +1,4 @@
+import { ShoppingCartItem } from './../../models/shopping-cart-item';
 import { Order } from './../../models/order';
 import { Observable, Subscription } from 'rxjs';
 import { UsersService } from './../../services/users/users.service';
@@ -57,6 +58,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.loggedIn = false;
       }
     })
+
   }
   async ngOnInit() {
      
@@ -71,6 +73,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
       });
       
     });
+
+     
     
   }
 
