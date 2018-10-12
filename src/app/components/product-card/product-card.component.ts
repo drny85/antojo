@@ -29,6 +29,7 @@ export class ProductCardComponent implements OnInit {
   message = '';
   enableAddBtn: boolean = false;
   noFlavorsAdded: boolean = false;
+ 
   
   
   constructor(private shoppingCartServ: ShoppingCartService, private modalService: NgbModal)  { 
@@ -105,6 +106,13 @@ async updateCart(event?: HTMLButtonElement) {
 
 async  openLg(content) {
   // await this.addToCart();
+    if(this.flavors.length > 0 ) {
+      this.enableAddBtn = false;
+      
+    } else {
+     
+      this.enableAddBtn = true;
+    }
     this.modalService.open(content, { size: 'lg' });
   }
 
