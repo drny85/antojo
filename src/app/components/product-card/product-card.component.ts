@@ -68,10 +68,14 @@ export class ProductCardComponent implements OnInit {
 
 async updateCart(event?: HTMLButtonElement) {
 
-  if(this.flavorsSelected.length < 1) {
-    alert('Please Make a Selection.');
-    return
+  if (event) {
+    if(this.flavorsSelected.length < 1) {
+      alert('Please Make a Selection.');
+      return
+    }
   }
+
+  
   this.product.addons = this.itemSelected;
   this.product.instruction = this.message;
   this.product.flavors = this.flavorsSelected;

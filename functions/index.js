@@ -12,7 +12,7 @@ const emailJs = require('emailjs');
 exports.sendEmail = functions.database.ref('users').onWrite(
     event => {
         const userId = event.params.userId;
-        const db = admin.firestore()
+        const db = admin.database
         return db.collection('users').get()
         .then(doc => {
             const user = doc.data()
