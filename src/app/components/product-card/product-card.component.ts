@@ -5,7 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ShoppingCartService } from './../../services/shopping-cart.service';
 import { Product } from './../../models/product';
 import { Component, Input, OnInit } from '@angular/core';
-import { MatCheckboxChange, MatRadioChange } from '@angular/material';
+import { MatCheckboxChange, MatRadioChange, throwMatDialogContentAlreadyAttachedError } from '@angular/material';
 
 
 
@@ -21,7 +21,7 @@ export class ProductCardComponent implements OnInit {
   @Input('shopping-cart') shoppingCart: ShoppingCart;
   @Input('itemCount') itemCount: number;
 
-  addons: object;
+  addons: string[] = [];
   flavors: string[] | string;
   flavorSelected: string;
   flavorsSelected= [];
@@ -62,6 +62,7 @@ export class ProductCardComponent implements OnInit {
     
     } else {
       this.enableAddBtn = false;
+      
     }
     
   }
@@ -71,21 +72,28 @@ async updateCart(event?: HTMLButtonElement) {
   if (event) {
     if(this.flavorsSelected.length < 1) {
       alert('Please Make a Selection.');
+      //this.flavorSelected = '';
       return
     }
   }
-
   
-  this.product.addons = this.itemSelected;
+  this.product.addons = this.itemSelected || [];
   this.product.instruction = this.message;
   this.product.flavors = this.flavorsSelected;
 
   if(this.flavorsSelected) {
-   
+
+    console.log('Product:', this.product);
+    console.log('Flavor:', this.flavorsSelected);
+    
     await this.shoppingCartServ.addToCart(this.product);
+    
     if(event) {
+    
     event.click();
+    
     }
+    
   } 
     
  
@@ -113,6 +121,7 @@ async updateCart(event?: HTMLButtonElement) {
 async  openLg(content) {
   
     this.modalService.open(content, { centered: true });
+
   }
 
 }
