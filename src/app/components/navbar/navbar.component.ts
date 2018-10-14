@@ -25,9 +25,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
   user: User;
   cart$: Observable<ShoppingCart>;
   subscription: Subscription;
+  orderSubscription: Subscription;
   orders: Order[] = [];
   newOrder: boolean = false;
   orderCount: number = 0;
+ 
   
 
   constructor(public auth: LoginsService, 
@@ -61,7 +63,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   async ngOnInit() {
      
     this.cart$ = (await this.shoppingCartService.getCart());
-    this.orderServ.getAllOrders().subscribe(order => {this.orders = order;
+    this.orderSubscription = this.orderServ.getAllOrders().subscribe(order => {this.orders = order;
       let filtered =this.orders.filter(neworder => neworder.status === 'new');
      
       filtered.forEach(order => {
@@ -71,11 +73,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
       });
       
     });
+
     
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    this.orderSubscription.unsubscribe();
+
   }
 
   logout() {

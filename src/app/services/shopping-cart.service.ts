@@ -140,6 +140,12 @@ export class ShoppingCartService {
     
   }
 
+  getCartItemsCount() {
+    let cartId = localStorage.getItem('cartId');
+    if (cartId) return this.db.collection<ShoppingCartItem>(`shopping-carts/${cartId}/items`).valueChanges();
+    
+  }
+
 
   }
 
