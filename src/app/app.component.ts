@@ -1,6 +1,6 @@
-import { Router } from '@angular/router';
+
 import { Component } from '@angular/core';
-import { LoginsService } from './services/logins/logins.service';
+
 
 
 @Component({
@@ -8,11 +8,8 @@ import { LoginsService } from './services/logins/logins.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
- 
-  constructor(private auth: LoginsService, private router: Router) {
-    
+export class AppComponent{
+
 }
 
 
-}

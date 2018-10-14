@@ -1,3 +1,4 @@
+
 <div *ngIf="product.name" class="card top">
   <img width="400" height="300" *ngIf="product.picture" class="card-img-top" [src]="product.picture" alt="{{ product.name }}">
   <div class="card-body">
@@ -7,7 +8,7 @@
       <li class="list-inline-item text-capitalize">{{ flavor }}</li>
     </ul>
   </div>
-  <div #child *ngIf="showActions && shoppingCart && product.flavors?.length > 0; else noAddons" class="card-footer">
+  <div #child *ngIf="showActions && shoppingCart && flavors?.length > 0; else noAddons" class="card-footer">
     <button *ngIf="!itemCount; else updateQuantity" (click)="openLg(content)" class="btn btn-dark btn-block">Add to
       Cart</button>
 
@@ -21,7 +22,7 @@
       </div>
       <div class="modal-body animated fadeInRight">
         <div class="row">
-          <div *ngIf="flavors" class="col">
+          <div *ngIf="flavors.length > 0" class="col">
             <p class="font-weight-bold">Select Type/Flavor</p>
             <p class="text-capitalize">
 
@@ -35,9 +36,9 @@
             <p *ngIf="!enableAddBtn"><i class="alert  alert-warning">Pick one</i></p>
 
           </div>
-          <div class="col">
+          <div *ngIf="product.addons.length > 0" class="col">
             <p class="font-weight-bold">Select Addons/Items</p>
-            <p *ngFor="let item of product.addons" class="text-capitalize">
+            <p *ngFor="let item of addons" class="text-capitalize">
               <mat-checkbox value="{{item}}" name="{{ item }}" (change)="onSelect($event)">{{ item }}</mat-checkbox>
             </p>
           </div>
@@ -52,7 +53,7 @@
 
       <div class="modal-footer">
         <button type="button" class="btn btn-warning" (click)="modal.close('Close click')">Close</button>
-        <button [disabled]="!enableAddBtn && product.flavors" type="button" class="btn btn-success" (click)="updateCart(closeModal)">Add
+        <button [disabled]="!enableAddBtn && product.addons.length === 0" type="button" class="btn btn-success" (click)="updateCart(closeModal)">Add
           to Cart</button>
       </div>
     </ng-template>

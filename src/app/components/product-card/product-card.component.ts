@@ -5,8 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ShoppingCartService } from './../../services/shopping-cart.service';
 import { Product } from './../../models/product';
 import { Component, Input, OnInit } from '@angular/core';
-import { MatCheckboxChange, MatRadioChange } from '@angular/material';
-
+import { MatCheckboxChange, MatRadioChange, throwMatDialogContentAlreadyAttachedError } from '@angular/material';
 
 
 @Component({
@@ -21,7 +20,7 @@ export class ProductCardComponent implements OnInit {
   @Input('shopping-cart') shoppingCart: ShoppingCart;
   @Input('itemCount') itemCount: number;
 
-  addons: object;
+  addons: string[] = [];
   flavors: string[] | string;
   flavorSelected: string;
   flavorsSelected= [];
@@ -29,8 +28,8 @@ export class ProductCardComponent implements OnInit {
   message = '';
   enableAddBtn: boolean = false;
   noFlavorsAdded: boolean = false;
-  
-  
+ 
+
   constructor(private shoppingCartServ: ShoppingCartService, private modalService: NgbModal)  { 
    
   }
@@ -58,27 +57,38 @@ export class ProductCardComponent implements OnInit {
     if (e.value) {
       this.enableAddBtn = true;
       this.flavorsSelected[0] = e.value;
-      console.log(this.product.flavors.length);
+    
     } else {
       this.enableAddBtn = false;
+      
     }
     
   }
 
 async updateCart(event?: HTMLButtonElement) {
 
-  this.product.addons = this.itemSelected;
+  if (event) {
+    if(this.flavorsSelected.length < 1) {
+      alert('Please Make a Selection.');
+      //this.flavorSelected = '';
+      return
+    }
+  }
+  
+  this.product.addons = this.itemSelected || [];
   this.product.instruction = this.message;
   this.product.flavors = this.flavorsSelected;
 
-  if (!this.flavorsSelected) return;
-
   if(this.flavorsSelected) {
-   
+
     await this.shoppingCartServ.addToCart(this.product);
+    
     if(event) {
+    
     event.click();
+    
     }
+    
   } 
     
  
@@ -104,8 +114,9 @@ async updateCart(event?: HTMLButtonElement) {
   }
 
 async  openLg(content) {
-  // await this.addToCart();
-    this.modalService.open(content, { size: 'lg' });
+  
+    this.modalService.open(content, { centered: true });
+
   }
 
 }

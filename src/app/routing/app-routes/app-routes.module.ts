@@ -55,7 +55,7 @@ const appRoutes: Routes = [
   
   { path: 'myorders', component: MyordersComponent , canActivate: [ AuthGuard ]},
   { path: 'myorders/detail/:id', component: OrderDetailsComponent , canActivate: [ AuthGuard ]},
-  { path: '**', component: NotfoundComponent }
+  { path: '**', redirectTo: '/' }
 
 ]
 
