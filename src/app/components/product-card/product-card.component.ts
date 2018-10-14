@@ -8,7 +8,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatCheckboxChange, MatRadioChange, throwMatDialogContentAlreadyAttachedError } from '@angular/material';
 
 
-
 @Component({
   selector: 'product-card',
   templateUrl: './product-card.component.html',
@@ -30,8 +29,7 @@ export class ProductCardComponent implements OnInit {
   enableAddBtn: boolean = false;
   noFlavorsAdded: boolean = false;
  
-  
-  
+
   constructor(private shoppingCartServ: ShoppingCartService, private modalService: NgbModal)  { 
    
   }
@@ -83,9 +81,6 @@ async updateCart(event?: HTMLButtonElement) {
 
   if(this.flavorsSelected) {
 
-    console.log('Product:', this.product);
-    console.log('Flavor:', this.flavorsSelected);
-    
     await this.shoppingCartServ.addToCart(this.product);
     
     if(event) {
