@@ -76,10 +76,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
       
     });
 
-<<<<<<< HEAD
-=======
      
->>>>>>> 55df0d5d0c657f51f1af837279faf79cd7a5add3
     
   }
 

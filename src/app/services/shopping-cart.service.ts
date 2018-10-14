@@ -140,19 +140,10 @@ export class ShoppingCartService {
     
   }
 
-<<<<<<< HEAD
-  getCartItemsCount() {
-    let cartId = localStorage.getItem('cartId');
-    if (cartId) return this.db.collection<ShoppingCartItem>(`shopping-carts/${cartId}/items`).valueChanges();
-    
-  }
-
-=======
    async getItemsCount() {
     let cartId = await this.getOrCreateCartId();
     if ( cartId) return this.db.collection<ShoppingCartItem>('shopping-carts/' + cartId + '/items');
     
->>>>>>> 55df0d5d0c657f51f1af837279faf79cd7a5add3
 
   }
 
