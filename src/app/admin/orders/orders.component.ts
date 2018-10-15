@@ -4,8 +4,6 @@ import { Order } from './../../models/order';
 import { OrderService } from './../../services/order.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { count } from 'rxjs/operators';
-
 
 @Component({
   selector: 'app-orders',
@@ -61,10 +59,10 @@ export class OrdersComponent implements OnInit {
 
       if (this.count > 0) {
         this.msg.show('You have ' + this.count + ' new orders', 'NEW ORDER');
-        console.log(this.audioFile.nativeElement);
         (<HTMLAudioElement>this.audioFile.nativeElement).play();
+    
         setTimeout(() => (<HTMLAudioElement>this.audioFile.nativeElement).play(), 2100);
-
+       
 
         if (this.count < 1) {
           this.msg.show('There is no New Orders', 'NO ORDERS');
