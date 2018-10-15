@@ -20,6 +20,9 @@
       <li class="nav-item">
           <a routerLink="/home" class="nav-link" >Home</a>
         </li>
+        <li *ngIf="user" class="nav-item">
+          <a *ngIf="user.isAdmin" routerLink="/admin/orders" class="nav-link" >Manage Orders</a>
+        </li>
       
       <li *ngIf="loggedIn" ngbDropdown class="nav-item dropdown">
         <a ngbDropdownToggle class="nav-link dropdown-toggle text-capitalize" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
