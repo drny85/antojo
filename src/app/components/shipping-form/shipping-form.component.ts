@@ -21,6 +21,7 @@ export class ShippingFormComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   message: string = '';
 
+
   user: User = {
     name: '',
     last_name: '',

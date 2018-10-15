@@ -27,7 +27,7 @@ export class OrdersComponent implements OnInit {
  async ngOnInit() {
   this.orders$ = (await this.orderServ.getAllOrders());
   this.populateOrders();
-  this.orderServ.newOrder.subscribe(order => {this.checkNewOrder = order;
+  this.orderServ.newOrderSubmitted.subscribe(order => {this.checkNewOrder = order;
     console.log(this.checkNewOrder);
   })
   
