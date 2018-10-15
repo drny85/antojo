@@ -38,8 +38,8 @@ export class OrdersComponent implements OnInit {
 
   
    
-   this.subscription = this.orderServ.getAllOrders().subscribe(orders => {
-     
+    this.subscription = this.orderServ.getAllOrders().subscribe(orders => {
+
       this.orders = orders;
       this.activeRoute.queryParamMap.subscribe(params => {
         this.status = params.get('status');
@@ -49,34 +49,34 @@ export class OrdersComponent implements OnInit {
       })
       this.count = 0;
       orders.filter(order => {
-        
+
         if (order.status === 'new') {
           this.count += 1;
-         
+
         }
-        
+
       }
-     
+
       );
 
-      if (this.count > 0)  {
-        this.msg.show('You have '+ this.count + ' new orders', 'NEW ORDER');
+      if (this.count > 0) {
+        this.msg.show('You have ' + this.count + ' new orders', 'NEW ORDER');
         console.log(this.audioFile.nativeElement);
         (<HTMLAudioElement>this.audioFile.nativeElement).play();
-        setTimeout(() =>  (<HTMLAudioElement>this.audioFile.nativeElement).play(), 2100);
-       
+        setTimeout(() => (<HTMLAudioElement>this.audioFile.nativeElement).play(), 2100);
 
-      if (this.count < 1)  {
-        this.msg.show('There is no New Orders', 'NO ORDERS');
-      } 
-      
-    }
 
-  })
-    
-    
- }
+        if (this.count < 1) {
+          this.msg.show('There is no New Orders', 'NO ORDERS');
+        }
 
- 
+      }
+
+    })
+
+
+  }
+
+
 
 }
