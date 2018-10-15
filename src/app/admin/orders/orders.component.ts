@@ -18,6 +18,7 @@ export class OrdersComponent implements OnInit {
   status: string = 'All Orders';
   filteredStatus: Order[] = [];
   subscription: Subscription;
+  checkNewOrder: boolean;
 
   constructor(private orderServ: OrderService, private activeRoute: ActivatedRoute, private msg: ToastrService) { 
     
@@ -26,6 +27,9 @@ export class OrdersComponent implements OnInit {
  async ngOnInit() {
   this.orders$ = (await this.orderServ.getAllOrders());
   this.populateOrders();
+  this.orderServ.newOrder.subscribe(order => {this.checkNewOrder = order;
+    console.log(this.checkNewOrder);
+  })
   
 
   }

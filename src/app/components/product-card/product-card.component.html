@@ -8,7 +8,7 @@
       <li class="list-inline-item text-capitalize">{{ flavor }}</li>
     </ul>
   </div>
-  <div #child *ngIf="showActions && shoppingCart && flavors?.length > 0; else noAddons" class="card-footer">
+  <div #child *ngIf="showActions && shoppingCart && flavors?.length > 0 || addons.length > 0; else noAddons" class="card-footer">
     <button *ngIf="!itemCount; else updateQuantity" (click)="openLg(content)" class="btn btn-dark btn-block">Add to
       Cart</button>
 

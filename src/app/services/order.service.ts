@@ -2,7 +2,7 @@ import { ShoppingCartService } from './shopping-cart.service';
 import { Order } from './../models/order';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 
@@ -15,8 +15,15 @@ export class OrderService {
   orders: Observable<Order[]>;
   orderDoc: AngularFirestoreDocument<Order>;
   order: Observable<Order>;
+  newOrder = new BehaviorSubject<boolean>(false);
+  newOrderSubmitted = this.newOrder.asObservable();
 
   constructor(private db: AngularFirestore, private shoppingCartServ: ShoppingCartService) { }
+
+
+  checkForNewOrder(value: boolean) {
+    this.newOrder.next(value);
+  }
 
 
  async placeOrder(order: Order) {

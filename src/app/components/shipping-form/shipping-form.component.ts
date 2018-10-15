@@ -75,7 +75,11 @@ export class ShippingFormComponent implements OnInit, OnDestroy {
     let result = await this.orderServ.placeOrder(orderToSubmmit);
     if (result) {
       this.notification.success(`Thank You ${order.shipping.name.toUpperCase()}!`, 'You order has been proccesed.');
+      this.orderServ.checkForNewOrder(true);
+    } else {
+      this.orderServ.checkForNewOrder(false);
     }
+    
     this.router.navigate(['/order-success', result.id]);
   }
 
